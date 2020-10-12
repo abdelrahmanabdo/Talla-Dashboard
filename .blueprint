@@ -1,0 +1,27 @@
+created:
+    - database/factories/Models/CategoryFactory.php
+    - database/factories/Models/ColorFactory.php
+    - database/factories/Models/BrandFactory.php
+    - database/factories/Models/CountryFactory.php
+    - database/factories/Models/BlogFactory.php
+    - database/migrations/2020_10_12_013651_create_categories_table.php
+    - database/migrations/2020_10_12_013652_create_colors_table.php
+    - database/migrations/2020_10_12_013653_create_brands_table.php
+    - database/migrations/2020_10_12_013654_create_countries_table.php
+    - database/migrations/2020_10_12_013655_create_blogs_table.php
+    - app/Models/Category.php
+    - app/Models/Color.php
+    - app/Models/Brand.php
+    - app/Models/Country.php
+    - app/Models/Blog.php
+    - 'database/seeders/Blog Seeder.php'
+    - 'database/seeders/Category Seeder.php'
+    - 'database/seeders/Brand Seeder.php'
+    - 'database/seeders/Color Seeder.php'
+    - database/seeders/CountrySeeder.php
+models:
+    Models\Category: { name: 'string:200', name_en: 'string:200', icon: 'string:200', icon_colored: 'string:200', active: 'boolean default:1', timestamps: true, softDeletes: true }
+    Models\Color: { name: 'string:200', hexa: 'string:200', active: 'boolean default:1', timestamps: true }
+    Models\Brand: { name: 'string:200', name_en: 'string:200', image: 'string:200', active: 'boolean default:1', timestamps: true }
+    Models\Country: { name: 'string:200', name_en: 'string:200', active: 'boolean default:1', timestamps: true }
+    Models\Blog: { title: 'string:400', content: longtext, published_at: 'nullable timestamp', softDeletes: true, timestamps: true }

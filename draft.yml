@@ -1,0 +1,53 @@
+models:
+  Models\Category:
+    name : string:200
+    name_en : string:200
+    icon: string:200
+    icon_colored: string:200
+    active : boolean default:1
+    timestamps : true
+    softDeletes : true
+
+  Models\Color:
+    name : string:200
+    hexa : string:200
+    active : boolean default:1
+    timestamps : true
+
+  Models\Brand:
+    name : string:200
+    name_en : string:200
+    image : string:200
+    active : boolean default:1
+    timestamps : true
+
+  Models\Country:
+    name : string:200
+    name_en : string:200
+    active : boolean default:1
+    timestamps : true
+
+  Models\Blog:
+    title: string:400
+    content: longtext
+    published_at: nullable timestamp
+    softDeletes : true
+    timestamps : true
+
+# controllers:
+#   Blog:
+#     index:
+#       query: all
+#       render: post.index with:posts
+
+#     store:
+#       validate: title, content
+#       save: post
+#       send: ReviewNotification to:post.author with:post
+#       dispatch: SyncMedia with:post
+#       fire: NewPost with:post
+#       flash: post.title
+#       redirect: post.index
+
+
+seeders : Blog , Category , Brand , Color , Country

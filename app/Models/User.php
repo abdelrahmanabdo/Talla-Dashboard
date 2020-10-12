@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory, Notifiable;
 
     /**
@@ -18,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        // 'role_id',
         'email',
         'password',
     ];
