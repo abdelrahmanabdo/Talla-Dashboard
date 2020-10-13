@@ -43,8 +43,8 @@ class BrandCrudController extends CrudController
         CRUD::column('name_en');
         CRUD::column('image');
         CRUD::column('active');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        // CRUD::column('created_at');
+        // CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -65,7 +65,12 @@ class BrandCrudController extends CrudController
 
         CRUD::field('name');
         CRUD::field('name_en');
-        CRUD::field('image');
+        CRUD::addField([
+            'name' => 'image',
+            'type' => 'image',
+            'upload' => true,
+            'disk' => 'uploads'
+        ]);
         CRUD::field('active');
 
         /**

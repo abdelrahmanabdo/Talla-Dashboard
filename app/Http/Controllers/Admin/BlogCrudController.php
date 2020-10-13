@@ -41,10 +41,10 @@ class BlogCrudController extends CrudController
     {
         CRUD::column('title');
         CRUD::column('content');
-        CRUD::column('published_at');
-        CRUD::column('softDeletes');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        // CRUD::column('published_at');
+        // CRUD::column('softDeletes');
+        // CRUD::column('created_at');
+        // CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -65,8 +65,8 @@ class BlogCrudController extends CrudController
 
         CRUD::field('title');
         CRUD::field('content');
-        CRUD::field('published_at');
-        CRUD::field('softDeletes');
+        // CRUD::field('published_at');
+        // CRUD::field('softDeletes');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

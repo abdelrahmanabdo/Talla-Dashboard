@@ -44,9 +44,9 @@ class CategoryCrudController extends CrudController
         CRUD::column('icon');
         CRUD::column('icon_colored');
         CRUD::column('active');
-        CRUD::column('softDeletes');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        // CRUD::column('softDeletes');
+        // CRUD::column('created_at');
+        // CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -67,10 +67,22 @@ class CategoryCrudController extends CrudController
 
         CRUD::field('name');
         CRUD::field('name_en');
-        CRUD::field('icon');
-        CRUD::field('icon_colored');
-        CRUD::field('active');
-        CRUD::field('softDeletes');
+        CRUD::addField([
+            'name' => 'icon',
+            'type' => 'image',
+            'upload' => true,
+            'disk' => 'uploads'
+        ]);
+        CRUD::addField([
+            'name' => 'icon_colored',
+            'type' => 'image',
+            'upload' => true,
+            'disk' => 'uploads'
+        ]);
+        CRUD::addField([
+            'name'=>'active',
+            'type' => 'boolean']);
+        // CRUD::field('softDeletes');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
