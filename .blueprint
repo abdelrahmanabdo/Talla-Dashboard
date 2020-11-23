@@ -1,27 +1,98 @@
 created:
+    - database/factories/Models/SpecializationFactory.php
     - database/factories/Models/CategoryFactory.php
     - database/factories/Models/ColorFactory.php
     - database/factories/Models/BrandFactory.php
+    - database/factories/Models/GiftFactory.php
     - database/factories/Models/CountryFactory.php
+    - database/factories/Models/SupportFactory.php
+    - database/factories/Models/UserRoleFactory.php
+    - database/factories/Models/RegistrationChoiceFactory.php
+    - database/factories/Models/UserProfileFactory.php
+    - database/factories/Models/StylistFactory.php
+    - database/factories/Models/StylistCertificateFactory.php
+    - database/factories/Models/StylistProjectFactory.php
+    - database/factories/Models/StylistProjectImageFactory.php
+    - database/factories/Models/StylistSpecializationFactory.php
+    - database/factories/Models/StylistBankAccountFactory.php
     - database/factories/Models/BlogFactory.php
-    - database/migrations/2020_10_12_013651_create_categories_table.php
-    - database/migrations/2020_10_12_013652_create_colors_table.php
-    - database/migrations/2020_10_12_013653_create_brands_table.php
-    - database/migrations/2020_10_12_013654_create_countries_table.php
-    - database/migrations/2020_10_12_013655_create_blogs_table.php
+    - database/factories/Models/BlogImageFactory.php
+    - database/factories/Models/BlogCommentFactory.php
+    - database/factories/Models/ClosetFactory.php
+    - database/factories/Models/OutfitFactory.php
+    - database/factories/Models/ClosetOutfitItemFactory.php
+    - database/migrations/2020_11_23_042950_create_specializations_table.php
+    - database/migrations/2020_11_23_042951_create_categories_table.php
+    - database/migrations/2020_11_23_042952_create_colors_table.php
+    - database/migrations/2020_11_23_042953_create_brands_table.php
+    - database/migrations/2020_11_23_042954_create_gifts_table.php
+    - database/migrations/2020_11_23_042955_create_countries_table.php
+    - database/migrations/2020_11_23_042956_create_supports_table.php
+    - database/migrations/2020_11_23_042957_create_user_roles_table.php
+    - database/migrations/2020_11_23_042958_create_registration_choices_table.php
+    - database/migrations/2020_11_23_042959_create_user_profiles_table.php
+    - database/migrations/2020_11_23_043000_create_stylists_table.php
+    - database/migrations/2020_11_23_043001_create_stylist_certificates_table.php
+    - database/migrations/2020_11_23_043002_create_stylist_projects_table.php
+    - database/migrations/2020_11_23_043003_create_stylist_project_images_table.php
+    - database/migrations/2020_11_23_043004_create_stylist_specializations_table.php
+    - database/migrations/2020_11_23_043005_create_stylist_bank_accounts_table.php
+    - database/migrations/2020_11_23_043006_create_blogs_table.php
+    - database/migrations/2020_11_23_043007_create_blog_images_table.php
+    - database/migrations/2020_11_23_043008_create_blog_comments_table.php
+    - database/migrations/2020_11_23_043009_create_closets_table.php
+    - database/migrations/2020_11_23_043010_create_outfits_table.php
+    - database/migrations/2020_11_23_043011_create_closet_outfit_items_table.php
+    - app/Models/Specialization.php
     - app/Models/Category.php
     - app/Models/Color.php
     - app/Models/Brand.php
+    - app/Models/Gift.php
     - app/Models/Country.php
+    - app/Models/Support.php
+    - app/Models/UserRole.php
+    - app/Models/RegistrationChoice.php
+    - app/Models/UserProfile.php
+    - app/Models/Stylist.php
+    - app/Models/StylistCertificate.php
+    - app/Models/StylistProject.php
+    - app/Models/StylistProjectImage.php
+    - app/Models/StylistSpecialization.php
+    - app/Models/StylistBankAccount.php
     - app/Models/Blog.php
-    - 'database/seeders/Blog Seeder.php'
-    - 'database/seeders/Category Seeder.php'
-    - 'database/seeders/Brand Seeder.php'
-    - 'database/seeders/Color Seeder.php'
+    - app/Models/BlogImage.php
+    - app/Models/BlogComment.php
+    - app/Models/Closet.php
+    - app/Models/Outfit.php
+    - app/Models/ClosetOutfitItem.php
+    - database/seeders/UserSeeder.php
+    - database/seeders/BlogSeeder.php
+    - database/seeders/CategorySeeder.php
+    - database/seeders/BrandSeeder.php
+    - database/seeders/ColorSeeder.php
     - database/seeders/CountrySeeder.php
+    - database/seeders/SpecializationSeeder.php
 models:
-    Models\Category: { name: 'string:200', name_en: 'string:200', icon: 'string:200', icon_colored: 'string:200', active: 'boolean default:1', timestamps: true, softDeletes: true }
-    Models\Color: { name: 'string:200', hexa: 'string:200', active: 'boolean default:1', timestamps: true }
+    Models\User: {  }
+    Models\Specialization: { title: 'string:100', description: 'string:150', active: 'boolean default:1' }
+    Models\Category: { name: 'string:200', name_en: 'string:200', icon: 'string:200', icon_colored: 'string:200', active: 'boolean default:1', timestamps: true }
+    Models\Color: { name: 'string:40', hexa: 'string:40', active: 'boolean default:1', timestamps: true }
     Models\Brand: { name: 'string:200', name_en: 'string:200', image: 'string:200', active: 'boolean default:1', timestamps: true }
+    Models\Gift: { name: 'string:200', name_en: 'string:200', image: 'string:200', active: 'boolean default:1', timestamps: true }
     Models\Country: { name: 'string:200', name_en: 'string:200', active: 'boolean default:1', timestamps: true }
-    Models\Blog: { title: 'string:400', content: longtext, published_at: 'nullable timestamp', softDeletes: true, timestamps: true }
+    Models\Support: { name: 'string:200', mobile: 'string:200', message: 'string:400', timestamps: true }
+    Models\UserRole: { name: 'string:200', name_en: 'string:200', active: 'boolean default:1', timestamps: true }
+    Models\RegistrationChoice: { type: 'string:50', title: 'string:100', image: 'string:200' }
+    Models\UserProfile: { user_id: 'id foreign', body_shaped_id: 'id:registration_choices', skin_glow_id: 'id:registration_choices', job_id: 'id:registration_choices', goal_id: 'id:registration_choices', favourite_style_id: 'id:registration_choices', timestamps: true }
+    Models\Stylist: { user_id: 'id foreign', avatar: 'string:200', email: 'string:200', country_id: 'id:country', bio: longtext, experience_years: integer, is_approved: 'boolean default:0', active: 'boolean default:0', timestamps: true, softDeletes: true, relationships: { hasMany: 'StylistCertificate, StylistProject, StylistSpecialization' } }
+    Models\StylistCertificate: { stylist_id: 'id foreign', certificate_name: 'string:150', organization_name: 'string:150 nullable', issurance_years: integer, timestamps: true }
+    Models\StylistProject: { stylist_id: 'id foreign', name: 'string:150', description: longtext, timestamps: true }
+    Models\StylistProjectImage: { project_id: 'id:StylistProject', image: 'string:200', timestamps: true }
+    Models\StylistSpecialization: { stylist_id: 'id foreign', specialization_id: 'id foreign', description: 'string:150', start_price: 'integer default:0', timestamps: true }
+    Models\StylistBankAccount: { stylist_id: 'id foreign', name_on_card: 'string:150', card_number: 'string:17', expire_date: 'string:10', CVV: 'integer:3' }
+    Models\Blog: { user_id: 'id foreign', title: 'string:200', body: longtext, likes: 'integer:10 default:0', is_reviewed: 'boolean default:0', active: 'boolean default:0', published_at: 'nullable timestamp', softDeletes: true, timestamps: true }
+    Models\BlogImage: { blog_id: 'id foreign', image: 'string:200' }
+    Models\BlogComment: { blog_id: 'id foreign', commenter_id: 'id:user', comment: longtext }
+    Models\Closet: { user_id: 'id foreign', type: 'integer:1', season: 'integer:3', category_id: 'id foreign nullable', color_id: 'id foreign nullable', brand_id: 'id foreign nullable', price: 'string:50 nullable', comment: 'longtext nullable', image: 'string:200 nullable', timestamps: true }
+    Models\Outfit: { closet_item_id: 'id foreign:Closet', timestamps: true }
+    Models\ClosetOutfitItem: { outfit_id: 'id foreign:Outfit', closet_item_id: 'id foreign:Closet', timestamps: true }

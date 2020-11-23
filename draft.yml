@@ -1,4 +1,10 @@
 models:
+  #General
+  Models\Specialization:
+    title: string:100
+    description: string:150
+    active : boolean default:1
+
   Models\Category:
     name : string:200
     name_en : string:200
@@ -6,15 +12,21 @@ models:
     icon_colored: string:200
     active : boolean default:1
     timestamps : true
-    softDeletes : true
 
   Models\Color:
-    name : string:200
-    hexa : string:200
+    name : string:40
+    hexa : string:40
     active : boolean default:1
     timestamps : true
 
   Models\Brand:
+    name : string:200
+    name_en : string:200
+    image : string:200
+    active : boolean default:1
+    timestamps : true
+
+  Models\Gift:
     name : string:200
     name_en : string:200
     image : string:200
@@ -27,27 +39,177 @@ models:
     active : boolean default:1
     timestamps : true
 
+  Models\Support:
+    name : string:200
+    mobile : string:200
+    message : string:400
+    timestamps : true
+
+  #User
+  Models\UserRole:
+    name : string:200
+    name_en : string:200 
+    active : boolean default:1
+    timestamps : true
+
+  #Profile
+  Models\RegistrationChoice:
+    type: string:50
+    title: string:100
+    image: string:200
+
+  Models\UserProfile:
+    user_id: id foreign
+    body_shaped_id: id:registration_choices
+    skin_glow_id: id:registration_choices
+    job_id: id:registration_choices
+    goal_id: id:registration_choices
+    favourite_style_id: id:registration_choices
+    timestamps : true
+
+  #Stylist
+  Models\Stylist:
+    user_id: id foreign
+    avatar: string:200
+    email: string:200
+    country_id: id:country 
+    bio: longtext
+    experience_years: integer
+    is_approved: boolean default:0
+    active: boolean default:0 
+    timestamps : true
+    softDeletes : true
+    relationships:
+      hasMany: StylistCertificate, StylistProject, StylistSpecialization
+
+  Models\StylistCertificate:
+    stylist_id: id foreign
+    certificate_name: string:150
+    organization_name: string:150 nullable
+    issurance_years: integer
+    timestamps : true
+
+  Models\StylistProject:
+    stylist_id: id foreign
+    name: string:150
+    description: longtext
+    timestamps : true
+
+  Models\StylistProjectImage:
+    project_id: id:StylistProject
+    image: string:200
+    timestamps : true
+
+  Models\StylistSpecialization:
+    stylist_id: id foreign
+    specialization_id: id foreign 
+    description: string:150
+    start_price: integer default:0
+    timestamps : true
+
+  Models\StylistBankAccount:
+    stylist_id: id foreign
+    name_on_card: string:150
+    card_number: string:17
+    expire_date: string:10
+    CVV: integer:3
+
+  #Blogs
   Models\Blog:
-    title: string:400
-    content: longtext
+    user_id: id foreign
+    title: string:200
+    body: longtext
+    likes: integer:10 default:0
+    is_reviewed: boolean default:0
+    active: boolean default:0
     published_at: nullable timestamp
     softDeletes : true
     timestamps : true
 
+  Models\BlogImage:
+    blog_id: id foreign
+    image : string:200
+
+  Models\BlogComment:
+    blog_id: id foreign
+    commenter_id: id:user
+    comment: longtext
+
+  #Closet
+  Models\Closet:
+    user_id: id foreign
+    type: integer:1
+    season: integer:3
+    category_id: id foreign nullable
+    color_id: id foreign nullable
+    brand_id: id foreign nullable
+    price: string:50 nullable
+    comment: longtext nullable
+    image: string:200 nullable
+    timestamps : true
+
+  Models\Outfit:
+    closet_item_id: id foreign:Closet
+    timestamps : true
+
+  Models\ClosetOutfitItem:
+    outfit_id: id foreign:Outfit
+    closet_item_id: id foreign:Closet
+    timestamps : true
+
+
 # controllers:
+#   UserRole:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   Specialization:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   Brand:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   Country:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   Gift:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   Category:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   Color:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   Support:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   RegistrationChoice:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   Stylist:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   StylistCertificate:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   StylistProject:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   StylistSpecialization:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   StylistBankAccount:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
 #   Blog:
-#     index:
-#       query: all
-#       render: post.index with:posts
+#     resource: api.store, api.index, api.show, api.update, api.destroy
 
-#     store:
-#       validate: title, content
-#       save: post
-#       send: ReviewNotification to:post.author with:post
-#       dispatch: SyncMedia with:post
-#       fire: NewPost with:post
-#       flash: post.title
-#       redirect: post.index
+#   UserProfile:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
+
+#   Closet:
+#     resource: api.store, api.index, api.show, api.update, api.destroy
 
 
-seeders : Blog , Category , Brand , Color , Country
+
+seeders : User, Blog, Category, Brand, Color, Country, Specialization

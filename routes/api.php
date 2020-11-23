@@ -14,6 +14,50 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * Auth Routes
+ */
+
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('login','AuthController@login');
+    Route::post('register','AuthController@register');
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('user-role', 'UserRoleController');
+
+Route::apiResource('specialization', 'SpecializationController');
+
+Route::apiResource('brand', 'BrandController');
+
+Route::apiResource('country', 'CountryController');
+
+Route::apiResource('gift', 'GiftController');
+
+Route::apiResource('category', 'CategoryController');
+
+Route::apiResource('color', 'ColorController');
+
+Route::apiResource('support', 'SupportController');
+
+Route::apiResource('registration-choice', 'RegistrationChoiceController');
+
+Route::apiResource('stylist', 'StylistController');
+
+Route::apiResource('stylist-certificate', 'StylistCertificateController');
+
+Route::apiResource('stylist-project', 'StylistProjectController');
+
+Route::apiResource('stylist-specialization', 'StylistSpecializationController');
+
+Route::apiResource('stylist-bank-account', 'StylistBankAccountController');
+
+Route::apiResource('blog', 'BlogController');
+
+Route::apiResource('user-profile', 'UserProfileController');
+
+Route::apiResource('closet', 'ClosetController');
+

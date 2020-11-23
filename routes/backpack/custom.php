@@ -20,4 +20,21 @@ Route::group([
     Route::crud('color', 'ColorCrudController');
     Route::crud('country', 'CountryCrudController');
     Route::crud('user', 'UserCrudController');
+    Route::crud('blogcomment', 'BlogCommentCrudController');
+    Route::crud('blogimage', 'BlogImageCrudController');
+    Route::crud('closet', 'ClosetCrudController');
+    Route::crud('closetoutfititem', 'ClosetOutfitItemCrudController');
+    Route::crud('gift', 'GiftCrudController');
+    Route::crud('outfit', 'OutfitCrudController');
+    Route::crud('registrationchoice', 'RegistrationChoiceCrudController');
+    Route::crud('specialization', 'SpecializationCrudController');
+    Route::crud('stylist', 'StylistCrudController');
+    Route::crud('stylistbankaccount', 'StylistBankAccountCrudController');
+    Route::crud('stylistcertificate', 'StylistCertificateCrudController');
+    Route::crud('stylistproject', 'StylistProjectCrudController');
+    Route::crud('stylistprojectimage', 'StylistProjectImageCrudController');
+    Route::crud('stylistspecialization', 'StylistSpecializationCrudController');
+    Route::crud('support', 'SupportCrudController');
+    Route::crud('userprofile', 'UserProfileCrudController');
+    Route::crud('userrole', 'UserRoleCrudController');
 }); // this should be the absolute last line of this file

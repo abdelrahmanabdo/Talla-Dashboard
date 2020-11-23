@@ -21,7 +21,6 @@ class Category extends Model
         'icon',
         'icon_colored',
         'active',
-        'softDeletes',
     ];
 
     /**

@@ -28,7 +28,6 @@ class CategoryFactory extends Factory
             'icon' => $this->faker->word,
             'icon_colored' => $this->faker->word,
             'active' => $this->faker->boolean,
-            'softDeletes' => $this->faker->word,
         ];
     }
 }

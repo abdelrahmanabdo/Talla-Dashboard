@@ -16,8 +16,12 @@ class Blog extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'title',
-        'content',
+        'body',
+        'likes',
+        'is_reviewed',
+        'active',
         'published_at',
         'softDeletes',
     ];
@@ -29,6 +33,9 @@ class Blog extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'user_id' => 'integer',
+        'is_reviewed' => 'boolean',
+        'active' => 'boolean',
     ];
 
     /**
@@ -39,4 +46,10 @@ class Blog extends Model
     protected $dates = [
         'published_at',
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
 }
