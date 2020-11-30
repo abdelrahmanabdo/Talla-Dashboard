@@ -3,33 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Http\Requests\CategoryStoreRequest;
-use App\Http\Requests\CategoryUpdateRequest;
-use App\Http\Resources\CategoryCollection;
+use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
-
 class CategoryController extends Controller
 {
     /**
      * @param \Illuminate\Http\Request $request
-     * @return \App\Http\Resources\CategoryCollection
+     * @return \App\Http\Resources\CategoryResource
      */
     public function index(Request $request)
     {
         $categories = Category::all();
 
-        return new CategoryCollection($categories);
+        return new CategoryResource($categories);
     }
 
     /**
-     * @param \App\Http\Requests\CategoryStoreRequest $request
+     * @param \App\Http\Requests\CategoryRequest $request
      * @return \App\Http\Resources\CategoryResource
      */
-    public function store(CategoryStoreRequest $request)
+    public function store(CategoryRequest $request)
     {
         $category = Category::create($request->validated());
-
         return new CategoryResource($category);
     }
 
@@ -44,13 +40,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\CategoryUpdateRequest $request
+     * @param \App\Http\Requests\CategoryRequest $request
      * @param \App\category $category
      * @return \App\Http\Resources\CategoryResource
      */
-    public function update(CategoryUpdateRequest $request, Category $category)
+    public function update(Request $request, Category $category)
     {
-        $category->update($request->validated());
+        $category->update($request->all());
 
         return new CategoryResource($category);
     }
@@ -64,6 +60,9 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'status' => true,
+            'message' => 'Deleted successfully'
+        ]);
     }
 }

@@ -15,8 +15,8 @@ class BlogCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'status' => true,
-            'data' => $this->collection,
+            'success' => true,
+            'data' => $this->collection
         ];
     }
 }

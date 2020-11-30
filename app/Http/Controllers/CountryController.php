@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
-use App\Http\Requests\CountryStoreRequest;
-use App\Http\Requests\CountryUpdateRequest;
-use App\Http\Resources\CountryCollection;
+use App\Http\Requests\CountryRequest;
 use App\Http\Resources\CountryResource;
 use Illuminate\Http\Request;
 
@@ -19,14 +17,14 @@ class CountryController extends Controller
     {
         $countries = Country::all();
 
-        return new CountryCollection($countries);
+        return new CountryResource($countries);
     }
 
     /**
-     * @param \App\Http\Requests\CountryStoreRequest $request
+     * @param \App\Http\Requests\CountryRequest $request
      * @return \App\Http\Resources\CountryResource
      */
-    public function store(CountryStoreRequest $request)
+    public function store(CountryRequest $request)
     {
         $country = Country::create($request->validated());
 
@@ -48,9 +46,9 @@ class CountryController extends Controller
      * @param \App\country $country
      * @return \App\Http\Resources\CountryResource
      */
-    public function update(CountryUpdateRequest $request, Country $country)
+    public function update(Request $request, Country $country)
     {
-        $country->update($request->validated());
+        $country->update($request->all());
 
         return new CountryResource($country);
     }
@@ -64,6 +62,9 @@ class CountryController extends Controller
     {
         $country->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'status' => true,
+            'message' => 'Deleted successfully'
+        ]);    
     }
 }

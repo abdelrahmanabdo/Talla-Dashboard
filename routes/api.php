@@ -14,50 +14,60 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/**
- * Auth Routes
- */
+Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], function() {
+    /**
+     * Auth routes
+     */
+    Route::group(['prefix' => 'auth'], function() {
+        //Login
+        Route::post('login','AuthController@login');
+        //Register
+        Route::post('register','AuthController@register');
+    });
+    
+    /**
+     * Secure routes
+     */
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::apiResource('stylists', 'StylistController');
 
-Route::group(['prefix' => 'auth'], function() {
-    Route::post('login','AuthController@login');
-    Route::post('register','AuthController@register');
+        Route::apiResource('stylist-certificates', 'StylistCertificateController');
+    
+        Route::apiResource('stylist-projects', 'StylistProjectController');
+    
+        Route::apiResource('stylist-specializations', 'StylistSpecializationController');
+    
+        Route::apiResource('stylist-bank-accounts', 'StylistBankAccountController');
+    
+        Route::apiResource('blogs', 'BlogController');
+    
+        Route::apiResource('user-profile', 'UserProfileController');
+    
+        Route::apiResource('closets', 'ClosetController');
+    });
+
+    /**
+     * Public routes
+     */
+    Route::apiResource('user-roles', 'UserRoleController');
+
+    Route::apiResource('specializations', 'SpecializationController');
+
+    Route::apiResource('brands', 'BrandController');
+    
+    Route::apiResource('countries', 'CountryController');
+
+    Route::apiResource('gifts', 'GiftController');
+
+    Route::apiResource('categories', 'CategoryController');
+
+    Route::apiResource('colors', 'ColorController');
+
+    Route::apiResource('supports', 'SupportController');
+
+    Route::apiResource('registration-choices', 'RegistrationChoiceController');
+
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::apiResource('user-role', 'UserRoleController');
-
-Route::apiResource('specialization', 'SpecializationController');
-
-Route::apiResource('brand', 'BrandController');
-
-Route::apiResource('country', 'CountryController');
-
-Route::apiResource('gift', 'GiftController');
-
-Route::apiResource('category', 'CategoryController');
-
-Route::apiResource('color', 'ColorController');
-
-Route::apiResource('support', 'SupportController');
-
-Route::apiResource('registration-choice', 'RegistrationChoiceController');
-
-Route::apiResource('stylist', 'StylistController');
-
-Route::apiResource('stylist-certificate', 'StylistCertificateController');
-
-Route::apiResource('stylist-project', 'StylistProjectController');
-
-Route::apiResource('stylist-specialization', 'StylistSpecializationController');
-
-Route::apiResource('stylist-bank-account', 'StylistBankAccountController');
-
-Route::apiResource('blog', 'BlogController');
-
-Route::apiResource('user-profile', 'UserProfileController');
-
-Route::apiResource('closet', 'ClosetController');
 

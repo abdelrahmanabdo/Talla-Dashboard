@@ -14,8 +14,7 @@ class UserProfileRequest extends FormRequest
      */
     public function authorize()
     {
-        // only allow updates if the user is logged in
-        return backpack_auth()->check();
+        return true;
     }
 
     /**
@@ -26,7 +25,11 @@ class UserProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'user_id' => 'required',
+            'phone' => 'required|min:11',
+            'country_id' => 'required',
+            'city_id' => 'required',
+            'birth_date' => 'required',
         ];
     }
 
@@ -50,7 +53,11 @@ class UserProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'user_id' => 'The user id is required',
+            'country_id' => 'The country id is required',
+            'city_id' => 'The city id is required',
+            'phone' => 'The phone is required',
+            'birth_date' => 'The user id is required',
         ];
     }
 }

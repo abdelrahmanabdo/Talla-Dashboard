@@ -15,7 +15,7 @@ class BlogRequest extends FormRequest
     public function authorize()
     {
         // only allow updates if the user is logged in
-        return backpack_auth()->check();
+        return backpack_auth()->check() ? backpack_auth()->check() : true;
     }
 
     /**
@@ -26,7 +26,9 @@ class BlogRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'user_id' => 'required',
+            'title' => 'required|max:100',
+            'body' => 'required',
         ];
     }
 
@@ -50,7 +52,9 @@ class BlogRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'user_id' => 'The user id is required',
+            'title' => 'The title is required',
+            'body' => 'The body is required',
         ];
     }
 }

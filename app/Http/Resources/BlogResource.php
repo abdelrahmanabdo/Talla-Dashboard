@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ColorCollection extends ResourceCollection
+class BlogResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -15,7 +15,8 @@ class ColorCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
+            'success' => true,
+            'data' => []
         ];
     }
 }

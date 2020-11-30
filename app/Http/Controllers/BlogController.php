@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Http\Requests\BlogStoreRequest;
-use App\Http\Requests\BlogUpdateRequest;
-use App\Http\Resources\BlogCollection;
+use App\Http\Requests\BlogRequest;
 use App\Http\Resources\BlogResource;
+use App\Http\Resources\BlogCollection;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -23,10 +22,10 @@ class BlogController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\BlogStoreRequest $request
+     * @param \App\Http\Requests\BlogRequest $request
      * @return \App\Http\Resources\BlogResource
      */
-    public function store(BlogStoreRequest $request)
+    public function store(BlogRequest $request)
     {
         $blog = Blog::create($request->validated());
 
@@ -48,9 +47,9 @@ class BlogController extends Controller
      * @param \App\blog $blog
      * @return \App\Http\Resources\BlogResource
      */
-    public function update(BlogUpdateRequest $request, Blog $blog)
+    public function update(Request $request, Blog $blog)
     {
-        $blog->update($request->validated());
+        $blog->update($request->all());
 
         return new BlogResource($blog);
     }
@@ -64,6 +63,9 @@ class BlogController extends Controller
     {
         $blog->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'status' => true,
+            'message' => 'Deleted successfully'
+        ]);
     }
 }

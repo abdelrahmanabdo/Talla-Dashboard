@@ -15,7 +15,7 @@ class ColorRequest extends FormRequest
     public function authorize()
     {
         // only allow updates if the user is logged in
-        return backpack_auth()->check();
+        return backpack_auth()->check() ? backpack_auth()->check() : true;
     }
 
     /**
@@ -26,7 +26,9 @@ class ColorRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required|max:25',
+            'name_en' => 'required|max:25',
+            'hexa' => 'required|max:8',
         ];
     }
 
@@ -50,7 +52,9 @@ class ColorRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'name.required' => 'A name is required',
+            'name_en.required' => 'A name in english is required',
+            'hexa.required' => 'A hexa value is required',
         ];
     }
 }

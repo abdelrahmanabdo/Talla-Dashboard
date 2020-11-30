@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Color;
-use App\Http\Requests\ColorStoreRequest;
-use App\Http\Requests\ColorUpdateRequest;
-use App\Http\Resources\ColorCollection;
+use App\Http\Requests\ColorRequest;
 use App\Http\Resources\ColorResource;
 use Illuminate\Http\Request;
 
@@ -19,14 +17,14 @@ class ColorController extends Controller
     {
         $colors = Color::all();
 
-        return new ColorCollection($colors);
+        return new ColorResource($colors);
     }
 
     /**
      * @param \App\Http\Requests\ColorStoreRequest $request
      * @return \App\Http\Resources\ColorResource
      */
-    public function store(ColorStoreRequest $request)
+    public function store(ColorRequest $request)
     {
         $color = Color::create($request->validated());
 
@@ -48,9 +46,9 @@ class ColorController extends Controller
      * @param \App\color $color
      * @return \App\Http\Resources\ColorResource
      */
-    public function update(ColorUpdateRequest $request, Color $color)
+    public function update(Request $request, Color $color)
     {
-        $color->update($request->validated());
+        $color->update($request->all());
 
         return new ColorResource($color);
     }
@@ -64,6 +62,9 @@ class ColorController extends Controller
     {
         $color->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'status' => true,
+            'message' => 'Deleted successfully'
+        ]);
     }
 }

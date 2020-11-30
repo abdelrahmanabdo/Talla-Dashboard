@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserProfileStoreRequest;
-use App\Http\Requests\UserProfileUpdateRequest;
-use App\Http\Resources\UserProfileCollection;
+use App\Http\Requests\UserProfileRequest;
 use App\Http\Resources\UserProfileResource;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
@@ -13,20 +11,20 @@ class UserProfileController extends Controller
 {
     /**
      * @param \Illuminate\Http\Request $request
-     * @return \App\Http\Resources\UserProfileCollection
+     * @return \App\Http\Resources\UserProfileResource
      */
     public function index(Request $request)
     {
         $userProfiles = UserProfile::all();
 
-        return new UserProfileCollection($userProfiles);
+        return new UserProfileResource($userProfiles);
     }
 
     /**
-     * @param \App\Http\Requests\UserProfileStoreRequest $request
+     * @param \App\Http\Requests\UserProfileRequest $request
      * @return \App\Http\Resources\UserProfileResource
      */
-    public function store(UserProfileStoreRequest $request)
+    public function store(UserProfileRequest $request)
     {
         $userProfile = UserProfile::create($request->validated());
 
@@ -44,13 +42,13 @@ class UserProfileController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\UserProfileUpdateRequest $request
+     * @param \App\Http\Requests\UserProfileRequest $request
      * @param \App\userProfile $userProfile
      * @return \App\Http\Resources\UserProfileResource
      */
-    public function update(UserProfileUpdateRequest $request, UserProfile $userProfile)
-    {
-        $userProfile->update($request->validated());
+    public function update(Request $request, UserProfile $userProfile)
+    {  
+        $userProfile->update($request->all());
 
         return new UserProfileResource($userProfile);
     }
@@ -64,6 +62,9 @@ class UserProfileController extends Controller
     {
         $userProfile->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'status' => true,
+            'message' => 'Deleted successfully'
+        ]);
     }
 }

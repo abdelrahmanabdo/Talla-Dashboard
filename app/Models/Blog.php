@@ -10,6 +10,7 @@ class Blog extends Model
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
+    // protected $with = ['user'];
     /**
      * The attributes that are mass assignable.
      *

@@ -4,49 +4,66 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     /**
      * @param \Illuminate\Http\Request $request
-     * @return \App\Http\Resources\User
      */
     public function login(Request $request)
     {
-        $loginData = $request->validate([
-            'email' => 'email|required',
-            'password' => 'required'
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8',
         ]);
 
-        if (!auth()->attempt($loginData)) {
-            return response(['message' => 'Invalid Credentials']);
+        if ($validator->fails())
+        {
+            return response(['success' => false, 'errors'=>$validator->errors()->all()], 422);
         }
 
-        $accessToken = auth()->user()->createToken('authToken')->accessToken;
-
-        return response(['user' => auth()->user(), 'access_token' => $accessToken]);
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            if (Hash::check($request->password, $user->password)) {
+                $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+                $response = ['success' => true, 'message' => 'User login successfully', 'token' => $token, 'user' => $user];
+                return response($response, 200);
+            } else {
+                $response = ['success' => false, "message" => "Password mismatch"];
+                return response($response, 422);
+            }
+        } else {
+            $response = ['success' => false, "message" =>'User does not exist'];
+            return response($response, 422);
+        }
 
     }
 
     /**
-     * @param \App\Http\Requests\UserRequest $request
-     * @return \App\Http\Resources\BlogResource
+     * @param \Illuminate\Http\Request $request
      */
-    public function register(BlogStoreRequest $request)
+    public function register(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:55',
-            'email' => 'email|required|unique:users',
-            'password' => 'required|confirmed'
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
         ]);
 
-        $validatedData['password'] = bcrypt($request->password);
+        if ($validator->fails())
+        {
+            return response(['success' => false, 'errors'=>$validator->errors()->all()], 422);
+        }
 
-        $user = User::create($validatedData);
+        $request['password'] = Hash::make($request['password']);
+        $request['remember_token'] = Str::random(10);
+        $user = User::create($request->toArray());
+        $token = $user->createToken('Tallah password')->accessToken;
+        $response = ['success' => true, 'token' => $token , 'message' => 'User created successfully' , 'user' => $user];
 
-        $accessToken = $user->createToken('authToken')->accessToken;
-
-        return response([ 'user' => $user, 'access_token' => $accessToken]);
+        return response($response, 200);
     }
 
 }

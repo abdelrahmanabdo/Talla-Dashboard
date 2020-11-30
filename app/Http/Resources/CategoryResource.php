@@ -3,8 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserProfileCollection extends ResourceCollection
+class CategoryResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -15,7 +16,8 @@ class UserProfileCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
+            'success' => true,
+            'data' => parent::toArray($request),
         ];
     }
 }

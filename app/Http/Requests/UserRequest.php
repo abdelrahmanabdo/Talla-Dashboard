@@ -41,7 +41,9 @@ class UserRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
+            'name' => 'The name is required',
+            'email' => 'The email is required',
+            'password' => 'The password is required',
         ];
     }
 

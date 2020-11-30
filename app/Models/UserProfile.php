@@ -10,6 +10,8 @@ class UserProfile extends Model
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
+    protected $table = 'user_profile';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,7 +19,12 @@ class UserProfile extends Model
      */
     protected $fillable = [
         'user_id',
-        'body_shaped_id',
+        'phone',
+        'country_id',
+        'city_id',
+        'avatar',
+        'birth_date',
+        'body_shape_id',
         'skin_glow_id',
         'job_id',
         'goal_id',
@@ -32,7 +39,7 @@ class UserProfile extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
-        'body_shaped_id' => 'integer',
+        'body_shape_id' => 'integer',
         'skin_glow_id' => 'integer',
         'job_id' => 'integer',
         'goal_id' => 'integer',
@@ -45,7 +52,7 @@ class UserProfile extends Model
         return $this->belongsTo(\App\Models\User::class);
     }
 
-    public function bodyShaped()
+    public function bodyShape()
     {
         return $this->belongsTo(\App\Models\RegistrationChoices::class);
     }

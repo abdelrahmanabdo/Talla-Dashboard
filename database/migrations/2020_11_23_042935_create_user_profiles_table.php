@@ -15,13 +15,14 @@ class CreateUserProfilesTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('user_profiles', function (Blueprint $table) {
+        Schema::create('user_profile', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('avatar', 150);
-            $table->string('mobile', 15);
-            $table->string('birth_date', 20);
             $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('city_id');
+            $table->string('avatar', 150);
+            $table->string('phone', 15);
+            $table->string('birth_date', 20);
             $table->unsignedBigInteger('body_shaped_id');
             $table->unsignedBigInteger('skin_glow_id');
             $table->unsignedBigInteger('job_id');

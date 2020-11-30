@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
-use App\Http\Requests\BrandStoreRequest;
-use App\Http\Requests\BrandUpdateRequest;
-use App\Http\Resources\BrandCollection;
+use App\Http\Requests\BrandRequest;
 use App\Http\Resources\BrandResource;
 use Illuminate\Http\Request;
 
@@ -19,14 +17,14 @@ class BrandController extends Controller
     {
         $brands = Brand::all();
 
-        return new BrandCollection($brands);
+        return new BrandResource($brands);
     }
 
     /**
      * @param \App\Http\Requests\BrandStoreRequest $request
      * @return \App\Http\Resources\BrandResource
      */
-    public function store(BrandStoreRequest $request)
+    public function store(BrandRequest $request)
     {
         $brand = Brand::create($request->validated());
 
@@ -48,9 +46,9 @@ class BrandController extends Controller
      * @param \App\brand $brand
      * @return \App\Http\Resources\BrandResource
      */
-    public function update(BrandUpdateRequest $request, Brand $brand)
+    public function update(Request $request, Brand $brand)
     {
-        $brand->update($request->validated());
+        $brand->update($request->all());
 
         return new BrandResource($brand);
     }
@@ -64,6 +62,9 @@ class BrandController extends Controller
     {
         $brand->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'status' => true,
+            'message' => 'Deleted successfully'
+        ]);
     }
 }

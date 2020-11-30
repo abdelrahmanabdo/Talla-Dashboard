@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryCollection extends ResourceCollection
+class CountryResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -15,7 +15,8 @@ class CategoryCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
+            'success' => true,
+            'data' => parent::toArray($request),
         ];
     }
 }
