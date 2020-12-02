@@ -21,6 +21,7 @@ class Blog extends Model
         'title',
         'body',
         'likes',
+        'hashtags',
         'is_reviewed',
         'active',
         'published_at',
@@ -35,6 +36,7 @@ class Blog extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
+        'hashtags' => 'array',
         'is_reviewed' => 'boolean',
         'active' => 'boolean',
     ];
@@ -49,8 +51,27 @@ class Blog extends Model
     ];
 
 
+    /**
+     * Blog owner
+     */
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class);
+    }
+
+    /**
+     * Blog comments
+     */
+    public function comments()
+    {
+        return $this->hasMany(\App\Models\BlogComment::class);
+    }
+
+    /**
+     * Blog images
+     */
+    public function images()
+    {
+        return $this->hasMany(\App\Models\BlogImage::class);
     }
 }

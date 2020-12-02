@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\BlogComment;
 use App\Http\Requests\BlogRequest;
+use App\Http\Requests\BlogCommentRequest;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\BlogCollection;
 use Illuminate\Http\Request;
@@ -64,8 +66,29 @@ class BlogController extends Controller
         $blog->delete();
 
         return response()->json([
-            'status' => true,
+            'success' => true,
             'message' => 'Deleted successfully'
         ]);
     }
+
+    /**
+     * Add blog comment
+     * @param \App\Http\Requests\BlogCommentRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postBlogComment (BlogCommentRequest $request) {
+        $comment = BlogComment::create($request->validated());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Blog comment added successfully',
+            'data' => $comment
+        ]);;
+    }
+
+    /**
+     * Add blog comment
+     * @param \App\Http\Requests\BlogCommentRequest $request
+     * @return \Illuminate\Http\Response
+     */
 }

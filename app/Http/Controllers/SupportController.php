@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SupportStoreRequest;
-use App\Http\Requests\SupportUpdateRequest;
-use App\Http\Resources\SupportCollection;
+use App\Http\Requests\SupportRequest;
 use App\Http\Resources\SupportResource;
 use App\Models\Support;
 use Illuminate\Http\Request;
@@ -19,14 +17,14 @@ class SupportController extends Controller
     {
         $supports = Support::all();
 
-        return new SupportCollection($supports);
+        return SupportResource::collection($supports);
     }
 
     /**
-     * @param \App\Http\Requests\SupportStoreRequest $request
+     * @param \App\Http\Requests\SupportRequest $request
      * @return \App\Http\Resources\SupportResource
      */
-    public function store(SupportStoreRequest $request)
+    public function store(SupportRequest $request)
     {
         $support = Support::create($request->validated());
 
@@ -44,11 +42,11 @@ class SupportController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\SupportUpdateRequest $request
+     * @param \App\Http\Requests\SupportRequest $request
      * @param \App\support $support
      * @return \App\Http\Resources\SupportResource
      */
-    public function update(SupportUpdateRequest $request, Support $support)
+    public function update(SupportRequest $request, Support $support)
     {
         $support->update($request->validated());
 
@@ -64,6 +62,9 @@ class SupportController extends Controller
     {
         $support->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'success' => true,
+            'message' => 'Deleted successfully'
+        ]);    
     }
 }

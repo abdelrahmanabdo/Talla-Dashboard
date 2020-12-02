@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BlogResource extends JsonResource
+class ClosetResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -18,13 +18,14 @@ class BlogResource extends JsonResource
             'success' => true,
             'data' => [
                 'id' => $this->id,
-                'title' => $this->title,
-                'body' => $this->body,
-                'hashtags' => $this->hashtags,
-                'likes' => $this->likes,
-                'user' => $this->user,
-                'comments' => $this->comments,
-                'images' => $this->images,
+                'type' => $this->type,
+                'season' => $this->season,
+                'color' => $this->color,
+                'category' => $this->category,
+                'brand' => $this->brand,
+                'image' => $this->image,
+                'price' => $this->price,
+                'comment' => $this->comment,
                 'created_at' => $this->created_at
             ]
         ];

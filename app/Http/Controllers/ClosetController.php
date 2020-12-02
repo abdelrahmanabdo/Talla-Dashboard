@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Closet;
-use App\Http\Requests\ClosetStoreRequest;
-use App\Http\Requests\ClosetUpdateRequest;
+use App\Http\Requests\ClosetRequest;
 use App\Http\Resources\ClosetCollection;
 use App\Http\Resources\ClosetResource;
 use Illuminate\Http\Request;
@@ -23,10 +22,10 @@ class ClosetController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\ClosetStoreRequest $request
+     * @param \App\Http\Requests\ClosetRequest $request
      * @return \App\Http\Resources\ClosetResource
      */
-    public function store(ClosetStoreRequest $request)
+    public function store(ClosetRequest $request)
     {
         $closet = Closet::create($request->validated());
 
@@ -44,11 +43,11 @@ class ClosetController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\ClosetUpdateRequest $request
+     * @param \App\Http\Requests\ClosetRequest $request
      * @param \App\closet $closet
      * @return \App\Http\Resources\ClosetResource
      */
-    public function update(ClosetUpdateRequest $request, Closet $closet)
+    public function update(ClosetRequest $request, Closet $closet)
     {
         $closet->update($request->validated());
 
@@ -64,6 +63,9 @@ class ClosetController extends Controller
     {
         $closet->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'success' => true,
+            'message' => 'Deleted successfully'
+        ]);    
     }
 }

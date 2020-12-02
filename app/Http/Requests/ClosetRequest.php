@@ -15,7 +15,7 @@ class ClosetRequest extends FormRequest
     public function authorize()
     {
         // only allow updates if the user is logged in
-        return backpack_auth()->check();
+        return backpack_auth()->check() ? backpack_auth()->check() : true;
     }
 
     /**
@@ -26,7 +26,15 @@ class ClosetRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'user_id' => 'required',
+            'type' => 'required',
+            'season' => 'required',
+            'category_id' => 'required',
+            'color_id' => 'required',
+            'brand_id' => 'required',
+            'price' => 'max:5',
+            'comment' => 'max:225',
+            'image' => 'max:225',
         ];
     }
 

@@ -39,18 +39,26 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
     
         Route::apiResource('stylist-bank-accounts', 'StylistBankAccountController');
     
+        /**
+         * Blogs routes
+         */
         Route::apiResource('blogs', 'BlogController');
+        Route::post('blogs/comments','BlogController@postBlogComment');
     
+        /**
+         * User profile routes
+         */
         Route::apiResource('user-profile', 'UserProfileController');
     
+        /**
+         * Closet routes
+         */
         Route::apiResource('closets', 'ClosetController');
     });
 
     /**
      * Public routes
      */
-    Route::apiResource('user-roles', 'UserRoleController');
-
     Route::apiResource('specializations', 'SpecializationController');
 
     Route::apiResource('brands', 'BrandController');
@@ -66,6 +74,8 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
     Route::apiResource('supports', 'SupportController');
 
     Route::apiResource('registration-choices', 'RegistrationChoiceController');
+
+    Route::apiResource('user-roles', 'UserRoleController');
 
 });
 
