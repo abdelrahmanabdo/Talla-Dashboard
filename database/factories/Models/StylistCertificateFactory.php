@@ -27,7 +27,7 @@ class StylistCertificateFactory extends Factory
             'stylist_id' => Stylist::factory(),
             'certificate_name' => $this->faker->word,
             'organization_name' => $this->faker->word,
-            'issurance_years' => $this->faker->numberBetween(-10000, 10000),
+            'issurance_year' => $this->faker->numberBetween(-10000, 10000),
         ];
     }
 }

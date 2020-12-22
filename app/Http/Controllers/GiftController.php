@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Gift;
+use App\Models\Gift;
 use App\Http\Requests\GiftStoreRequest;
 use App\Http\Requests\GiftUpdateRequest;
 use App\Http\Resources\GiftCollection;

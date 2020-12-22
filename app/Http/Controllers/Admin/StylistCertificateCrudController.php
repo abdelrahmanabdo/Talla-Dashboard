@@ -41,7 +41,7 @@ class StylistCertificateCrudController extends CrudController
     {
         CRUD::column('certificate_name');
         CRUD::column('created_at');
-        CRUD::column('issurance_years');
+        CRUD::column('issurance_year');
         CRUD::column('organization_name');
         CRUD::column('stylist_id');
         CRUD::column('updated_at');
@@ -64,7 +64,7 @@ class StylistCertificateCrudController extends CrudController
         CRUD::setValidation(StylistCertificateRequest::class);
 
         CRUD::field('certificate_name');
-        CRUD::field('issurance_years');
+        CRUD::field('issurance_year');
         CRUD::field('organization_name');
         CRUD::field('stylist_id');
 

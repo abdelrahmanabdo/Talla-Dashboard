@@ -20,7 +20,7 @@ class CreateStylistCertificatesTable extends Migration
             $table->foreignId('stylist_id')->constrained()->cascadeOnDelete();
             $table->string('certificate_name', 150);
             $table->string('organization_name', 150)->nullable();
-            $table->integer('issurance_years');
+            $table->integer('issurance_year');
             $table->timestamps();
         });
 

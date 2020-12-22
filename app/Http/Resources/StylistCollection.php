@@ -15,7 +15,19 @@ class StylistCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
+            'success' => true,
+            'data' => $this->collection->transform(function($item) {
+                return [
+                    'id' => $item->id,
+                    'user' => $item->user,
+                    'avatar' => $item->avatar,
+                    'email' => $item->email,
+                    'mobile_numbers' => $item->mobile_numbers,
+                    'bio' => $item->bio,
+                    'country' => $item->country,
+                    'created_at' => $item->created_at
+                ];
+            }),
         ];
     }
 }

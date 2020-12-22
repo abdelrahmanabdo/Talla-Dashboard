@@ -60,4 +60,5 @@ class Closet extends Model
     {
         return $this->belongsTo(\App\Models\Brand::class);
     }
+
 }

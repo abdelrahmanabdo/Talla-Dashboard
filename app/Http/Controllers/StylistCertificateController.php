@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StylistCertificateStoreRequest;
-use App\Http\Requests\StylistCertificateUpdateRequest;
-use App\Http\Resources\StylistCertificateCollection;
+use App\Http\Requests\StylistCertificateRequest;
 use App\Http\Resources\StylistCertificateResource;
 use App\Models\StylistCertificate;
 use Illuminate\Http\Request;
@@ -19,17 +17,26 @@ class StylistCertificateController extends Controller
     {
         $stylistCertificates = StylistCertificate::all();
 
-        return new StylistCertificateCollection($stylistCertificates);
+        return new StylistCertificateResource($stylistCertificates);
     }
 
     /**
-     * @param \App\Http\Requests\StylistCertificateStoreRequest $request
+     * @param \App\Http\Requests\StylistCertificateRequest $request
      * @return \App\Http\Resources\StylistCertificateResource
      */
-    public function store(StylistCertificateStoreRequest $request)
+    public function store(Request $request)
     {
-        $stylistCertificate = StylistCertificate::create($request->validated());
+        foreach ($request->all() as $key => $certificate) {
+            StylistCertificate::create([
+                'stylist_id' => $certificate['stylist_id'],
+                'certificate_name' => $certificate['certificate_name'],
+                'organization_name' => $certificate['organization_name'],
+                'issurance_year' => $certificate['issurance_year'],
+            ]);
+        }
 
+        $stylistCertificate = $request->all() ;
+        
         return new StylistCertificateResource($stylistCertificate);
     }
 
@@ -44,11 +51,11 @@ class StylistCertificateController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\StylistCertificateUpdateRequest $request
+     * @param \Illuminate\Http\Request $request
      * @param \App\stylistCertificate $stylistCertificate
      * @return \App\Http\Resources\StylistCertificateResource
      */
-    public function update(StylistCertificateUpdateRequest $request, StylistCertificate $stylistCertificate)
+    public function update(Request $request, StylistCertificate $stylistCertificate)
     {
         $stylistCertificate->update($request->validated());
 

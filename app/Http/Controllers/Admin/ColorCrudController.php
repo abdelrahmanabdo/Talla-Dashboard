@@ -40,6 +40,7 @@ class ColorCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('name');
+        CRUD::column('name_en');
         CRUD::column('hexa');
         CRUD::column('active');
         // CRUD::column('created_at');
@@ -61,10 +62,14 @@ class ColorCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(ColorRequest::class);
-
         CRUD::field('name');
+        CRUD::field('name_en');
         CRUD::field('hexa');
-        CRUD::field('active');
+        CRUD::addColumn([
+            'name'  => 'active',
+            'label' => 'Is Active ?',
+            'type'  => 'boolean',
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

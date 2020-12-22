@@ -15,7 +15,14 @@ class StylistSpecializationCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
+            'success' => true,  
+            'data' => $this->collection->transform(function($item) {
+                return [
+                    'id' => $item->id,
+                    'title' => $item->title,
+                    'description' => $item->description,
+                ];
+            }),
         ];
     }
 }

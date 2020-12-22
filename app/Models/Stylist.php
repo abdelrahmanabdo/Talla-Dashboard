@@ -19,6 +19,7 @@ class Stylist extends Model
         'user_id',
         'avatar',
         'email',
+        'mobile_numbers',
         'country_id',
         'bio',
         'experience_years',
@@ -36,25 +37,10 @@ class Stylist extends Model
         'id' => 'integer',
         'user_id' => 'integer',
         'country_id' => 'integer',
+        'mobile_numbers' => 'array',
         'is_approved' => 'boolean',
         'active' => 'boolean',
     ];
-
-
-    public function stylistCertificates()
-    {
-        return $this->hasMany(\App\Models\StylistCertificate::class);
-    }
-
-    public function stylistProjects()
-    {
-        return $this->hasMany(\App\Models\StylistProject::class);
-    }
-
-    public function stylistSpecializations()
-    {
-        return $this->hasMany(\App\Models\StylistSpecialization::class);
-    }
 
     public function user()
     {
@@ -65,4 +51,20 @@ class Stylist extends Model
     {
         return $this->belongsTo(\App\Models\Country::class);
     }
+
+    public function certificates()
+    {
+        return $this->hasMany(\App\Models\StylistCertificate::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(\App\Models\StylistProject::class);
+    }
+
+    public function specializations()
+    {
+        return $this->hasMany(\App\Models\StylistSpecialization::class);
+    }
+
 }

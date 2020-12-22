@@ -6,9 +6,11 @@ use App\Models\Brand;
 use App\Http\Requests\BrandRequest;
 use App\Http\Resources\BrandResource;
 use Illuminate\Http\Request;
+use App\Traits\StoreImageTrait;
 
 class BrandController extends Controller
 {
+    use StoreImageTrait;
     /**
      * @param \Illuminate\Http\Request $request
      * @return \App\Http\Resources\BrandCollection
@@ -26,6 +28,7 @@ class BrandController extends Controller
      */
     public function store(BrandRequest $request)
     {
+        $request['image'] = $this->verifyAndStoreBase64Image($request->image ,'test','brands');
         $brand = Brand::create($request->validated());
 
         return new BrandResource($brand);

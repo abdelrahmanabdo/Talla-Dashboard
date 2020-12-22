@@ -34,11 +34,10 @@ class ClosetRequest extends FormRequest
             'brand_id' => 'required',
             'price' => 'max:5',
             'comment' => 'max:225',
-            'image' => 'max:225',
         ];
     }
 
-    /**
+    /** 
      * Get the validation attributes that apply to the request.
      *
      * @return array

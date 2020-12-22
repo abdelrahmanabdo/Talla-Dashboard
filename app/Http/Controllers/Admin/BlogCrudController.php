@@ -40,10 +40,10 @@ class BlogCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('title');
-        CRUD::column('content');
+        CRUD::column('body');
         // CRUD::column('published_at');
         // CRUD::column('softDeletes');
-        // CRUD::column('created_at');
+        CRUD::column('created_at');
         // CRUD::column('updated_at');
 
         /**
@@ -64,7 +64,7 @@ class BlogCrudController extends CrudController
         CRUD::setValidation(BlogRequest::class);
 
         CRUD::field('title');
-        CRUD::field('content');
+        CRUD::field('body');
         // CRUD::field('published_at');
         // CRUD::field('softDeletes');
 

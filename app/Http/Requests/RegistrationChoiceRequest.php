@@ -15,7 +15,7 @@ class RegistrationChoiceRequest extends FormRequest
     public function authorize()
     {
         // only allow updates if the user is logged in
-        return backpack_auth()->check();
+        return backpack_auth()->check() ? backpack_auth()->check() : true;
     }
 
     /**
@@ -26,7 +26,9 @@ class RegistrationChoiceRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'type' => 'required|max:255',
+            'title' => 'required|max:255',
+            'image' => 'required',
         ];
     }
 

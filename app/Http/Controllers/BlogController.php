@@ -4,21 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\BlogComment;
+use App\Models\BlogImage;
 use App\Http\Requests\BlogRequest;
 use App\Http\Requests\BlogCommentRequest;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\BlogCollection;
 use Illuminate\Http\Request;
-
+use App\Traits\StoreImageTrait;
 class BlogController extends Controller
 {
+    use StoreImageTrait;
+
     /**
      * @param \Illuminate\Http\Request $request
      * @return \App\Http\Resources\BlogCollection
      */
     public function index(Request $request)
     {
-        $blogs = Blog::all();
+        $blogs = Blog::with(['user:id', 'user.profile:user_id,avatar'])
+                      ->orderBy('created_at','Desc')
+                      ->get();
 
         return new BlogCollection($blogs);
     }
@@ -29,7 +34,21 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
+
         $blog = Blog::create($request->validated());
+
+        /**
+         * Store blog images
+         */
+        if ($request->images) {
+            foreach ($request->images as $key => $image) {
+                $imagePath = $this->verifyAndStoreBase64Image($image, $request->user_id .'-'. $request->title . '-' . $key , 'blogs');
+                BlogImage::create([
+                    'blog_id' => $blog->id,
+                    'image'   => $imagePath
+                ]);
+            }
+        }
 
         return new BlogResource($blog);
     }
@@ -52,6 +71,19 @@ class BlogController extends Controller
     public function update(Request $request, Blog $blog)
     {
         $blog->update($request->all());
+
+        /**
+         * Store blog images
+         */
+        if ($request->images) {
+            foreach ($request->images as $key => $image) {
+                $imagePath = $this->verifyAndStoreBase64Image($image, $blog->user_id .'-'. $request->title . '-' . $key , 'blogs');
+                BlogImage::create([
+                    'blog_id' => $blog->id,
+                    'image'   => $imagePath
+                ]);
+            }
+        }
 
         return new BlogResource($blog);
     }
@@ -86,9 +118,5 @@ class BlogController extends Controller
         ]);;
     }
 
-    /**
-     * Add blog comment
-     * @param \App\Http\Requests\BlogCommentRequest $request
-     * @return \Illuminate\Http\Response
-     */
+
 }

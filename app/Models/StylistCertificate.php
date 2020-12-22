@@ -19,7 +19,7 @@ class StylistCertificate extends Model
         'stylist_id',
         'certificate_name',
         'organization_name',
-        'issurance_years',
+        'issurance_year',
     ];
 
     /**

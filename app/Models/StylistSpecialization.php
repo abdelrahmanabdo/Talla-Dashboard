@@ -9,7 +9,7 @@ class StylistSpecialization extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
-
+    protected $with = ['specialization'];
     /**
      * The attributes that are mass assignable.
      *
@@ -41,6 +41,6 @@ class StylistSpecialization extends Model
 
     public function specialization()
     {
-        return $this->belongsTo(\App\Models\Specialization::class);
+        return $this->belongsTo(\App\Models\Specialization::class)->select(['id','title']);
     }
 }

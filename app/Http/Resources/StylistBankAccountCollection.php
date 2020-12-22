@@ -15,7 +15,17 @@ class StylistBankAccountCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
+            'success' => true,  
+            'data' => $this->collection->transform(function($item) {
+                return [
+                    'id' => $item->id,
+                    'stylist' => $item->stylist,
+                    'name_on_card' => $item->name_on_card,
+                    'card_number' => $item->card_number,
+                    'expire_date' => $item->expire_date,
+                    'CVV' => $item->CVV,
+                ];
+            }),
         ];
     }
 }

@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StylistProjectStoreRequest;
+use App\Http\Requests\StylistProjectRequest;
 use App\Http\Requests\StylistProjectUpdateRequest;
 use App\Http\Resources\StylistProjectCollection;
 use App\Http\Resources\StylistProjectResource;
 use App\Models\StylistProject;
+use App\Models\StylistProjectImage;
 use Illuminate\Http\Request;
+use App\Traits\StoreImageTrait;
 
 class StylistProjectController extends Controller
 {
+    use StoreImageTrait;
+    
     /**
      * @param \Illuminate\Http\Request $request
      * @return \App\Http\Resources\StylistProjectCollection
@@ -26,11 +30,34 @@ class StylistProjectController extends Controller
      * @param \App\Http\Requests\StylistProjectStoreRequest $request
      * @return \App\Http\Resources\StylistProjectResource
      */
-    public function store(StylistProjectStoreRequest $request)
+    public function store(StylistProjectRequest $request)
     {
-        $stylistProject = StylistProject::create($request->validated());
+        foreach ($request->all() as $key => $project) {
+            $newProject = StylistProject::create([
+                'stylist_id' => $project['stylist_id'],
+                'name' => $project['name'],
+                'description' => $project['description'],
+            ]);
 
-        return new StylistProjectResource($stylistProject);
+            /**
+             * Store project images
+             */
+            if ($project['images']) {
+                foreach ($project['images'] as $key => $image) {
+                    $imagePath = $this->verifyAndStoreBase64Image($image, 
+                                                                 $project['stylist_id'] .'-'. $project['name'] . '-' . $key , 
+                                                                 'projects');
+                    StylistProjectImage::create([
+                        'project_id' => $newProject->id,
+                        'image'   => $imagePath
+                    ]);
+                }
+            }
+        }
+
+        $projects = $request->all();
+
+        return new StylistProjectResource($projects);
     }
 
     /**

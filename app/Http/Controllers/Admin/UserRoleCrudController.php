@@ -28,7 +28,7 @@ class UserRoleCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\UserRole::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/userrole');
-        CRUD::setEntityNameStrings('userrole', 'user_roles');
+        CRUD::setEntityNameStrings('user role', 'user roles');
     }
 
     /**
@@ -39,11 +39,15 @@ class UserRoleCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('active');
-        CRUD::column('created_at');
+        CRUD::column('id');
         CRUD::column('name');
         CRUD::column('name_en');
-        CRUD::column('updated_at');
+        CRUD::addColumn([
+            'name'  => 'active',
+            'label' => 'Is Active ?',
+            'type'  => 'boolean',
+        ]);
+        // CRUD::column('created_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -61,11 +65,9 @@ class UserRoleCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(UserRoleRequest::class);
-
-        CRUD::field('active');
         CRUD::field('name');
         CRUD::field('name_en');
-
+        CRUD::field('active');
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');

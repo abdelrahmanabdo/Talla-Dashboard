@@ -41,9 +41,25 @@ class CategoryCrudController extends CrudController
     {
         CRUD::column('name');
         CRUD::column('name_en');
-        CRUD::column('icon');
-        CRUD::column('icon_colored');
-        CRUD::column('active');
+        CRUD::addColumn([
+            'name'      => 'icon', // The db column name
+            'label'     => 'Icon', // Table column heading
+            'type'      => 'image',
+            'height' => '70px',
+            'width'  => '70px',
+        ]);
+        CRUD::addColumn([
+            'name'      => 'icon_colored', // The db column name
+            'label'     => 'Colored Icon', // Table column heading
+            'type'      => 'image',
+            'height' => '70px',
+            'width'  => '70px',
+        ]);
+        CRUD::addColumn([
+            'name'  => 'active',
+            'label' => 'Is Active ?',
+            'type'  => 'boolean',
+        ]);
         // CRUD::column('softDeletes');
         // CRUD::column('created_at');
         // CRUD::column('updated_at');
@@ -64,20 +80,23 @@ class CategoryCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(CategoryRequest::class);
-
         CRUD::field('name');
         CRUD::field('name_en');
         CRUD::addField([
+            'label' => 'Non-selected Icon',
             'name' => 'icon',
             'type' => 'image',
             'upload' => true,
-            'disk' => 'uploads'
+            'disk' => 'public',
+            'aspect_ratio' => 1
         ]);
         CRUD::addField([
+            'label' => 'Selected Colored Icon',
             'name' => 'icon_colored',
             'type' => 'image',
             'upload' => true,
-            'disk' => 'uploads'
+            'disk' => 'public',
+            'aspect_ratio' => 1
         ]);
         CRUD::addField([
             'name'=>'active',

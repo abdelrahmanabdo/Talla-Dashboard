@@ -28,7 +28,7 @@ class RegistrationChoiceCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\RegistrationChoice::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/registrationchoice');
-        CRUD::setEntityNameStrings('registrationchoice', 'registration_choices');
+        CRUD::setEntityNameStrings('registration choice', 'registration choices');
     }
 
     /**
@@ -39,10 +39,16 @@ class RegistrationChoiceCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('created_at');
-        CRUD::column('image');
-        CRUD::column('title');
         CRUD::column('type');
+        CRUD::column('title');
+        CRUD::addColumn([
+            'name'      => 'image', // The db column name
+            'label'     => 'Choice image', // Table column heading
+            'type'      => 'image',
+            'height' => '70px',
+            'width'  => '70px',
+        ]);
+        CRUD::column('created_at');
         CRUD::column('updated_at');
 
         /**
@@ -61,10 +67,27 @@ class RegistrationChoiceCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(RegistrationChoiceRequest::class);
-
-        CRUD::field('image');
+        CRUD::addField([   // select_from_array
+            'name'        => 'type',
+            'label'       => "Type",
+            'type'        => 'select_from_array',
+            'options'     => ['body_shape' => 'Body Shape',
+                              'skin_glow' => 'Skin Glow', 
+                              'job' => 'Job', 
+                              'goal' => 'Fashion Goal',
+                              'favourite_style' => 'Favourite Style'
+                            ],
+            'allows_null' => false,
+            'default'     => 'body_shape',
+        ]);
         CRUD::field('title');
-        CRUD::field('type');
+        CRUD::addField([
+            'name' => 'image',
+            'type' => 'image',
+            'upload' => true,
+            'disk' => 'public',
+            'aspect_ratio' => 1
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

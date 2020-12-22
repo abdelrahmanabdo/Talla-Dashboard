@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     /**
+     * User login handler
      * @param \Illuminate\Http\Request $request
      */
     public function login(Request $request)
@@ -21,27 +22,39 @@ class AuthController extends Controller
 
         if ($validator->fails())
         {
-            return response(['success' => false, 'errors'=>$validator->errors()->all()], 422);
+            return response([
+                'success' => false,
+                'errors'=>$validator->errors()->all()
+            ], 422);
         }
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->with(['profile', 'profile.country', 'profile.city'])->first();
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-                $response = ['success' => true, 'message' => 'User login successfully', 'token' => $token, 'user' => $user];
+                $response = [   "success" => true,
+                                "message" => 'User login successfully',
+                                "token" => $token,
+                                "user" => $user
+                            ];
                 return response($response, 200);
             } else {
-                $response = ['success' => false, "message" => "Password mismatch"];
+                $response = ["success" => false,
+                             "message" => "Password mismatch"
+                            ];
                 return response($response, 422);
             }
         } else {
-            $response = ['success' => false, "message" =>'User does not exist'];
+            $response = ["success" => false,
+                         "message" =>'User does not exist'
+                        ];
             return response($response, 422);
         }
 
     }
 
     /**
+     * Create new user row handler
      * @param \Illuminate\Http\Request $request
      */
     public function register(Request $request)
@@ -54,14 +67,20 @@ class AuthController extends Controller
 
         if ($validator->fails())
         {
-            return response(['success' => false, 'errors'=>$validator->errors()->all()], 422);
+            return response(['success' => false,
+                             'errors'=>$validator->errors()->all()
+                            ], 422);
         }
 
         $request['password'] = Hash::make($request['password']);
         $request['remember_token'] = Str::random(10);
         $user = User::create($request->toArray());
         $token = $user->createToken('Tallah password')->accessToken;
-        $response = ['success' => true, 'token' => $token , 'message' => 'User created successfully' , 'user' => $user];
+        $response = ['success' => true,
+                     'message' => 'User created successfully',
+                     'token' => $token ,
+                     'user' => $user
+                    ];
 
         return response($response, 200);
     }

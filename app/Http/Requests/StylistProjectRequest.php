@@ -15,7 +15,7 @@ class StylistProjectRequest extends FormRequest
     public function authorize()
     {
         // only allow updates if the user is logged in
-        return backpack_auth()->check();
+        return backpack_auth()->check() ? backpack_auth()->check() : true;
     }
 
     /**
@@ -23,10 +23,9 @@ class StylistProjectRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            // 'name' => 'required|min:5|max:255'
+
         ];
     }
 

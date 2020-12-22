@@ -41,7 +41,11 @@ class CountryCrudController extends CrudController
     {
         CRUD::column('name');
         CRUD::column('name_en');
-        CRUD::column('active');
+        CRUD::addColumn([
+            'name'  => 'active',
+            'label' => 'Is Active ?',
+            'type'  => 'boolean',
+        ]);
         // CRUD::column('created_at');
         // CRUD::column('updated_at');
 

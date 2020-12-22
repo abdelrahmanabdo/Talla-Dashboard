@@ -20,6 +20,7 @@ class CreateStylistsTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('avatar', 200);
             $table->string('email', 200);
+            $table->json('mobile_numbers');
             $table->unsignedBigInteger('country_id');
             $table->longText('bio');
             $table->integer('experience_years');

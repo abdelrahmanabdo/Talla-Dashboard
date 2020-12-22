@@ -3,20 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Closet;
+use App\Models\ClosetOutfitItem;
 use App\Http\Requests\ClosetRequest;
 use App\Http\Resources\ClosetCollection;
 use App\Http\Resources\ClosetResource;
 use Illuminate\Http\Request;
+use App\Traits\StoreImageTrait;
 
 class ClosetController extends Controller
 {
+    use StoreImageTrait;
+
     /**
      * @param \Illuminate\Http\Request $request
      * @return \App\Http\Resources\ClosetCollection
      */
     public function index(Request $request)
     {
-        $closets = Closet::all();
+        // Filter closet rows acording to type (item , outfit)
+        $closets = Closet::when(!empty($request->type) , function($q) use($request){
+                                    $q->where('type', $request->type);
+                                })
+                            ->when(!empty($request->category_id) && $request->category_id !== 'null' , function($q) use($request){
+                                    $q->where('category_id', $request->category_id);
+                                })
+                            ->when(!empty($request->season) && $request->season !== 'null' , function($q) use($request){
+                                    $q->where('season', $request->season);
+                                })
+                            ->get();
 
         return new ClosetCollection($closets);
     }
@@ -27,7 +41,30 @@ class ClosetController extends Controller
      */
     public function store(ClosetRequest $request)
     {
-        $closet = Closet::create($request->validated());
+        /**
+         * Store item image
+         */
+        if ($request->image) {
+            $imagePath = $this->verifyAndStoreBase64Image($request->image, $request->user_id . '-item' , 'closets');
+            $request->merge([
+                'image' => $imagePath
+            ]);
+        }
+
+        $closet = Closet::create($request->all());
+
+        /**
+         * If the new item is an outfit 
+         * add the outfit items to the closet_outfit_items table
+         */
+        if ($request->type === 2 && count($request->outfit_items) > 0) {
+            foreach ($request->outfit_items as $item) {
+              ClosetOutfitItem::create([
+                  'outfit_id' => $closet->id,
+                  'closet_item_id' => $item
+              ]);  
+            }
+        }
 
         return new ClosetResource($closet);
     }

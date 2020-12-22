@@ -23,11 +23,11 @@ class CreateUserProfilesTable extends Migration
             $table->string('avatar', 150);
             $table->string('phone', 15);
             $table->string('birth_date', 20);
-            $table->unsignedBigInteger('body_shaped_id');
+            $table->unsignedBigInteger('body_shape_id');
             $table->unsignedBigInteger('skin_glow_id');
-            $table->unsignedBigInteger('job_id');
-            $table->unsignedBigInteger('goal_id');
-            $table->unsignedBigInteger('favourite_style_id');
+            $table->json('job_id');
+            $table->json('goal_id');
+            $table->json('favourite_style_id');
             $table->timestamps();
         });
 

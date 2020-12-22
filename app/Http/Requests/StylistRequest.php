@@ -15,7 +15,7 @@ class StylistRequest extends FormRequest
     public function authorize()
     {
         // only allow updates if the user is logged in
-        return backpack_auth()->check();
+        return backpack_auth()->check() ? backpack_auth()->check() : true;
     }
 
     /**
@@ -26,7 +26,10 @@ class StylistRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'user_id' => 'required',
+            'email' => 'required',
+            'avatar' => 'required',
+            'country_id' => 'required',
         ];
     }
 
@@ -50,7 +53,10 @@ class StylistRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'user_id' => 'The user id is required',
+            'email' => 'The email is required',
+            'avatar' => 'The avatar is required',
+            'country_id' => 'The country id is required',
         ];
     }
 }

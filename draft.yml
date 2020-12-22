@@ -86,7 +86,7 @@ models:
     stylist_id: id foreign
     certificate_name: string:150
     organization_name: string:150 nullable
-    issurance_years: integer
+    issurance_year: integer
     timestamps : true
 
   Models\StylistProject:

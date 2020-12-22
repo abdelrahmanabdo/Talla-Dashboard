@@ -15,7 +15,7 @@ class StylistBankAccountRequest extends FormRequest
     public function authorize()
     {
         // only allow updates if the user is logged in
-        return backpack_auth()->check();
+        return backpack_auth()->check() ? backpack_auth()->check() : true;
     }
 
     /**
@@ -26,7 +26,11 @@ class StylistBankAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'stylist_id' => 'required',
+            'name_on_card' => 'required|max:150',
+            'card_number' => 'required|min:13|max:16',
+            'expire_date' => 'required|min:5|max:5',
+            'CVV' => 'required|min:3|max:5',
         ];
     }
 

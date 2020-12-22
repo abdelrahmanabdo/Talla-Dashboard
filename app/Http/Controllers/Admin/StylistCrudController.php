@@ -39,17 +39,39 @@ class StylistCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('active');
-        CRUD::column('avatar');
-        CRUD::column('bio');
-        CRUD::column('country_id');
-        CRUD::column('created_at');
+        CRUD::column('user');
+        CRUD::addColumn([
+            'name'      => 'avatar', // The db column name
+            'label'     => 'Avatar', // Table column heading
+            'type'      => 'image',
+            'height' => '70px',
+            'width'  => '70px',
+        ]);
         CRUD::column('email');
+        CRUD::column('country');
+        CRUD::addColumn([  
+        'name'         => 'mobile_numbers', // name of relationship method in the model
+        'type'         => 'table',
+        'label'        => 'Mobile Numbers', // Table column heading,
+        'columns'      => [
+                'mobile_numbers'  => 'Mobile',
+            ]   
+        ]);
+        CRUD::column('bio');
         CRUD::column('experience_years');
-        CRUD::column('is_approved');
-        CRUD::column('softDeletes');
-        CRUD::column('updated_at');
-        CRUD::column('user_id');
+        CRUD::addColumn([
+            'name'  => 'is_approved',
+            'label' => 'Is Approved ?',
+            'type'  => 'boolean',
+        ]);
+        // CRUD::column('softDeletes');
+        // CRUD::column('updated_at');
+        CRUD::addColumn([
+            'name'  => 'active',
+            'label' => 'Is Active ?',
+            'type'  => 'boolean',
+        ]);
+        CRUD::column('created_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -67,16 +89,46 @@ class StylistCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(StylistRequest::class);
-
-        CRUD::field('active');
-        CRUD::field('avatar');
+        CRUD::field('user_id');
+        CRUD::field('email');
+        CRUD::addField([
+            'name' => 'avatar',
+            'type' => 'image',
+            'upload' => true,
+            'disk' => 'public',
+            'aspect_ratio' => 1
+        ]);
+        CRUD::addField([
+            'name' => 'mobile_numbers',
+            'type' => 'table',
+            'columns'  => [
+                'mobile_numbers'  => 'Mobile',
+            ]  
+        ]);
         CRUD::field('bio');
         CRUD::field('country_id');
-        CRUD::field('email');
         CRUD::field('experience_years');
-        CRUD::field('is_approved');
-        CRUD::field('softDeletes');
-        CRUD::field('user_id');
+        CRUD::addField([
+            'name' => 'is_approved',
+            'type' => 'radio',
+            'label' => 'is account approved ?' ,
+            'options'     => [
+                // the key will be stored in the db, the value will be shown as label; 
+                1 => "Yes",
+                0 => "No"
+            ],
+        ]);
+        // CRUD::field('softDeletes');
+        CRUD::addField([
+            'name' => 'active',
+            'type' => 'radio',
+            'label' => 'is account active ?' ,
+            'options'     => [
+                // the key will be stored in the db, the value will be shown as label; 
+                1 => "Yes",
+                0 => "No"
+            ],
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

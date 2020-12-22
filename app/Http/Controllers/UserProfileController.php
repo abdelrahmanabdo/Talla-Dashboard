@@ -6,9 +6,10 @@ use App\Http\Requests\UserProfileRequest;
 use App\Http\Resources\UserProfileResource;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
-
+use App\Traits\StoreImageTrait;
 class UserProfileController extends Controller
 {
+    use StoreImageTrait;
     /**
      * @param \Illuminate\Http\Request $request
      * @return \App\Http\Resources\UserProfileResource
@@ -26,8 +27,31 @@ class UserProfileController extends Controller
      */
     public function store(UserProfileRequest $request)
     {
-        $userProfile = UserProfile::create($request->validated());
+        /**
+         * Store user avatar
+         */
+        if ($request->avatar) {
+            $imagePath = $this->verifyAndStoreBase64Image($request->avatar, $request->user_id , 'users');
+            $request->merge([
+                'avatar' => $imagePath
+            ]);
+        }
 
+       //Check if user already has a profile
+       /**
+        * Update current user
+        */
+        if ($user = UserProfile::whereUserId($request->user_id)->first()) {
+            $user->update($request->all());
+            $userProfile = $user;
+        } 
+        /**
+         * Create new user
+         */
+        else {
+            $userProfile = UserProfile::create($request->all());
+        }
+        
         return new UserProfileResource($userProfile);
     }
 

@@ -73,10 +73,17 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
 
     Route::apiResource('supports', 'SupportController');
 
+    Route::apiResource('favourites', 'FavouriteController');
+
     Route::apiResource('registration-choices', 'RegistrationChoiceController');
 
     Route::apiResource('user-roles', 'UserRoleController');
 
+    /**
+     * OTP
+     */
+    Route::post('otp/create', 'OTPController@create');
+    Route::post('otp/validate', 'OTPController@validate');
 });
 
 

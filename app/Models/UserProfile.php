@@ -41,9 +41,9 @@ class UserProfile extends Model
         'user_id' => 'integer',
         'body_shape_id' => 'integer',
         'skin_glow_id' => 'integer',
-        'job_id' => 'integer',
-        'goal_id' => 'integer',
-        'favourite_style_id' => 'integer',
+        'job_id' => 'array',
+        'goal_id' => 'array',
+        'favourite_style_id' => 'array',
     ];
 
 
@@ -52,28 +52,38 @@ class UserProfile extends Model
         return $this->belongsTo(\App\Models\User::class);
     }
 
+    public function country()
+    {
+        return $this->belongsTo(\App\Models\Country::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(\App\Models\Country::class);
+    }
+
     public function bodyShape()
     {
-        return $this->belongsTo(\App\Models\RegistrationChoices::class);
+        return $this->belongsTo(\App\Models\RegistrationChoice::class);
     }
 
     public function skinGlow()
     {
-        return $this->belongsTo(\App\Models\RegistrationChoices::class);
+        return $this->belongsTo(\App\Models\RegistrationChoice::class);
     }
 
     public function job()
     {
-        return $this->belongsTo(\App\Models\RegistrationChoices::class);
+        return $this->belongsTo(\App\Models\RegistrationChoice::class);
     }
 
     public function goal()
     {
-        return $this->belongsTo(\App\Models\RegistrationChoices::class);
+        return $this->belongsTo(\App\Models\RegistrationChoice::class);
     }
 
     public function favouriteStyle()
     {
-        return $this->belongsTo(\App\Models\RegistrationChoices::class);
+        return $this->belongsTo(\App\Models\RegistrationChoice::class);
     }
 }

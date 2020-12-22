@@ -3,31 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\RegistrationChoice;
-use App\Http\Requests\RegistrationChoiceStoreRequest;
-use App\Http\Requests\RegistrationChoiceUpdateRequest;
-use App\Http\Resources\RegistrationChoiceCollection;
+use App\Http\Requests\RegistrationChoiceRequest;
 use App\Http\Resources\RegistrationChoiceResource;
 use Illuminate\Http\Request;
+use App\Traits\StoreImageTrait;
 
 class RegistrationChoiceController extends Controller
 {
+    use StoreImageTrait;
+
     /**
      * @param \Illuminate\Http\Request $request
      * @return \App\Http\Resources\RegistrationChoiceCollection
      */
     public function index(Request $request)
     {
-        $registrationChoices = RegistrationChoice::all();
+        if ($request->type) {
+          $registrationChoices = RegistrationChoice::whereType($request->type)->get();
+        } else {
+          $registrationChoices = RegistrationChoice::all();
+        }
 
-        return new RegistrationChoiceCollection($registrationChoices);
+        return new RegistrationChoiceResource($registrationChoices);
     }
 
     /**
      * @param \App\Http\Requests\RegistrationChoiceStoreRequest $request
      * @return \App\Http\Resources\RegistrationChoiceResource
      */
-    public function store(RegistrationChoiceStoreRequest $request)
+    public function store(RegistrationChoiceRequest $request)
     {
+        $request['image'] = $this->verifyAndStoreBase64Image($request->image, $request->title,'registration-choices');
+
         $registrationChoice = RegistrationChoice::create($request->validated());
 
         return new RegistrationChoiceResource($registrationChoice);
@@ -48,8 +55,10 @@ class RegistrationChoiceController extends Controller
      * @param \App\registrationChoice $registrationChoice
      * @return \App\Http\Resources\RegistrationChoiceResource
      */
-    public function update(RegistrationChoiceUpdateRequest $request, RegistrationChoice $registrationChoice)
+    public function update(Request $request, RegistrationChoice $registrationChoice)
     {
+        $request['image'] = $this->verifyAndStoreBase64Image($request->image, $request->title,'registration-choices');
+
         $registrationChoice->update($request->validated());
 
         return new RegistrationChoiceResource($registrationChoice);

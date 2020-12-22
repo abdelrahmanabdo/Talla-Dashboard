@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StylistSpecializationStoreRequest;
+use App\Http\Requests\StylistSpecializationRequest;
 use App\Http\Requests\StylistSpecializationUpdateRequest;
 use App\Http\Resources\StylistSpecializationCollection;
 use App\Http\Resources\StylistSpecializationResource;
@@ -26,11 +26,21 @@ class StylistSpecializationController extends Controller
      * @param \App\Http\Requests\StylistSpecializationStoreRequest $request
      * @return \App\Http\Resources\StylistSpecializationResource
      */
-    public function store(StylistSpecializationStoreRequest $request)
+    public function store(StylistSpecializationRequest $request)
     {
-        $stylistSpecialization = StylistSpecialization::create($request->validated());
 
-        return new StylistSpecializationResource($stylistSpecialization);
+        foreach ($request->all() as $key => $specialization) {
+            $newSpecialization = StylistSpecialization::create([
+                'stylist_id' => $specialization['stylist_id'],
+                'specialization_id' => $specialization['id'],
+                'description' => $specialization['description'],
+                'start_price' => $specialization['start_price'],
+            ]);
+        }
+
+        $specializations = $request->all();
+
+        return new StylistSpecializationResource($specializations);
     }
 
     /**

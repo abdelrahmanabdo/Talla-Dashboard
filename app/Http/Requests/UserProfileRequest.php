@@ -26,10 +26,11 @@ class UserProfileRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'phone' => 'required|min:11',
+            'phone' => 'required|min:11|max:15',
             'country_id' => 'required',
             'city_id' => 'required',
             'birth_date' => 'required',
+            'avatar' => 'string'
         ];
     }
 

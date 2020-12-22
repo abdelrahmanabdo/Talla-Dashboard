@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\StylistBankAccount;
-use App\Http\Requests\StylistBankAccountStoreRequest;
+use App\Http\Requests\StylistBankAccountRequest;
 use App\Http\Requests\StylistBankAccountUpdateRequest;
 use App\Http\Resources\StylistBankAccountCollection;
 use App\Http\Resources\StylistBankAccountResource;
@@ -26,7 +26,7 @@ class StylistBankAccountController extends Controller
      * @param \App\Http\Requests\StylistBankAccountStoreRequest $request
      * @return \App\Http\Resources\StylistBankAccountResource
      */
-    public function store(StylistBankAccountStoreRequest $request)
+    public function store(StylistBankAccountRequest $request)
     {
         $stylistBankAccount = StylistBankAccount::create($request->validated());
 

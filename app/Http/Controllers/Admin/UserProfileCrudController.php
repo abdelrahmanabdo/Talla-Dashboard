@@ -28,7 +28,7 @@ class UserProfileCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\UserProfile::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/userprofile');
-        CRUD::setEntityNameStrings('userprofile', 'user_profiles');
+        CRUD::setEntityNameStrings('user profile', 'users profile');
     }
 
     /**
@@ -39,14 +39,67 @@ class UserProfileCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('body_shaped_id');
+        CRUD::addColumn([  
+        'name'         => 'user', // name of relationship method in the model
+        'type'         => 'relationship',
+        'label'        => 'User', // Table column heading
+        ]);
+        CRUD::column('phone');
+        CRUD::addColumn([  
+        'name'         => 'country', // name of relationship method in the model
+        'type'         => 'relationship',
+        'label'        => 'Country', // Table column heading
+        ]);
+        CRUD::addColumn([  
+        'name'         => 'city', // name of relationship method in the model
+        'type'         => 'relationship',
+        'label'        => 'City', // Table column heading
+        ]);        
+        CRUD::addColumn([
+            'name'      => 'avatar', // The db column name
+            'label'     => 'User avatar', // Table column heading
+            'type'      => 'image',
+            'height' => '70px',
+            'width'  => '70px',
+        ]);
+        CRUD::addColumn([  
+        'name'         => 'bodyShape', // name of relationship method in the model
+        'type'         => 'relationship',
+        'label'        => 'Body Shape', // Table column heading
+        ]);
+        CRUD::addColumn([  
+        'name'         => 'skinGlow', // name of relationship method in the model
+        'type'         => 'relationship',
+        'label'        => 'Skin Glow', // Table column heading
+        ]);
+        CRUD::addColumn([  
+        'name'         => 'job_id', // name of relationship method in the model
+        'type'         => 'table',
+        'label'        => 'Job', // Table column heading
+        'columns'      => [
+                'id' => '#',
+                'title'  => 'Title',
+            ]
+        ]);
+        CRUD::addColumn([  
+        'name'         => 'goal_id', // name of relationship method in the model
+        'type'         => 'table',
+        'label'        => 'Goal', // Table column heading
+        'columns'      => [
+                'id' => '#',
+                'title'  => 'Title',
+            ]
+        ]);
+        CRUD::addColumn([  
+        'name'         => 'favourite_style_id', // name of relationship method in the model
+        'type'         => 'table',
+        'label'        => 'Favourite Style', // Table column heading,
+        'columns'      => [
+                'id' => '#',
+                'title'  => 'Title',
+            ]
+        ]);
         CRUD::column('created_at');
-        CRUD::column('favourite_style_id');
-        CRUD::column('goal_id');
-        CRUD::column('job_id');
-        CRUD::column('skin_glow_id');
-        CRUD::column('updated_at');
-        CRUD::column('user_id');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -64,13 +117,22 @@ class UserProfileCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(UserProfileRequest::class);
-
-        CRUD::field('body_shaped_id');
-        CRUD::field('favourite_style_id');
-        CRUD::field('goal_id');
-        CRUD::field('job_id');
-        CRUD::field('skin_glow_id');
         CRUD::field('user_id');
+        CRUD::addField([
+            'name' => 'avatar',
+            'type' => 'image',
+            'upload' => true,
+            'disk' => 'public',
+            'aspect_ratio' => 1
+        ]);
+        CRUD::field('phone');
+        CRUD::field('Country');
+        CRUD::field('City');
+        CRUD::field('bodyShape');
+        CRUD::field('favouriteStyle');
+        CRUD::field('goal');
+        CRUD::field('job');
+        CRUD::field('skinGlow');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

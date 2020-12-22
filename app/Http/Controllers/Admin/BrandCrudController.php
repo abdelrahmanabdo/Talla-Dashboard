@@ -41,9 +41,19 @@ class BrandCrudController extends CrudController
     {
         CRUD::column('name');
         CRUD::column('name_en');
-        CRUD::column('image');
-        CRUD::column('active');
-        // CRUD::column('created_at');
+        CRUD::addColumn([
+            'name'      => 'image', // The db column name
+            'label'     => 'Image', // Table column heading
+            'type'      => 'image',
+            'height' => '70px',
+            'width'  => '70px',
+        ]);
+        CRUD::addColumn([
+            'name'  => 'active',
+            'label' => 'Is Active ?',
+            'type'  => 'boolean',
+        ]);
+        CRUD::column('created_at');
         // CRUD::column('updated_at');
 
         /**
@@ -69,7 +79,8 @@ class BrandCrudController extends CrudController
             'name' => 'image',
             'type' => 'image',
             'upload' => true,
-            'disk' => 'uploads'
+            'disk' => 'public',
+            'aspect_ratio' => 1
         ]);
         CRUD::field('active');
 

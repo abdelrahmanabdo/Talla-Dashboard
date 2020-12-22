@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StylistStoreRequest;
-use App\Http\Requests\StylistUpdateRequest;
+use App\Http\Requests\StylistRequest;
 use App\Http\Resources\StylistCollection;
 use App\Http\Resources\StylistResource;
 use App\Models\Stylist;
 use Illuminate\Http\Request;
+use App\Traits\StoreImageTrait;
 
 class StylistController extends Controller
 {
+    use StoreImageTrait;
     /**
      * @param \Illuminate\Http\Request $request
      * @return \App\Http\Resources\StylistCollection
@@ -23,12 +24,37 @@ class StylistController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\StylistStoreRequest $request
+     * @param \App\Http\Requests\StylistRequest $request
      * @return \App\Http\Resources\StylistResource
      */
-    public function store(StylistStoreRequest $request)
+    public function store(StylistRequest $request)
     {
-        $stylist = Stylist::create($request->validated());
+
+        /**
+         * Store stylist avatar
+         */
+        if ($request->avatar) {
+            $imagePath = $this->verifyAndStoreBase64Image($request->avatar, $request->user_id , 'users');
+            $request->merge([
+                'avatar' => $imagePath
+            ]);
+        }
+
+       //Check if user already has a stylist profile
+       /**
+        * Update current stylist profile
+        */
+        if ($isStylistData = Stylist::whereUserId($request->user_id)->first()) {
+            $isStylistData->update($request->all());
+            $stylist = $isStylistData;
+        } 
+
+        /**
+         * Create new stylist profile
+         */
+        else {
+            $stylist = Stylist::create($request->all());
+        }
 
         return new StylistResource($stylist);
     }
@@ -42,15 +68,15 @@ class StylistController extends Controller
     {
         return new StylistResource($stylist);
     }
-
+    
     /**
-     * @param \App\Http\Requests\StylistUpdateRequest $request
+     * @param \Illuminate\Http\Request $request
      * @param \App\stylist $stylist
      * @return \App\Http\Resources\StylistResource
      */
-    public function update(StylistUpdateRequest $request, Stylist $stylist)
+    public function update(Request $request, Stylist $stylist)
     {
-        $stylist->update($request->validated());
+        $stylist->update($request->all());
 
         return new StylistResource($stylist);
     }
@@ -64,6 +90,9 @@ class StylistController extends Controller
     {
         $stylist->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'status' => true,
+            'message' => 'Deleted successfully'
+        ]);
     }
 }

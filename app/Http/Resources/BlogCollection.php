@@ -16,7 +16,16 @@ class BlogCollection extends ResourceCollection
     {
         return [
             'success' => true,
-            'data' => $this->collection
+            'data' => $this->collection->transform(function($item) {
+                return [
+                    'id' => $item->id,
+                    'title' => $item->title,
+                    'body' => $item->body,
+                    'likes' => $item->likes,
+                    'user' => $item->user,
+                    'image' => $item->image
+                ];
+            }),
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use \App\Models\Closet;
 
 class ClosetResource extends JsonResource
 {
@@ -26,6 +27,12 @@ class ClosetResource extends JsonResource
                 'image' => $this->image,
                 'price' => $this->price,
                 'comment' => $this->comment,
+                'related_items' => Closet::whereType($this->type)
+                                            ->whereSeason($this->season)
+                                            ->whereCategoryId($this->category_id)
+                                            ->where('id','<>',$this->id)
+                                            ->limit(5)
+                                            ->get(),
                 'created_at' => $this->created_at
             ]
         ];

@@ -74,4 +74,12 @@ class Blog extends Model
     {
         return $this->hasMany(\App\Models\BlogImage::class);
     }
+
+    /**
+     * Blog images
+     */
+    public function image()
+    {
+        return $this->hasOne(\App\Models\BlogImage::class);
+    }
 }

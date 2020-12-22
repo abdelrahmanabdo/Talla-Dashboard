@@ -15,8 +15,21 @@ class UserProfileResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'success' => true, 
-            'data' => parent::toArray($request),
+            'success' => true,
+            'data' => [
+                'id' => $this->id,
+                'user' => $this->user,
+                'phone' => $this->phone,
+                'avatar' => $this->avatar,
+                'country' => $this->country,
+                'city' => $this->city,
+                'body_shape' => $this->bodyShape,
+                'skin_glow' => $this->skinGlow,
+                'goals' => $this->goal,
+                'jobs' => $this->job,
+                'favourite_styles' => $this->favouriteStyle,
+                'created_at' => $this->created_at
+            ]
         ];
     }
 }
