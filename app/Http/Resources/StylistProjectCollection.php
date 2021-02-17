@@ -22,6 +22,7 @@ class StylistProjectCollection extends ResourceCollection
                     'stylist' => $item->stylist,
                     'name' => $item->name,
                     'description' => $item->description,
+                    'image' => $item->image,
                     'created_at' => $item->created_at
                 ];
             }),

@@ -27,7 +27,6 @@ class ClosetRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'type' => 'required',
             'season' => 'required',
             'category_id' => 'required',
             'color_id' => 'required',

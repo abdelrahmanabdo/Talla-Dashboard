@@ -25,15 +25,18 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
         Route::post('register','AuthController@register');
     });
     
+
     /**
      * Secure routes
      */
     Route::group(['middleware' => 'auth:api'], function () {
         Route::apiResource('stylists', 'StylistController');
 
-        Route::apiResource('stylist-certificates', 'StylistCertificateController');
-    
         Route::apiResource('stylist-projects', 'StylistProjectController');
+
+        // Route::apiResource('stylists.projects', 'StylistProjectController');
+
+        Route::apiResource('stylist-certificates', 'StylistCertificateController');
     
         Route::apiResource('stylist-specializations', 'StylistSpecializationController');
     
@@ -43,7 +46,8 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
          * Blogs routes
          */
         Route::apiResource('blogs', 'BlogController');
-        Route::post('blogs/comments','BlogController@postBlogComment');
+
+        Route::apiResource('blogs.comments','BlogCommentController');
     
         /**
          * User profile routes
@@ -54,7 +58,14 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
          * Closet routes
          */
         Route::apiResource('closets', 'ClosetController');
+
+        /**
+         * Outfits
+         */
+        Route::apiResource('outfits', 'OutfitController');
+
     });
+
 
     /**
      * Public routes
@@ -78,6 +89,20 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
     Route::apiResource('registration-choices', 'RegistrationChoiceController');
 
     Route::apiResource('user-roles', 'UserRoleController');
+    
+    Route::get('blogs', 'BlogController@index');
+
+    Route::get('blogs/{blog}', 'BlogController@show');
+
+    Route::get('stylists', 'StylistController@index');
+
+    Route::get('stylists/{stylist}', 'StylistController@show');
+
+    Route::get('stylist-projects', 'StylistProjectController@index');
+
+    Route::get('stylist-projects/{stylistProject}', 'StylistProjectController@show');
+
+    Route::get('notification/test', 'NotificationController@test');
 
     /**
      * OTP

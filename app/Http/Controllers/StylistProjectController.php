@@ -16,12 +16,15 @@ class StylistProjectController extends Controller
     use StoreImageTrait;
     
     /**
+     * Stylist projects
      * @param \Illuminate\Http\Request $request
      * @return \App\Http\Resources\StylistProjectCollection
      */
     public function index(Request $request)
     {
-        $stylistProjects = StylistProject::all();
+        $stylistProjects = StylistProject::whereStylistId($request->stylist_id)
+                                          ->with(['images'])  
+                                          ->get();
 
         return new StylistProjectCollection($stylistProjects);
     }

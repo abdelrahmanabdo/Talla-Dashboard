@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Closet;
-use App\Models\ClosetOutfitItem;
 use App\Http\Requests\ClosetRequest;
 use App\Http\Resources\ClosetCollection;
 use App\Http\Resources\ClosetResource;
@@ -21,10 +20,7 @@ class ClosetController extends Controller
     public function index(Request $request)
     {
         // Filter closet rows acording to type (item , outfit)
-        $closets = Closet::when(!empty($request->type) , function($q) use($request){
-                                    $q->where('type', $request->type);
-                                })
-                            ->when(!empty($request->category_id) && $request->category_id !== 'null' , function($q) use($request){
+        $closets = Closet::when(!empty($request->category_id) && $request->category_id !== 'null' , function($q) use($request){
                                     $q->where('category_id', $request->category_id);
                                 })
                             ->when(!empty($request->season) && $request->season !== 'null' , function($q) use($request){
@@ -52,19 +48,6 @@ class ClosetController extends Controller
         }
 
         $closet = Closet::create($request->all());
-
-        /**
-         * If the new item is an outfit 
-         * add the outfit items to the closet_outfit_items table
-         */
-        if ($request->type === 2 && count($request->outfit_items) > 0) {
-            foreach ($request->outfit_items as $item) {
-              ClosetOutfitItem::create([
-                  'outfit_id' => $closet->id,
-                  'closet_item_id' => $item
-              ]);  
-            }
-        }
 
         return new ClosetResource($closet);
     }

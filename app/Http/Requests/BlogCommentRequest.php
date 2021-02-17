@@ -26,7 +26,6 @@ class BlogCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'blog_id' => 'required',
             'comment' => 'required',
             'commenter_id' => 'required'
         ];

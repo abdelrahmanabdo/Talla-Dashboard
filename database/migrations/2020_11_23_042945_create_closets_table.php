@@ -18,7 +18,6 @@ class CreateClosetsTable extends Migration
         Schema::create('closets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->integer('type')->comment('1 => item, 2 => outfit')->default(1);
             $table->integer('season')->comment('1 => summer, 2 => winter, 3 => both')->default(1);
             $table->foreignId('category_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('color_id')->nullable()->constrained()->cascadeOnDelete();

@@ -3,8 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use \App\Models\Closet;
 
-class StylistProjectResource extends JsonResource
+class OutfitResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -18,12 +19,11 @@ class StylistProjectResource extends JsonResource
             'success' => true,
             'data' => [
                 'id' => $this->id,
-                'stylist_id' => $this->stylist_id,
-                'name' => $this->name,
-                'description' => $this->description,
-                'images' => $this->images,
+                'user' => $this->user,
+                'group' => $this->group,
+                'items' => $this->items,
                 'created_at' => $this->created_at
-            ],
+            ]
         ];
     }
 }

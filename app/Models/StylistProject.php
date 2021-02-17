@@ -9,7 +9,7 @@ class StylistProject extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
-    protected $with = ['image'];
+    protected $with = ['images'];
     /**
      * The attributes that are mass assignable.
      *

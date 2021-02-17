@@ -103,20 +103,5 @@ class BlogController extends Controller
         ]);
     }
 
-    /**
-     * Add blog comment
-     * @param \App\Http\Requests\BlogCommentRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function postBlogComment (BlogCommentRequest $request) {
-        $comment = BlogComment::create($request->validated());
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Blog comment added successfully',
-            'data' => $comment
-        ]);;
-    }
-
 
 }

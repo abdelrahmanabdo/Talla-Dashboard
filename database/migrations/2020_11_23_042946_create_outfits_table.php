@@ -17,6 +17,8 @@ class CreateOutfitsTable extends Migration
 
         Schema::create('outfits', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('Users')->cascadeOnDelete();
+            $table->integer('group')->default(1);
             $table->foreignId('closet_item_id')->constrained('Closets')->cascadeOnDelete();
             $table->timestamps();
         });

@@ -16,6 +16,8 @@ class Outfit extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
+        'group',
         'closet_item_id',
     ];
 
@@ -26,12 +28,19 @@ class Outfit extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'user_id' => 'integer',
+        'group' => 'integer',
         'closet_item_id' => 'integer',
     ];
 
 
-    public function closetItem()
+    public function user()
     {
-        return $this->belongsTo(\App\Models\Closet::class);
+        return $this->belongsTo(\App\Models\User::class);
+    }
+
+    public function item()
+    {
+        return $this->belongsTo(\App\Models\Closet::class, 'closet_item_id');
     }
 }
