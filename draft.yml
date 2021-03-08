@@ -48,7 +48,7 @@ models:
   #User
   Models\UserRole:
     name : string:200
-    name_en : string:200 
+    name_en : string:200
     active : boolean default:1
     timestamps : true
 
@@ -72,11 +72,11 @@ models:
     user_id: id foreign
     avatar: string:200
     email: string:200
-    country_id: id:country 
+    country_id: id:country
     bio: longtext
     experience_years: integer
     is_approved: boolean default:0
-    active: boolean default:0 
+    active: boolean default:0
     timestamps : true
     softDeletes : true
     relationships:
@@ -102,7 +102,7 @@ models:
 
   Models\StylistSpecialization:
     stylist_id: id foreign
-    specialization_id: id foreign 
+    specialization_id: id foreign
     description: string:150
     start_price: integer default:0
     timestamps : true
@@ -155,8 +155,19 @@ models:
   Models\ClosetOutfitItem:
     outfit_id: id foreign:Outfit
     closet_item_id: id foreign:Closet
-    timestamps : true
+    timestamps: true
 
+  Models\Chat:
+    chat_ref: string:17
+    user_1: id foreign
+    user_2: id foreign
+    timestamps: true
+
+  Models\DeviceToken:
+    user_id: id foreign
+    token: string:255
+    allow_notification: boolean
+    timestamps: true
 
 # controllers:
 #   UserRole:

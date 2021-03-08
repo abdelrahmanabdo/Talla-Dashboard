@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class Registration extends Notification
+class Profile extends Notification
 {
     use Queueable;
 
@@ -29,7 +29,7 @@ class Registration extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['mail'];
     }
 
     /**
@@ -41,24 +41,9 @@ class Registration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Welcome to Tallah.')
-                    ->action('Tallah website', url('http://tallah.co'))
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toDatabase($notifiable)
-    {
-        return [
-            "type" => "welcome_mail",
-            "text_en" => "Welcome to Tallah",
-            "text_ar" => "مرحبا بك في Tallah",
-        ];
     }
 
     /**

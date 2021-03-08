@@ -19,13 +19,13 @@ class NotificationController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $notifications
+            'data'    => $notifications
         ]);
     }
 
     /**
      * Mark notification as read
-     * 
+     *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
@@ -34,12 +34,13 @@ class NotificationController extends Controller
         User::whereId($request->user_id)
             ->unreadNotifications
             ->when($request->input('id'), function ($query) use ($request) {
-                return $query->where('id', $request->input('id'));
+                return $query->where('id', $request->id);
             })
             ->markAsRead();
 
         return response()->noContent();
     }
+
     /**
      * Delete user notification
      * @param \Illuminate\Http\Request $request

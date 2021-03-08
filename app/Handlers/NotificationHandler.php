@@ -7,8 +7,8 @@ use LaravelFCM\Message\OptionsBuilder;
 use LaravelFCM\Message\PayloadDataBuilder;
 use LaravelFCM\Message\PayloadNotificationBuilder;
 use FCM;
-use Pusher;
-use \App\Models\NotificationToken;
+//use Pusher;
+use \App\Models\DeviceToken;
 
 class NotificationHandler {
 
@@ -36,7 +36,7 @@ class NotificationHandler {
       $this->users = $users ;
       $this->data = $data ;
 
-      //Notification type 
+      //Notification type
       $this->$type();
     }
 
@@ -66,7 +66,7 @@ class NotificationHandler {
       $this->mobile_message = $this->data['message'];
       $this->pushMobileNotification($this->users['user_id']);
    }
-   
+
    /**
     * Accepting Order Handler
     */
@@ -86,7 +86,7 @@ class NotificationHandler {
       $this->pushMobileNotification($this->users['user_id']);
 
    }
-   
+
    /**
     * delivered Order Handler
     */
@@ -168,19 +168,19 @@ class NotificationHandler {
     public function change_auth_request_status (){
       $store_name =  $this->data["store_name"] ?? "";
       $this->mobile_title = $this->data['status'] == 1  ? ' تم الموافقة علي طلب عرض الأسعار !!' : ' تم رفض طلب عرض السعر من قبل التاجر';
-      $this->mobile_message =  $this->data['status'] == 1 ?   " تم الموافقة علي طلب توثيقك مع التاجر  {$store_name} " 
+      $this->mobile_message =  $this->data['status'] == 1 ?   " تم الموافقة علي طلب توثيقك مع التاجر  {$store_name} "
                                                           :  " تم رفض طلبك لرؤية الأسعار من قبل التاجر  {$store_name} ";
       $this->pushMobileNotification($this->users['user_id']);
    }
-   
-   
+
+
    /**
     * Change merchant request status
     */
     public function change_merchant_request_status (){
-      $this->mobile_title = $this->data['status'] == 1  ? "تم الموافقة علي طلب إنشاء متجرك" 
+      $this->mobile_title = $this->data['status'] == 1  ? "تم الموافقة علي طلب إنشاء متجرك"
                                                           : "تم رفض طلب إنشاء متجرك";
-      $this->mobile_message =  $this->data['status'] == 1 ?  'مبروك , تم تفعيل حسابك كمورد, رجاء التواصل مع خدمة العملاء لمساعدتك في تنسيق عرض منتجاتك' 
+      $this->mobile_message =  $this->data['status'] == 1 ?  'مبروك , تم تفعيل حسابك كمورد, رجاء التواصل مع خدمة العملاء لمساعدتك في تنسيق عرض منتجاتك'
                                                               : "تم رفض طلب إنشاء متجرك وذلك بسبب {$this->data['rejection_comment']} " ;
       $this->pushMobileNotification($this->users['user_id']);
    }
@@ -196,66 +196,68 @@ class NotificationHandler {
    /**
     * Push Norification to web app
     */
-   public function pushWebNotification ($user_id) {
-
-      $options = array(
-        'cluster' => 'eu',
-        'useTLS' => true
-      );
-      $pusher = new Pusher\Pusher(
-        '3ce59af96c324e631e9d',
-        '2dd8fc2995d2e45f3863',
-        '1048589',
-        $options
-      );
-    
-      $data['message'] = $this->merchant_message ?? '';
-      $data['user_id'] = $user_id;
-      $data['orders_url'] = '/orders';
-      $data['shipping_url'] = '/shippings';
-
-      $pusher->trigger('merchant-channel',$this->type, $data);
-
-   }
+//   public function pushWebNotification ($user_id) {
+//
+//      $options = array(
+//        'cluster' => 'eu',
+//        'useTLS' => true
+//      );
+//      $pusher = new Pusher\Pusher(
+//        '3ce59af96c324e631e9d',
+//        '2dd8fc2995d2e45f3863',
+//        '1048589',
+//        $options
+//      );
+//
+//      $data['message'] = $this->merchant_message ?? '';
+//      $data['user_id'] = $user_id;
+//      $data['orders_url'] = '/orders';
+//      $data['shipping_url'] = '/shippings';
+//
+//      $pusher->trigger('merchant-channel',$this->type, $data);
+//
+//   }
 
 
    /**
-     * Push Notifications to device 
+     * Push Notifications to device
      */
    public function pushMobileNotification ($users) {
 
       $optionBuilder = new OptionsBuilder();
       $optionBuilder->setTimeToLive(60*20);
-      
+
       $notificationBuilder = new PayloadNotificationBuilder($this->mobile_title);
       $notificationBuilder->setBody($this->mobile_message)
                          ->setSound('default');
 
       $dataBuilder = new PayloadDataBuilder();
       $dataBuilder->addData(['a_data' => 'my_data']);
-      
+
       $option = $optionBuilder->build();
       $notification = $notificationBuilder->build();
       $data = $dataBuilder->build();
-      
+
       // You must change it to get your tokens
-      $tokens = NotificationToken::whereIn('user_id',$users)->pluck('token')->toArray();
+      $tokens = DeviceToken::whereIn('user_id', $users)
+                                ->pluck('token')
+                                ->toArray();
 
       $downstreamResponse = FCM::sendTo($tokens, $option, $notification, $data);
-      
+
       $downstreamResponse->numberSuccess();
       $downstreamResponse->numberFailure();
       $downstreamResponse->numberModification();
-      
+
       // return Array - you must remove all this tokens in your database
       $downstreamResponse->tokensToDelete();
-      
+
       // return Array (key : oldToken, value : new token - you must change the token in your database)
       $downstreamResponse->tokensToModify();
-      
+
       // return Array - you should try to resend the message to the tokens in the array
       $downstreamResponse->tokensToRetry();
-      
+
       // return Array (key:token, value:error) - in production you should remove from your database the tokens present in this array
       $downstreamResponse->tokensWithError();
    }

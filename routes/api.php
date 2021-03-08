@@ -65,6 +65,13 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
         Route::apiResource('outfits', 'OutfitController');
 
         /**
+         * Chats
+         */
+        Route::get('chats/getChats', 'ChatController@getUserChats');
+        Route::get('chats/getMessages', 'ChatController@getChatMessages');
+        Route::post('chats/sendNewMessage', 'ChatController@sendNewMessage');
+
+        /**
          * Notifications
          */
         Route::apiResource('notifications', 'NotificationController');
@@ -108,6 +115,16 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
     Route::get('stylist-projects/{stylistProject}', 'StylistProjectController@show');
 
     Route::get('notification/test', 'NotificationController@test');
+
+    /**
+     * user devices tokens
+     */
+    Route::post('tokens/anonymous' , 'DeviceTokenController@addAnonymousToken');
+    Route::post('tokens/user' , 'DeviceTokenController@addUserToken');
+    Route::post('tokens/assign' , 'DeviceTokenController@assignUserToken');
+    Route::post('tokens/unassign' , 'DeviceTokenController@unassignUserToken');
+    Route::post('tokens/notification/status' , 'DeviceTokenController@changeNotificationStatus');
+    Route::get('tokens/' , 'DeviceTokenController@getUserToken');
 
     /**
      * OTP
