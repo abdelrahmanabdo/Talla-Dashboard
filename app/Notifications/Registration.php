@@ -29,7 +29,7 @@ class Registration extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -44,6 +44,21 @@ class Registration extends Notification
                     ->line('Welcome to Tallah.')
                     ->action('Notification Action', url('http://tallah.co'))
                     ->line('Thank you for using our application!');
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toDatabase($notifiable)
+    {
+        return [
+            "type" => "Welcome_mail",
+            "text_en" => "Welcome to Tallah",
+            "text_ar" => "مرحبا بك في Tallah",
+        ];
     }
 
     /**
