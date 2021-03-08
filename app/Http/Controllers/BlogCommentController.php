@@ -18,7 +18,7 @@ class BlogCommentController extends Controller
      */
     public function index(Blog $blog)
     {
-        $blogCommentss = $blog->comments()::get();
+        $blogComments = $blog->comments()::get();
 
         return new BlogCollection($blogs);
     }

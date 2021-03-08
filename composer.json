@@ -20,7 +20,7 @@
         "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "twilio/sdk": "^6.14"
+        "twilio/sdk": "^6.18"
     },
     "require-dev": {
         "backpack/generators": "^3.1",

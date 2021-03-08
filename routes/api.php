@@ -21,10 +21,10 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
     Route::group(['prefix' => 'auth'], function() {
         //Login
         Route::post('login','AuthController@login');
-        //Register
+        //Registration
         Route::post('register','AuthController@register');
     });
-    
+
 
     /**
      * Secure routes
@@ -37,23 +37,23 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
         // Route::apiResource('stylists.projects', 'StylistProjectController');
 
         Route::apiResource('stylist-certificates', 'StylistCertificateController');
-    
+
         Route::apiResource('stylist-specializations', 'StylistSpecializationController');
-    
+
         Route::apiResource('stylist-bank-accounts', 'StylistBankAccountController');
-    
+
         /**
          * Blogs routes
          */
         Route::apiResource('blogs', 'BlogController');
 
         Route::apiResource('blogs.comments','BlogCommentController');
-    
+
         /**
          * User profile routes
          */
         Route::apiResource('user-profile', 'UserProfileController');
-    
+
         /**
          * Closet routes
          */
@@ -64,6 +64,11 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
          */
         Route::apiResource('outfits', 'OutfitController');
 
+        /**
+         * Notifications
+         */
+        Route::apiResource('notifications', 'NotificationController');
+
     });
 
 
@@ -73,7 +78,7 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
     Route::apiResource('specializations', 'SpecializationController');
 
     Route::apiResource('brands', 'BrandController');
-    
+
     Route::apiResource('countries', 'CountryController');
 
     Route::apiResource('gifts', 'GiftController');
@@ -89,7 +94,7 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
     Route::apiResource('registration-choices', 'RegistrationChoiceController');
 
     Route::apiResource('user-roles', 'UserRoleController');
-    
+
     Route::get('blogs', 'BlogController@index');
 
     Route::get('blogs/{blog}', 'BlogController@show');
