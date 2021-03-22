@@ -62,7 +62,7 @@ class NotificationHandler {
     * new Message Handler
     */
    public function new_message (){
-      $this->mobile_title = 'رسالة من دييل';
+      $this->mobile_title = 'رسالة جديدة';
       $this->mobile_message = $this->data['message'];
       $this->pushMobileNotification($this->users['user_id']);
    }

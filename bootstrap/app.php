@@ -54,3 +54,6 @@ $app->singleton(
 return $app;
 
 $app->register(LaravelFCM\FCMServiceProvider::class);
+$app->register(Kreait\Laravel\Firebase\ServiceProvider::class);
+$app->withFacades();
+

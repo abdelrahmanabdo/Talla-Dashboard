@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], function() {
+Route::group(['middleware' => ['cors', 'json.response']], function() {
     /**
      * Auth routes
      */
@@ -67,9 +67,9 @@ Route::group(['prefix' => '/v1/', 'middleware' => ['cors', 'json.response']], fu
         /**
          * Chats
          */
-        Route::get('chats/getChats', 'ChatController@getUserChats');
-        Route::get('chats/getMessages', 'ChatController@getChatMessages');
-        Route::post('chats/sendNewMessage', 'ChatController@sendNewMessage');
+        Route::get('/chats', 'ChatController@getUserChats');
+        Route::get('chats/messages', 'ChatController@getChatMessages');
+        Route::post('chats/send', 'ChatController@sendNewMessage');
 
         /**
          * Notifications

@@ -25,7 +25,7 @@ class ChatController extends Controller
 
         $chats = Chat::where('user_1', $request->user_id)
                     ->orWhere('user_2', $request->user_id)
-                    ->with(['first', 'second'])
+                    ->with(['user'])
                     ->get();
 
         return response()->json([
@@ -47,28 +47,35 @@ class ChatController extends Controller
                 'errors'=>$validator->errors()->all()
             ], 422);
         }
+
+        $messages = [];
+
+        return response()->json([
+            "success" => true,
+            "data" => $messages
+        ]);
     }
 
     /**
      * Send new message
-     * @param \Illuminate\Http\RequesgetChatst $request
+     * @param \Illuminate\Http\ChatRequest $request
      */
     public function sendNewMessage(ChatRequest $request) {
         // First user
-        $user1 = $request->user_1;
+        $sender = $request->sender_id;
         // Second user
-        $user2 = $request->user_2;
-        // Check if already there is an chat for those two users
-        $chat = $this->isChaExist($user1, $user2);
+        $receiver = $request->receiver_id;
+        // Check if already there is a chat for these two users
+        $chat = $this->isChatExist($sender, $receiver);
         // In case of no chat
         if (!$chat) {
             // New chat ref => concatenate $user$user2$random
-            $newChatRef = $user1.$user2.rand(10000, 99999);
+            $newChatRef = $sender.$receiver.rand(100000, 999999);
             // Create new chat record
             $chat = Chat::create([
                 'chat_ref' => $newChatRef,
-                'user_1' => $user1,
-                'user_2' => $user2,
+                'user_1' => $sender,
+                'user_2' => $receiver,
             ]);
         }
 
@@ -82,9 +89,9 @@ class ChatController extends Controller
      * @param {$user2} int
      * @return Boolean
      */
-    private function isChaExist ($user1, $user2) {
-        $chat = Chat::where(['user_1' => $user1, 'user_2' => user2])
-                        ->orWhere(['user_1' => $user2, 'user_2' => user1])
+    private function isChatExist ($user1, $user2) {
+        $chat = Chat::where(['user_1' => $user1, 'user_2' => $user2])
+                        ->orWhere(['user_1' => $user2, 'user_2' => $user1])
                         ->first();
         return $chat;
     }

@@ -37,4 +37,6 @@ Route::group([
     Route::crud('support', 'SupportCrudController');
     Route::crud('userprofile', 'UserProfileCrudController');
     Route::crud('userrole', 'UserRoleCrudController');
+    Route::get('charts/weekly-users', 'Charts\WeeklyUsersChartController@response')->name('charts.weekly-users.index');
+    Route::get('charts/weekly-stylists', 'Charts\WeeklyStylistsChartController@response')->name('charts.weekly-stylists.index');
 }); // this should be the absolute last line of this file
