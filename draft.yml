@@ -109,10 +109,10 @@ models:
 
   Models\StylistBankAccount:
     stylist_id: id foreign
-    name_on_card: string:150
-    card_number: string:17
-    expire_date: string:10
-    CVV: integer:3
+    account_number: string:15
+    iban: string:150
+    swift_code: string:12
+    bank_name: integer:3
 
   #Blogs
   Models\Blog:
