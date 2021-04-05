@@ -22,8 +22,10 @@ class BlogCollection extends ResourceCollection
                     'title' => $item->title,
                     'body' => $item->body,
                     'likes' => $item->likes,
+                    'comments_count' => $item->comments->count(),
                     'user' => $item->user,
-                    'image' => $item->image
+                    'image' => $item->image,
+                    'created_at' => $item->created_at
                 ];
             }),
         ];
