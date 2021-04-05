@@ -17,7 +17,9 @@ class Support extends Model
      */
     protected $fillable = [
         'name',
+        'email',
         'mobile',
+        'subject',
         'message',
     ];
 

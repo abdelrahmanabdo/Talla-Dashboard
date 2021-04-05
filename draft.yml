@@ -42,6 +42,8 @@ models:
   Models\Support:
     name : string:200
     mobile : string:200
+    subject : string:150
+    email : string:200
     message : string:400
     timestamps : true
 
