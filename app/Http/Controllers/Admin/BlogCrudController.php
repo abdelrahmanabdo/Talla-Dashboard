@@ -13,6 +13,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class BlogCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
@@ -32,6 +33,38 @@ class BlogCrudController extends CrudController
     }
 
     /**
+     * 
+     */
+    protected function setupShowOperation() {
+        CRUD::addColumn([
+          'label' => "User", 
+          'type' => "select",
+          'name' => 'user_id',
+          'entity' => 'user', 
+          'attribute' => "name", 
+          'model' => "App\Models\User",
+        ]);
+        CRUD::column('title');
+        CRUD::column('body');
+        CRUD::addColumn([
+          'label' => 'Hashtags',
+          'type' => 'json',
+          'name' => 'hashtags'
+        ]); 
+        CRUD::addColumn([
+          'label' => "Images", 
+          'type' => "relation",
+          'name' => 'images',
+          'entity' => 'images', 
+          'attribute' => "image", 
+          'model' => "App\Models\BlogImage",
+          'upload'    => true,
+          'disk'      => 'images',
+        ]);
+        CRUD::column('updated_at');
+        CRUD::column('created_at');
+    }
+    /**
      * Define what happens when the List operation is loaded.
      * 
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
@@ -39,12 +72,33 @@ class BlogCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::addColumn([
+          'label' => "User", 
+          'type' => "select",
+          'name' => 'user_id',
+          'entity' => 'user', 
+          'attribute' => "name", 
+          'model' => "App\Models\User",
+        ]);
         CRUD::column('title');
         CRUD::column('body');
-        // CRUD::column('published_at');
-        // CRUD::column('softDeletes');
+        CRUD::addColumn([
+          'label' => 'Hashtags',
+          'type' => 'json',
+          'name' => 'hashtags'
+        ]); 
+        CRUD::addColumn([
+          'label' => "Images", 
+          'type' => "relationship_count",
+          'name' => 'images',
+          'entity' => 'images', 
+          'attribute' => "image", 
+          'model' => "App\Models\BlogImage",
+          'ajax'          => true,
+          'inline_create' => true,
+        ]);
+        CRUD::column('updated_at');
         CRUD::column('created_at');
-        // CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -61,18 +115,37 @@ class BlogCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(BlogRequest::class);
-
+        CRUD::addField([
+          'label' => "User", 
+          'type' => "select2",
+          'name' => 'user_id',
+          'entity' => 'user', 
+          'attribute' => "name", 
+          'model' => "App\Models\User",
+        ]);
         CRUD::field('title');
-        CRUD::field('body');
-        // CRUD::field('published_at');
-        // CRUD::field('softDeletes');
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
+        CRUD::addField([
+          'label' => 'Body',
+          'name' => 'body',
+          'type' => 'easymde'
+        ]);
+        CRUD::addField([
+          'label' => 'Tags',
+          'name' => 'hashtags',
+          'type' => 'text',
+          'ajax' => true,
+        ]); 
+        CRUD::addField([
+          'label' => "Images", 
+          'type' => "upload_multiple",
+          'name' => 'images',
+          'entity' => 'images', 
+          'attribute' => "image", 
+          'model' => "App\Models\BlogImage",
+          'upload'    => true,
+          'disk'      => 'local',
+        ]);
+        CRUD::setValidation(BlogRequest::class);
     }
 
     /**

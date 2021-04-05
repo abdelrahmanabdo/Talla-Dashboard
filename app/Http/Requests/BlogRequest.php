@@ -29,7 +29,6 @@ class BlogRequest extends FormRequest
             'user_id' => 'required',
             'title' => 'required|max:100',
             'body' => 'required',
-            'hashtags' => 'array',
         ];
     }
 
