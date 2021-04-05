@@ -15,7 +15,7 @@ class SupportRequest extends FormRequest
     public function authorize()
     {
         // only allow updates if the user is logged in
-        return backpack_auth()->check() ? backpack_auth()->check() : true;
+        // return backpack_auth()->check() ? backpack_auth()->check() : true;
     }
 
     /**
@@ -27,8 +27,10 @@ class SupportRequest extends FormRequest
     {
         return [
            'name' => 'required|max:100',
-           'mobile' => 'required|min:5|max:13',
-           'message' => 'required|max:255',
+           'mobile' => 'min:5|max:20',
+           'email' => 'min:3|max:150',
+           'subject' => 'min:3|max:150',
+           'message' => 'max:255',
         ];
     }
 
