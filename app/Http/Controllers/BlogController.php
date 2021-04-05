@@ -21,7 +21,11 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        $blogs = Blog::with(['user:id,name', 'user.profile:user_id,avatar','comments'])
+      $category = $request->category;
+      $blogs = Blog::with(['user:id,name', 'user.profile:user_id,avatar','comments'])
+                      ->when($category, function($query) use($category) {
+                        return $query->where('hashtags', 'like', '%'.$category.'%');
+                      })
                       ->orderBy('created_at','Desc')
                       ->get();
 
