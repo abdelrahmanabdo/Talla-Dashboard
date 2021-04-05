@@ -22,6 +22,7 @@ class BlogCollection extends ResourceCollection
                     'title' => $item->title,
                     'body' => $item->body,
                     'likes' => $item->likes,
+                    'hashtags' => $item->hashtags,
                     'comments_count' => $item->comments->count(),
                     'user' => $item->user,
                     'image' => $item->image,
