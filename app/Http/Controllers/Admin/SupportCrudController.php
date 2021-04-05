@@ -39,11 +39,13 @@ class SupportCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('created_at');
-        CRUD::column('message');
-        CRUD::column('mobile');
         CRUD::column('name');
+        CRUD::column('email');
+        CRUD::column('mobile');
+        CRUD::column('subject');
+        CRUD::column('message');
         CRUD::column('updated_at');
+        CRUD::column('created_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -61,10 +63,11 @@ class SupportCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(SupportRequest::class);
-
-        CRUD::field('message');
-        CRUD::field('mobile');
         CRUD::field('name');
+        CRUD::field('mobile');
+        CRUD::field('email');
+        CRUD::field('subject');
+        CRUD::field('message');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
