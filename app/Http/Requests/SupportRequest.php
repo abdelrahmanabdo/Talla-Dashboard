@@ -15,7 +15,7 @@ class SupportRequest extends FormRequest
     public function authorize()
     {
         // only allow updates if the user is logged in
-        // return backpack_auth()->check() ? backpack_auth()->check() : true;
+        return backpack_auth()->check() ? backpack_auth()->check() : true;
     }
 
     /**
