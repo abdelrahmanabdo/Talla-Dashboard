@@ -21,7 +21,7 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        $blogs = Blog::with(['user:id, name', 'user.profile:user_id, avatar','comments'])
+        $blogs = Blog::with(['user:id,name', 'user.profile:user_id,avatar','comments'])
                       ->orderBy('created_at','Desc')
                       ->get();
 
