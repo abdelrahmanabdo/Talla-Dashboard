@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class AboutUsCollection extends ResourceCollection
+class BlogCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -18,9 +18,15 @@ class AboutUsCollection extends ResourceCollection
             'success' => true,
             'data' => $this->collection->transform(function($item) {
                 return [
+                    'id' => $item->id,
                     'title' => $item->title,
-                    'text' => $item->text,
+                    'body' => $item->body,
+                    'likes' => $item->likes,
+                    'hashtags' => $item->hashtags,
+                    'comments_count' => $item->comments->count(),
+                    'user' => $item->user,
                     'image' => $item->image,
+                    'created_at' => $item->created_at
                 ];
             }),
         ];

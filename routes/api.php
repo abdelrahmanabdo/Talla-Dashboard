@@ -116,6 +116,11 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
 
     Route::get('notification/test', 'NotificationController@test');
 
+    Route::apiResource('about', 'AboutUsController');
+
+    Route::apiResource('settings', 'SettingsController');
+
+
     /**
      * user devices tokens
      */
