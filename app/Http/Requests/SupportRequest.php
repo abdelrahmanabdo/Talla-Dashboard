@@ -28,7 +28,7 @@ class SupportRequest extends FormRequest
         return [
            'name' => 'required|max:100',
            'mobile' => 'min:5|max:20',
-           'email' => 'min:3|max:150',
+           'email' => 'email|max:150',
            'subject' => 'min:3|max:150',
            'message' => 'max:255',
         ];
