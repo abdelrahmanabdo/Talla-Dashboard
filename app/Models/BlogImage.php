@@ -17,6 +17,7 @@ class BlogImage extends Model
      */
     protected $fillable = [
         'blog_id',
+        'type',
         'image',
     ];
 

@@ -19,10 +19,13 @@ class Blog extends Model
     protected $fillable = [
         'user_id',
         'title',
+        'title_en',
         'body',
+        'body_en',
         'likes',
         'hashtags',
         'is_reviewed',
+        'is_featured',
         'active',
         'published_at',
         'softDeletes',

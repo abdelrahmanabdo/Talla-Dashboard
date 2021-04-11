@@ -19,14 +19,16 @@ class AboutUs extends Model
      */
     protected $fillable = [
         'title',
+        'title_en',
         'text',
+        'text_en',
         'image',
     ];
     
     public function setImageAttribute($value)
     {
         $attribute_name = "image";
-        // or use your own disk, defined in config/filesystems.php
+        // or use your own disk, defined in config/fileSystems.php
         $disk = config('filesystems.disks.public.driver'); 
         // destination path relative to the disk above
         $destination_path = "public/images/about/"; 

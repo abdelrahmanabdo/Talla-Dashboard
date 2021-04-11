@@ -18,6 +18,7 @@ class CreateBlogImagesTable extends Migration
         Schema::create('blog_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('blog_id')->constrained()->cascadeOnDelete();
+            $table->string('type', 10)->default('image');
             $table->string('image', 200);
             $table->timestamps();
         });

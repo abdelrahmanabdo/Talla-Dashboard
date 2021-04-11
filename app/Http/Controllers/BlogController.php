@@ -22,11 +22,20 @@ class BlogController extends Controller
     public function index(Request $request)
     {
       $category = $request->category;
-      $blogs = Blog::with(['user:id,name', 'user.profile:user_id,avatar','comments'])
+      $featured = $request->featured;
+      $latest = $request->latest;
+
+      $blogs = Blog::with(['user:id,name', 'user.profile:user_id,avatar', 'comments'])
                       ->when($category, function($query) use($category) {
                         return $query->where('hashtags', 'like', '%'.$category.'%');
                       })
-                      ->orderBy('created_at','Desc')
+                      ->when($featured, function($query) {
+                        return $query->where('is_featured', 1);
+                      })
+                      ->when($latest, function($query) {
+                        return $query->orderBy('created_at','Desc');
+                      })
+                      ->orderBy('likes','Desc')
                       ->get();
 
         return new BlogCollection($blogs);

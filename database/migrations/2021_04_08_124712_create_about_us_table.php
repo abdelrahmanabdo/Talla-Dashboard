@@ -17,6 +17,7 @@ class CreateAboutUsTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('text')->nullable();
+            $table->string('text_en')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

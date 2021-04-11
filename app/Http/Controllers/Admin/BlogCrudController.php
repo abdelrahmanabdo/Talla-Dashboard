@@ -61,6 +61,9 @@ class BlogCrudController extends CrudController
           'upload'    => true,
           'disk'      => 'images',
         ]);
+        CRUD::column('Reviewed')->type('boolean');
+        CRUD::column('Featured')->type('boolean');
+        CRUD::column('Active')->type('boolean');
         CRUD::column('updated_at');
         CRUD::column('created_at');
     }
@@ -81,7 +84,9 @@ class BlogCrudController extends CrudController
           'model' => "App\Models\User",
         ]);
         CRUD::column('title');
+        CRUD::column('title_ar');
         CRUD::column('body');
+        CRUD::column('body_ar');
         CRUD::addColumn([
           'label' => 'Hashtags',
           'type' => 'json',
@@ -97,6 +102,9 @@ class BlogCrudController extends CrudController
           'ajax'          => true,
           'inline_create' => true,
         ]);
+        CRUD::column('Reviewed')->type('boolean');
+        CRUD::column('Featured')->type('boolean');
+        CRUD::column('Active')->type('boolean');
         CRUD::column('updated_at');
         CRUD::column('created_at');
 
@@ -124,9 +132,15 @@ class BlogCrudController extends CrudController
           'model' => "App\Models\User",
         ]);
         CRUD::field('title');
+        CRUD::field('title_ar');
         CRUD::addField([
-          'label' => 'Body',
+          'label' => 'Body in En',
           'name' => 'body',
+          'type' => 'easymde'
+        ]);
+        CRUD::addField([
+          'label' => 'Body in ar',
+          'name' => 'body_ar',
           'type' => 'easymde'
         ]);
         CRUD::addField([
@@ -145,6 +159,24 @@ class BlogCrudController extends CrudController
           'upload'    => true,
           'disk'      => 'local',
         ]);
+        CRUD::addField([
+          'label' => 'Reviewed',
+          'name' => 'is_reviewed',
+          'type' => 'checkbox',
+          'default' => 1
+        ]); 
+        CRUD::addField([
+          'label' => 'Featured',
+          'name' => 'is_featured',
+          'type' => 'checkbox',
+          'default' => 0
+        ]); 
+        CRUD::addField([
+          'label' => 'Active',
+          'name' => 'active',
+          'type' => 'checkbox',
+          'default' => 1
+        ]); 
         CRUD::setValidation(BlogRequest::class);
     }
 
