@@ -27,6 +27,8 @@ class SubscriptionController extends Controller
     public function store(SubscriptionRequest $request)
     {
         $subscription = Subscription::create($request->validated());
+        // Send admin email
+        \Mail::to('admin@talah.com')->send(new \App\Mail\Subscription(['email' => $request->email]));
 
         return new SubscriptionResource($subscription);
     }
