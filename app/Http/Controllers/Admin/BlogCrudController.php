@@ -105,8 +105,8 @@ class BlogCrudController extends CrudController
         CRUD::column('Reviewed')->type('boolean');
         CRUD::column('Featured')->type('boolean');
         CRUD::column('Active')->type('boolean');
-        CRUD::column('updated_at');
         CRUD::column('created_at');
+        CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:

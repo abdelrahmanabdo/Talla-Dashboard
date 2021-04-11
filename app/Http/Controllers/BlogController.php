@@ -30,7 +30,7 @@ class BlogController extends Controller
                         return $query->where('hashtags', 'like', '%'.$category.'%');
                       })
                       ->when($featured, function($query) {
-                        return $query->where('is_featured', 1);
+                        return $query->where('is_featured', "1");
                       })
                       ->when($latest, function($query) {
                         return $query->orderBy('created_at','Desc');
