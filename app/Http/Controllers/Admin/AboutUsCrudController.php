@@ -39,10 +39,10 @@ class AboutUsCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('title');
-        CRUD::column('title_en');
-        CRUD::column('text');
-        CRUD::column('text_en');
+        CRUD::column('title')->label('Title in En');
+        CRUD::column('title_ar')->label('Title in Ar');
+        CRUD::column('text')->label('Text in En');
+        CRUD::column('text_ar')->label('Text in Ar');
         CRUD::column('image')->type('image');
 
         /**
@@ -63,9 +63,9 @@ class AboutUsCrudController extends CrudController
         CRUD::setValidation(AboutUsRequest::class);
 
         CRUD::field('title');
-        CRUD::field('title_en');
+        CRUD::field('title_ar');
         CRUD::field('text');
-        CRUD::field('text_en');
+        CRUD::field('text_ar');
         CRUD::field('image')->type('image');
 
         /**
