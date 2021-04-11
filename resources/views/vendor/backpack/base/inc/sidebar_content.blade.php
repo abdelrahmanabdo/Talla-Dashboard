@@ -23,6 +23,7 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('stylistprojectimage') }}'><i class='nav-icon la la-image'></i> Stylist Project Images</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('stylistspecialization') }}'><i class='nav-icon la la-question'></i> Stylist Specializations</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('userrole') }}'><i class='nav-icon la la-cog'></i> User Roles</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('subscription') }}'><i class='nav-icon la la-cog'></i> Subscriptions</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('support') }}'><i class='nav-icon la la-support'></i>Supports</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('about') }}'><i class='nav-icon la la-support'></i> About us</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('settings') }}'><i class='nav-icon la la-support'></i> General settings</a></li>

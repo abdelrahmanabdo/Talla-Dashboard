@@ -120,6 +120,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
 
     Route::apiResource('settings', 'SettingsController');
 
+    Route::apiResource('subscription', 'SubscriptionController');
+
 
     /**
      * user devices tokens

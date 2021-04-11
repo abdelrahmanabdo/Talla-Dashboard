@@ -40,10 +40,10 @@ Route::group([
     Route::get('charts/weekly-users', 'Charts\WeeklyUsersChartController@response')->name('charts.weekly-users.index');
     Route::get('charts/weekly-stylists', 'Charts\WeeklyStylistsChartController@response')->name('charts.weekly-stylists.index');
     Route::crud('about', 'AboutUsCrudController');
-    Route::crud('settings', 'SettingsCrudController');
     Route::crud('devicetoken', 'DeviceTokenCrudController');
     Route::crud('favourite', 'FavouriteCrudController');
     Route::crud('otp', 'OTPCrudController');
     Route::crud('settings', 'SettingsCrudController');
     Route::crud('chat', 'ChatCrudController');
+    Route::crud('subscription', 'SubscriptionCrudController');
 }); // this should be the absolute last line of this file
