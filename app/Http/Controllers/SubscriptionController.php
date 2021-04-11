@@ -28,7 +28,7 @@ class SubscriptionController extends Controller
     {
         $subscription = Subscription::create($request->validated());
         // Send admin email
-        \Mail::to('admin@talah.com')->send(new \App\Mail\Subscription(['email' => $request->email]));
+        \Mail::to('dev.abdelrahman1995@gmail.com')->send(new \App\Mail\Subscription(['email' => $request->email]));
 
         return new SubscriptionResource($subscription);
     }
