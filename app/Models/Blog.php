@@ -19,9 +19,9 @@ class Blog extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'title_en',
+        'title_ar',
         'body',
-        'body_en',
+        'body_ar',
         'likes',
         'hashtags',
         'is_reviewed',

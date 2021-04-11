@@ -19,9 +19,9 @@ class CreateBlogsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title', 200);
-            $table->string('title_en')->nullable();
+            $table->string('title_ar')->nullable();
             $table->longText('body');
-            $table->longText('body_en')->nullable();
+            $table->longText('body_ar')->nullable();
             $table->integer('likes')->default(0);
             $table->boolean('is_reviewed')->default(0);
             $table->boolean('is_featured')->default(0);
