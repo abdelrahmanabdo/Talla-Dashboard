@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class Subscription extends Mailable
 {
     use Queueable, SerializesModels;
+    
     public $data;
 
     /**
