@@ -26,7 +26,6 @@ class BlogReviewRequest extends FormRequest
     public function rules()
     {
         return [
-          'blog_id' => 'required',
           'name' => 'required',
           'email' => 'required',
           'website' => '',
