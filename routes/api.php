@@ -49,6 +49,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
 
         Route::apiResource('blogs.comments','BlogCommentController');
 
+        Route::apiResource('blogs.reviews','BlogReviewController');
+
         /**
          * User profile routes
          */

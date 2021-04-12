@@ -4,21 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogComment;
 use App\Models\Blog;
-use App\Http\Requests\BlogCommentRequest;
+use App\Http\Requests\BlogReviewRequest;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\BlogCollection;
 use Illuminate\Http\Request;
 
-class BlogCommentController extends Controller
+class BlogReviewController extends Controller
 {
-
     /**
      * @param \Illuminate\Http\Request $request
      * @return \App\Http\Resources\BlogCollection
      */
     public function index(Blog $blog)
     {
-        $blogComments = $blog->comments()::get();
+        $blogComments = $blog->reviews()::get();
 
         return new BlogCollection($blogs);
     }
@@ -30,7 +29,7 @@ class BlogCommentController extends Controller
     public function store(BlogCommentRequest $request, Blog $blog)
     {
 
-        $blogComment = $blog->comments()->create($request->validated());
+        $blogComment = $blog->reviews()->create($request->validated());
 
         return new BlogResource($blog);
     }

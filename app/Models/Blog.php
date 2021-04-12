@@ -71,6 +71,14 @@ class Blog extends Model
     }
 
     /**
+     * Blog reviews
+     */
+    public function reviews()
+    {
+        return $this->hasMany(\App\Models\BlogReview::class);
+    }
+
+    /**
      * Blog images
      */
     public function images()

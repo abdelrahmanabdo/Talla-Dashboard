@@ -21,6 +21,7 @@ Route::group([
     Route::crud('country', 'CountryCrudController');
     Route::crud('user', 'UserCrudController');
     Route::crud('blogcomment', 'BlogCommentCrudController');
+    Route::crud('blogreview', 'BlogReviewCrudController');
     Route::crud('blogimage', 'BlogImageCrudController');
     Route::crud('closet', 'ClosetCrudController');
     Route::crud('closetoutfititem', 'ClosetOutfitItemCrudController');

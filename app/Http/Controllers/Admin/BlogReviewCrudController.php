@@ -11,7 +11,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class BlogCommentCrudController extends CrudController
+class BlogReviewCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class BlogCommentCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\BlogComment::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/blogcomment');
-        CRUD::setEntityNameStrings('blogcomment', 'Blog Comments');
+        CRUD::setModel(\App\Models\BlogReview::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/blogreview');
+        CRUD::setEntityNameStrings('blogreview', 'Blog Reviews');
     }
 
     /**
@@ -40,8 +40,10 @@ class BlogCommentCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('blog_id');
+        CRUD::column('name');
+        CRUD::column('email');
+        CRUD::column('website');
         CRUD::column('comment');
-        CRUD::column('commenter_id');
         CRUD::column('created_at');
         CRUD::column('updated_at');
 
@@ -62,9 +64,13 @@ class BlogCommentCrudController extends CrudController
     {
         CRUD::setValidation(BlogCommentRequest::class);
 
-        CRUD::field('blog_id');
-        CRUD::field('comment');
-        CRUD::field('commenter_id');
+        CRUD::column('blog_id');
+        CRUD::column('name');
+        CRUD::column('email');
+        CRUD::column('website');
+        CRUD::column('comment');
+        CRUD::column('created_at');
+        CRUD::column('updated_at');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class BlogRequest extends FormRequest
+class BlogReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class BlogRequest extends FormRequest
     public function authorize()
     {
         // only allow updates if the user is logged in
-        return backpack_auth()->check() ? backpack_auth()->check() : true;
+        return true;
     }
 
     /**
@@ -26,12 +26,11 @@ class BlogRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'title' => 'required|max:100',
-            'title_ar' => '',
-            'body' => 'required',
-            'body_ar' => '',
-            'images' => '',
+          'blog_id' => 'required',
+          'name' => 'required',
+          'email' => 'required',
+          'website' => '',
+          'comment' => 'required',
         ];
     }
 
@@ -55,9 +54,10 @@ class BlogRequest extends FormRequest
     public function messages()
     {
         return [
-            'user_id' => 'The user id is required',
-            'title' => 'The title is required',
-            'body' => 'The body is required',
+          'blog_id' => 'The blog id is required',
+          'name' => 'The name is required',
+          'email' => 'The email is required',
+          'comment' => 'The comment is required',
         ];
     }
 }

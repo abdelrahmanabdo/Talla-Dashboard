@@ -10,6 +10,7 @@
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog') }}'><i class='nav-icon la la-blog'></i> Blogs</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('blogcomment') }}'><i class='nav-icon la la-commenting-o'></i> Blog Comments</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blogreview') }}'><i class='nav-icon la la-commenting-o'></i> Blog Reviews</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('blogimage') }}'><i class='nav-icon la la-picture-o'></i> Blog Images</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('closet') }}'><i class='nav-icon la la-question'></i> Closets</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('outfit') }}'><i class='nav-icon la la-question'></i> Outfits</a></li>
