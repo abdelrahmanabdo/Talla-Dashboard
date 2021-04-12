@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BlogComment;
+use App\Models\BlogReview;
 use App\Models\Blog;
 use App\Http\Requests\BlogReviewRequest;
 use App\Http\Resources\BlogResource;
@@ -23,13 +23,13 @@ class BlogReviewController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\BlogCommentRequest $request
+     * @param \App\Http\Requests\BlogReviewRequest $request
      * @return \App\Http\Resources\BlogResource
      */
     public function store(BlogReviewRequest $request, Blog $blog)
     {
 
-        $blogComment = $blog->reviews()->create($request->validated());
+        $blogReview = $blog->reviews()->create($request->validated());
 
         return new BlogResource($blog);
     }

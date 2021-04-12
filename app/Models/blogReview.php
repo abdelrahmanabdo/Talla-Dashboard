@@ -24,4 +24,10 @@ class BlogReview extends Model
     'comment',
   ];
 
+
+  public function blog()
+  {
+    return $this->belongsTo(\App\Models\Blog::class);
+  }
+
 }

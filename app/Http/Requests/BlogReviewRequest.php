@@ -27,7 +27,7 @@ class BlogReviewRequest extends FormRequest
     {
         return [
           'name' => 'required',
-          'email' => 'required',
+          'email' => 'required|email',
           'website' => '',
           'comment' => 'required',
         ];
