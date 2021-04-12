@@ -26,7 +26,7 @@ class BlogReviewController extends Controller
      * @param \App\Http\Requests\BlogCommentRequest $request
      * @return \App\Http\Resources\BlogResource
      */
-    public function store(BlogCommentRequest $request, Blog $blog)
+    public function store(BlogReviewRequest $request, Blog $blog)
     {
 
         $blogComment = $blog->reviews()->create($request->validated());
