@@ -49,8 +49,6 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
 
         Route::apiResource('blogs.comments','BlogCommentController');
 
-        Route::apiResource('blogs.reviews','BlogReviewController');
-
         /**
          * User profile routes
          */
@@ -107,6 +105,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
     Route::get('blogs', 'BlogController@index');
 
     Route::get('blogs/{blog}', 'BlogController@show');
+
+    Route::apiResource('blogs.reviews','BlogReviewController');
 
     Route::get('stylists', 'StylistController@index');
 
