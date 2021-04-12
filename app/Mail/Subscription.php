@@ -31,6 +31,6 @@ class Subscription extends Mailable
     public function build()
     {
         return $this->subject('New subscription E-mail')
-                    ->view('emails.subscription');
+                    ->view('emails.subscription.admin_subscription');
     }
 }
