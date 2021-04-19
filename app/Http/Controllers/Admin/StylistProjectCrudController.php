@@ -28,7 +28,7 @@ class StylistProjectCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\StylistProject::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/stylistproject');
-        CRUD::setEntityNameStrings('stylistproject', 'stylist_projects');
+        CRUD::setEntityNameStrings('stylist project', 'stylist projects');
     }
 
     /**
@@ -39,10 +39,10 @@ class StylistProjectCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('created_at');
+        CRUD::column('stylist_id')->attribute('user_id');
         CRUD::column('description');
         CRUD::column('name');
-        CRUD::column('stylist_id');
+        CRUD::column('created_at');
         CRUD::column('updated_at');
 
         /**
@@ -61,10 +61,9 @@ class StylistProjectCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(StylistProjectRequest::class);
-
+        CRUD::field('stylist_id');
         CRUD::field('description');
         CRUD::field('name');
-        CRUD::field('stylist_id');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

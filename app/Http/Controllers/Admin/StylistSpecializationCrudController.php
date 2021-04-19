@@ -39,11 +39,11 @@ class StylistSpecializationCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('created_at');
+        CRUD::column('stylist_id');
         CRUD::column('description');
         CRUD::column('specialization_id');
         CRUD::column('start_price');
-        CRUD::column('stylist_id');
+        CRUD::column('created_at');
         CRUD::column('updated_at');
 
         /**

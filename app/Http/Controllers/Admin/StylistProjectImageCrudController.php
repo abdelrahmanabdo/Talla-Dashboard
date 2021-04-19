@@ -28,7 +28,7 @@ class StylistProjectImageCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\StylistProjectImage::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/stylistprojectimage');
-        CRUD::setEntityNameStrings('stylistprojectimage', 'stylist_project_images');
+        CRUD::setEntityNameStrings('stylist project image', 'stylist project images');
     }
 
     /**
@@ -39,9 +39,13 @@ class StylistProjectImageCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('created_at');
-        CRUD::column('image');
         CRUD::column('project_id');
+        CRUD::addColumn([
+          'label' => "Images", 
+          'type' => "image",
+          'name' => 'image',
+        ]);
+        CRUD::column('created_at');
         CRUD::column('updated_at');
 
         /**
@@ -49,6 +53,23 @@ class StylistProjectImageCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+    }
+
+    /**
+     * Define what happens when the List operation is loaded.
+     * 
+     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
+     * @return void
+     */
+    protected function setupShowOperation()
+    {
+        CRUD::column('project_id');
+        CRUD::addColumn([
+          'label' => "Image", 
+          'type' => "image",
+          'name' => 'image',
+        ]);
+        CRUD::column('created_at');
     }
 
     /**

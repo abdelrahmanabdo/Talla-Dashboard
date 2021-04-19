@@ -28,7 +28,7 @@ class BlogImageCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\BlogImage::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/blogimage');
-        CRUD::setEntityNameStrings('blogimage', 'blog_images');
+        CRUD::setEntityNameStrings('blog image', 'blog images');
     }
 
     /**
@@ -40,15 +40,36 @@ class BlogImageCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('blog_id');
+        CRUD::addColumn([
+          'label' => "Images", 
+          'type' => "image",
+          'name' => 'image',
+        ]);
         CRUD::column('created_at');
-        CRUD::column('image');
-        CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+    }
+
+    /**
+     * Define what happens when the List operation is loaded.
+     * 
+     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
+     * @return void
+     */
+    protected function setupShowOperation()
+    {
+        CRUD::column('blog_id');
+        CRUD::column('type');
+        CRUD::addColumn([
+          'label' => "Image", 
+          'type' => "image",
+          'name' => 'image',
+        ]);
+        CRUD::column('created_at');
     }
 
     /**
@@ -62,8 +83,15 @@ class BlogImageCrudController extends CrudController
         CRUD::setValidation(BlogImageRequest::class);
 
         CRUD::field('blog_id');
-        CRUD::field('image');
-
+        // CRUD::field('image')->type('upload_multiple');
+        CRUD::addField([
+          'label' => "Images", 
+          'type' => "upload_multiple",
+          'name' => 'image',
+          'disk'      => 'local',
+          'allows_multiple' => true,
+          'upload'    => true,
+        ]);
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');

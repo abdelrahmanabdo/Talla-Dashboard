@@ -41,7 +41,7 @@ class ColorCrudController extends CrudController
     {
         CRUD::column('name');
         CRUD::column('name_en');
-        CRUD::column('hexa');
+        CRUD::column('hexa')->type('color');
         CRUD::column('active');
         // CRUD::column('created_at');
         // CRUD::column('updated_at');
