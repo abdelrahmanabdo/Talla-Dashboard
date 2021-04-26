@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class UserProfile extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
-    use \Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
     use HasFactory;
 
     protected $table = 'user_profile';
