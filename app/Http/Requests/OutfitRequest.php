@@ -26,8 +26,8 @@ class OutfitRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'items' => 'required',
+          'user_id' => 'required',
+          'items' => 'required',
         ];
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserProfile extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    use \Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
     use HasFactory;
 
     protected $table = 'user_profile';
@@ -72,17 +73,17 @@ class UserProfile extends Model
         return $this->belongsTo(\App\Models\RegistrationChoice::class);
     }
 
-    public function job()
+    public function jobs()
     {
         return $this->belongsTo(\App\Models\RegistrationChoice::class);
     }
 
-    public function goal()
+    public function goals()
     {
         return $this->belongsTo(\App\Models\RegistrationChoice::class);
     }
 
-    public function favouriteStyle()
+    public function favouriteStyles()
     {
         return $this->belongsTo(\App\Models\RegistrationChoice::class);
     }

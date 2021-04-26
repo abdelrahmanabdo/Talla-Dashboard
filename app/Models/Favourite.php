@@ -17,7 +17,8 @@ class Favourite extends Model
      */
     protected $fillable = [
         'user_id',
-        'closet_id'
+        'item_id',
+        'type'
     ];
 
     /**
@@ -33,11 +34,16 @@ class Favourite extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class);
+      return $this->belongsTo(\App\Models\User::class);
     }
 
     public function item()
     {
-        return $this->belongsTo(\App\Models\Closet::class,'closet_id');
+      return $this->belongsTo(\App\Models\Closet::class, 'item_id');
+    }
+
+    public function outfit()
+    {
+      return $this->belongsTo(\App\Models\Outfit::class, 'item_id');
     }
 }

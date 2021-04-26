@@ -41,6 +41,7 @@ Route::group([
     Route::get('charts/weekly-users', 'Charts\WeeklyUsersChartController@response')->name('charts.weekly-users.index');
     Route::get('charts/weekly-stylists', 'Charts\WeeklyStylistsChartController@response')->name('charts.weekly-stylists.index');
     Route::crud('about', 'AboutUsCrudController');
+    Route::crud('TAndC', 'TAndCCrudController');
     Route::crud('devicetoken', 'DeviceTokenCrudController');
     Route::crud('favourite', 'FavouriteCrudController');
     Route::crud('otp', 'OTPCrudController');

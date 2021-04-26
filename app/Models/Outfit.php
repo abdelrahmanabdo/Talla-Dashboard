@@ -18,7 +18,6 @@ class Outfit extends Model
     protected $fillable = [
         'user_id',
         'group',
-        'closet_item_id',
     ];
 
     /**
@@ -30,17 +29,18 @@ class Outfit extends Model
         'id' => 'integer',
         'user_id' => 'integer',
         'group' => 'integer',
-        'closet_item_id' => 'integer',
     ];
 
 
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class);
+      return $this->belongsTo(\App\Models\User::class);
     }
 
-    public function item()
+
+    public function items()
     {
-        return $this->belongsTo(\App\Models\Closet::class, 'closet_item_id');
+      return $this->hasMany(\App\Models\ClosetOutfitItem::class, 'outfit_id');
     }
+
 }

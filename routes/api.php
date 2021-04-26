@@ -120,6 +120,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
 
     Route::apiResource('about', 'AboutUsController');
 
+    Route::apiResource('T&C', 'TAndCController');
+
     Route::apiResource('settings', 'SettingsController');
 
     Route::apiResource('subscription', 'SubscriptionController');

@@ -40,5 +40,6 @@
 <li class="nav-title font-weight-bold mt-5">Site settings</li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('support') }}'><i class='nav-icon la la-support'></i>Supports</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('about') }}'><i class='nav-icon la la-support'></i> About us</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('TAndC') }}'><i class='nav-icon la la-support'></i> T&C</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('settings') }}'><i class='nav-icon la la-support'></i>General Settings</a></li>
 

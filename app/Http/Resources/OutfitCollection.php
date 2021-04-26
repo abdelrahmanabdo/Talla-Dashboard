@@ -16,7 +16,15 @@ class OutfitCollection extends ResourceCollection
     {
         return [
             'success' => true,
-            'data' => $this->collection,
+            'data' => $this->collection->transform(function($item) {
+                return [
+                    'id' => $item->id,
+                    'user' => $item->user,
+                    'group' => $item->group,
+                    'items' => $item->items,
+                    'created_at' => $item->created_at
+                ];
+            }),
         ];
     }
 }

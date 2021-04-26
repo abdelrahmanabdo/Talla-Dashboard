@@ -37,20 +37,13 @@ class UserProfileController extends Controller
             ]);
         }
 
-       //Check if user already has a profile
-       /**
-        * Update current user
-        */
+       // Update current user
         if ($user = UserProfile::whereUserId($request->user_id)->first()) {
             $user->update($request->all());
             $userProfile = $user;
         } 
-        /**
-         * Create new user
-         */
-        else {
-            $userProfile = UserProfile::create($request->all());
-        }
+        // Create new user
+        else $userProfile = UserProfile::create($request->all());
         
         return new UserProfileResource($userProfile);
     }

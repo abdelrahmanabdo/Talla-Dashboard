@@ -15,8 +15,14 @@ class AboutUsResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'success' => true,
-            'data' => parent::toArray($request),
+          'success' => true,
+          'data' => [
+            'title' => $this->title,
+            'title_ar' => $this->title_ar,
+            'text' => $this->text,
+            'text_ar' => $this->text_ar,
+            'sections' => $this->sections,
+          ]
         ];
     }
 }

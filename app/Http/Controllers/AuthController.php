@@ -40,7 +40,8 @@ class AuthController extends Controller
                 $response = [ "success" => true,
                               "message" => 'User login successfully',
                               "token" => $token,
-                              "user" => $user ];
+                              "user" => $user 
+                            ];
                 $status_code = 200;
 
             } else {
@@ -51,7 +52,7 @@ class AuthController extends Controller
         } else {
             $response = ["success" => false,
                          "message" =>'User does not exist'];
-            $status_code = 422;
+            $status_code = 400;
         }
         return response($response, $status_code);
 
@@ -84,7 +85,7 @@ class AuthController extends Controller
         $token = $user->createToken('Tallah password')->accessToken;
 
         // Send welcome email to new user
-        if ($user) $user->notify(new Registration());
+        // if ($user) $user->notify(new Registration());
 
         $response = ['success' => true,
             'message' => 'User created successfully',

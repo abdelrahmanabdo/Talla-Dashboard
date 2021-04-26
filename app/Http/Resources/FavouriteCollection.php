@@ -20,7 +20,9 @@ class FavouriteCollection extends ResourceCollection
                 return [
                     'id' => $item->id,
                     'user' => $item->user,
+                    'type' => $item->type,
                     'item' => $item->item,
+                    'outfit' => $item->outfit,
                 ];
             }),
         ];

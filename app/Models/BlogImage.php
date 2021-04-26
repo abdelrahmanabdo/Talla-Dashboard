@@ -46,7 +46,7 @@ class BlogImage extends Model
     public function save_image ($image_str) {
         $attribute_name = "image";
         // or use your own disk, defined in config/filesystems.php
-        $disk = config('filesystems.disks.public.driver'); 
+        $disk = config( 'filesystems.disks.public.driver'); 
         // destination path relative to the disk above
         $destination_path = "public/images/blogs/"; 
 

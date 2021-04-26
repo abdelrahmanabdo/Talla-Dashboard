@@ -7,6 +7,7 @@ use App\Http\Requests\StylistSpecializationUpdateRequest;
 use App\Http\Resources\StylistSpecializationCollection;
 use App\Http\Resources\StylistSpecializationResource;
 use App\Models\StylistSpecialization;
+use App\Models\Stylist;
 use Illuminate\Http\Request;
 
 class StylistSpecializationController extends Controller
@@ -29,18 +30,27 @@ class StylistSpecializationController extends Controller
     public function store(StylistSpecializationRequest $request)
     {
 
-        foreach ($request->all() as $key => $specialization) {
+     if (count($request->all()) == 0) {
+        return response()->json(['message' => 'You sent empty specializations'], 400);
+      } 
+
+      $stylist_id = $request->all()[0]['stylist_id'];
+      $stylist = Stylist::find($stylist_id);
+      // Delete old certificates
+      $stylist->specializations()->delete();
+
+      foreach ($request->all() as $key => $specialization) {
             $newSpecialization = StylistSpecialization::create([
                 'stylist_id' => $specialization['stylist_id'],
-                'specialization_id' => $specialization['id'],
+                'specialization_id' => $specialization['specialization_id'],
                 'description' => $specialization['description'],
-                'start_price' => $specialization['start_price'],
+                'start_price' => $specialization['start_price'] ?? Null,
             ]);
-        }
+      }
 
-        $specializations = $request->all();
+      $specializations = StylistSpecialization::with('specialization')->whereStylistId($stylist_id)->get();
 
-        return new StylistSpecializationResource($specializations);
+      return new StylistSpecializationResource($specializations);
     }
 
     /**

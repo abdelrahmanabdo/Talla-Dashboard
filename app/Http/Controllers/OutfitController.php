@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Outfit;
+use App\Models\ClosetOutfitItem;
 use App\Http\Requests\OutfitRequest;
 use App\Http\Resources\OutfitCollection;
 use App\Http\Resources\OutfitResource;
 use Illuminate\Http\Request;
 use Exception ;
+
 class OutfitController extends Controller
 {
 
@@ -17,9 +19,11 @@ class OutfitController extends Controller
      */
     public function index(Request $request)
     {
-        $Outfits = Outfit::all();
-
-        return new OutfitCollection($Outfits);
+      if (!$request->user_id) return response()->json(['message' => 'User id is required'], 422);
+      $outfits = Outfit::with(['items', 'items.closetItem'])
+                      ->whereUserId($request->user_id)
+                      ->get();
+      return new OutfitCollection($outfits);
     }
 
     /**
@@ -33,13 +37,15 @@ class OutfitController extends Controller
         
         // Increment last group by 1
         $lastUserOutfitGroup = ++$lastUserOutfitGroup ?? 1;
-        
+        $outfit = Outfit::create([
+                    'user_id' => $request->user_id,
+                    'group' => $lastUserOutfitGroup,
+                ]);
         // Iterate over items array
         foreach ($request->items as $item) {
             try {
-                $Outfit = Outfit::create([
-                    'user_id' => $request->user_id,
-                    'group' => $lastUserOutfitGroup,
+                ClosetOutfitItem::create([
+                    'outfit_id' => $outfit->id,
                     'closet_item_id' => $item
                 ]);
             } catch(Exception $e) {
@@ -50,7 +56,7 @@ class OutfitController extends Controller
             }
         }
 
-        return new OutfitResource($Outfit);
+        return new OutfitResource($outfit);
     }
 
     /**

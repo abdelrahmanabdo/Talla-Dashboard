@@ -25,11 +25,12 @@ class FavouriteRequest  extends FormRequest
      */
     public function rules()
     {
-        return [
-            'user_id' => 'required|max:25',
-            'closet_id' => 'required|max:25',
-            'remove_item' => 'boolean'
-        ];
+      return [
+        'user_id' => 'required',
+        'item_id' => 'required',
+        'type' => '',
+        'remove_item' => 'boolean'
+      ];
     }
 
     /**

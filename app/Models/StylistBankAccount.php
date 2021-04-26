@@ -17,10 +17,12 @@ class StylistBankAccount extends Model
      */
     protected $fillable = [
         'stylist_id',
-        'name_on_card',
-        'card_number',
-        'expire_date',
-        'CVV',
+        'name',
+        'account_number',
+        'iban',
+        'swift_code',
+        'branch_name',
+        'branch_address',
     ];
 
     /**

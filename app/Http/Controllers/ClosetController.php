@@ -26,6 +26,13 @@ class ClosetController extends Controller
                             ->when(!empty($request->season) && $request->season !== 'null' , function($q) use($request){
                                     $q->where('season', $request->season);
                                 })
+                            ->when(!empty($request->color) && $request->color !== 'null' , function($q) use($request){
+                                    $q->where('color_id', $request->color);
+                                })
+                            ->when(!empty($request->brand) && $request->brand !== 'null' , function($q) use($request){
+                                    $q->where('brand_id', $request->brand);
+                                })
+                            ->whereUserId($request->user_id)
                             ->get();
 
         return new ClosetCollection($closets);
@@ -59,7 +66,7 @@ class ClosetController extends Controller
      */
     public function show(Request $request, Closet $closet)
     {
-        return new ClosetResource($closet);
+      return new ClosetResource($closet);
     }
 
     /**

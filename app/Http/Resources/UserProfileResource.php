@@ -25,9 +25,9 @@ class UserProfileResource extends JsonResource
                 'city' => $this->city,
                 'body_shape' => $this->bodyShape,
                 'skin_glow' => $this->skinGlow,
-                'goals' => $this->goal,
-                'jobs' => $this->job,
-                'favourite_styles' => $this->favouriteStyle,
+                'goals' => $this->goal_id,
+                'jobs' => $this->job_id,
+                'favourite_styles' => $this->favourite_style_id,
                 'created_at' => $this->created_at
             ]
         ];

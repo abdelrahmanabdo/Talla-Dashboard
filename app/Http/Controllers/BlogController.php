@@ -33,7 +33,7 @@ class BlogController extends Controller
                         return $query->where('is_featured', 1);
                       })
                       ->when($latest, function($query) {
-                        return $query->orderBy('created_at','Desc');
+                        return $query->limit(5)->orderBy('created_at','Desc');
                       })
                       ->orderBy('likes','Desc')
                       ->get();

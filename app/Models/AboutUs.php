@@ -24,6 +24,14 @@ class AboutUs extends Model
         'text_ar',
         'image',
     ];
+
+    /**
+     * About sections
+     */
+    public function sections()
+    {
+        return $this->hasMany(\App\Models\AboutSection::class,'about_id');
+    }
     
     public function setImageAttribute($value)
     {

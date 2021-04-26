@@ -16,9 +16,11 @@ class FavouriteController extends Controller
      */
     public function index(Request $request)
     {
-        $countries = Favourite::with(['item'])->get();
+        $favorite = Favourite::with(['item', 'outfit.items.closet_item'])
+                            ->whereUserId($request->user_id)
+                            ->get();
 
-        return new FavouriteCollection($countries);
+        return new FavouriteCollection($favorite);
     }
 
     /**
@@ -30,7 +32,7 @@ class FavouriteController extends Controller
         /**
          * Check if item already added before
          */
-        $item = Favourite::where(['user_id' => $request->user_id, 'closet_id' => $request->closet_id])->first();
+        $item = Favourite::where(['user_id' => $request->user_id, 'item_id' => $request->item_id])->first();
          
         if ($item) {
             // Delete item if exists and user clicked twice on it
@@ -38,7 +40,7 @@ class FavouriteController extends Controller
                 $item->delete();
                 return response([
                     'success' => true,
-                    'message' => 'item removed from favourites'
+                    'message' => 'item removed from favorites'
                 ]);
             }
 
@@ -48,9 +50,9 @@ class FavouriteController extends Controller
             ]);
         }
         
-        $favourite = Favourite::create($request->validated());
+        $favorite = Favourite::create($request->validated());
 
-        return new FavouriteResource($favourite);
+        return new FavouriteResource($favorite);
     }
 
     /**

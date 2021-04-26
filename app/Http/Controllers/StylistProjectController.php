@@ -35,24 +35,30 @@ class StylistProjectController extends Controller
      */
     public function store(StylistProjectRequest $request)
     {
-        foreach ($request->all() as $key => $project) {
+
+      if (count($request->all()) == 0) {
+        return response()->json(['message' => 'You sent empty projects'], 400);
+      } 
+      
+      foreach ($request->all() as $key => $project) {
+              return 'here';
+
             $newProject = StylistProject::create([
                 'stylist_id' => $project['stylist_id'],
                 'name' => $project['name'],
                 'description' => $project['description'],
             ]);
-
             /**
              * Store project images
              */
-            if ($project['images']) {
+            if ($project['images'] && count($project['images']) > 0) {
                 foreach ($project['images'] as $key => $image) {
                     $imagePath = $this->verifyAndStoreBase64Image($image, 
                                                                  $project['stylist_id'] .'-'. $project['name'] . '-' . $key , 
                                                                  'projects');
                     StylistProjectImage::create([
-                        'project_id' => $newProject->id,
-                        'image'   => $imagePath
+                      'project_id' => $newProject->id,
+                      'image'   => $imagePath
                     ]);
                 }
             }
