@@ -93,4 +93,14 @@ class Blog extends Model
     {
         return $this->hasOne(\App\Models\BlogImage::class);
     }
+
+    public function acceptBlogButton()
+    {
+        return '<a class="btn btn-xs btn-default" href="accept" data-toggle="tooltip" title="Just a demo custom button.">Accept</a>';
+    }
+
+    public function rejectBlogButton()
+    {
+        return '<a class="btn btn-4 btn-danger" href="reject" data-toggle="tooltip" title="Just a demo custom button.">Reject</a>';
+    }
 }

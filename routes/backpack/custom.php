@@ -15,14 +15,15 @@ Route::group([
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
     Route::crud('blog', 'BlogCrudController');
+    Route::crud('blog/under-review', 'BlogNeedReviewCrudController');
     Route::crud('brand', 'BrandCrudController');
     Route::crud('category', 'CategoryCrudController');
     Route::crud('color', 'ColorCrudController');
     Route::crud('country', 'CountryCrudController');
     Route::crud('user', 'UserCrudController');
-    Route::crud('blogcomment', 'BlogCommentCrudController');
-    Route::crud('blogreview', 'BlogReviewCrudController');
-    Route::crud('blogimage', 'BlogImageCrudController');
+    Route::crud('blog/comments', 'BlogCommentCrudController');
+    Route::crud('blog/reviews', 'BlogReviewCrudController');
+    Route::crud('blog/images', 'BlogImageCrudController');
     Route::crud('closet', 'ClosetCrudController');
     Route::crud('closetoutfititem', 'ClosetOutfitItemCrudController');
     Route::crud('gift', 'GiftCrudController');
@@ -48,4 +49,9 @@ Route::group([
     Route::crud('settings', 'SettingsCrudController');
     Route::crud('chat', 'ChatCrudController');
     Route::crud('subscription', 'SubscriptionCrudController');
+
+
+    Route::get('blog/under-review/{id}/accept', 'BlogNeedReviewCrudController@accept_blog');
+    Route::get('blog/under-review/{id}/reject', 'BlogNeedReviewCrudController@reject_blog');
+
 }); // this should be the absolute last line of this file

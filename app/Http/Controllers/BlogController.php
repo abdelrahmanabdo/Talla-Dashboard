@@ -33,7 +33,7 @@ class BlogController extends Controller
                         return $query->where('is_featured', 1);
                       })
                       ->when($latest, function($query) {
-                        return $query->limit(5)->orderBy('created_at','Desc');
+                        return $query->limit(3)->orderBy('created_at','Desc');
                       })
                       ->orderBy('likes','Desc')
                       ->get();
@@ -54,10 +54,10 @@ class BlogController extends Controller
          */
         if ($request->images) {
             foreach ($request->images as $key => $image) {
-                $imagePath = $this->verifyAndStoreBase64Image($image, $request->user_id .'-'. $request->title . '-' . $key , 'blogs');
+                $imagePath = $this->verifyAndStoreImage($image, $request->user_id .'-'. $request->title . '-' . $key , 'blogs');
                 BlogImage::create([
-                    'blog_id' => $blog->id,
-                    'image'   => $imagePath
+                  'blog_id' => $blog->id,
+                  'image'   => $imagePath
                 ]);
             }
         }
@@ -89,7 +89,7 @@ class BlogController extends Controller
          */
         if ($request->images) {
             foreach ($request->images as $key => $image) {
-                $imagePath = $this->verifyAndStoreBase64Image($image, $blog->user_id .'-'. $request->title . '-' . $key , 'blogs');
+                $imagePath = $this->verifyAndStoreImage($image, $blog->user_id .'-'. $request->title . '-' . $key , 'blogs');
                 BlogImage::create([
                     'blog_id' => $blog->id,
                     'image'   => $imagePath

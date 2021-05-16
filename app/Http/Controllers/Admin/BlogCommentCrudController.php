@@ -27,8 +27,8 @@ class BlogCommentCrudController extends CrudController
     public function setup()
     {
         CRUD::setModel(\App\Models\BlogComment::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/blogcomment');
-        CRUD::setEntityNameStrings('blogcomment', 'Blog Comments');
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/blog/comments');
+        CRUD::setEntityNameStrings('blog comments', 'Blog Comments');
     }
 
     /**

@@ -2,10 +2,11 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a></li>
 
 <li class="nav-title font-weight-bold mt-2">Blogs </li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog/under-review') }}'><i class='nav-icon la la-blog'></i> Blogs Need Review</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog') }}'><i class='nav-icon la la-blog'></i> Blogs</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blogimage') }}'><i class='nav-icon la la-picture-o'></i> Blog Images</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blogcomment') }}'><i class='nav-icon la la-commenting-o'></i> Blog Comments</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blogreview') }}'><i class='nav-icon la la-commenting-o'></i> Blog Reviews (Landing Page)</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog/images') }}'><i class='nav-icon la la-picture-o'></i> Blog Images</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog/comments') }}'><i class='nav-icon la la-commenting-o'></i> Blog Comments</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog/reviews') }}'><i class='nav-icon la la-commenting-o'></i> Blog Reviews (Landing Page)</a></li>
 
 <li class="nav-title font-weight-bold mt-2">User</li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon la la-user'></i> Users</a></li>

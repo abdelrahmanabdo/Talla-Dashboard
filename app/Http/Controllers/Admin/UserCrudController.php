@@ -32,6 +32,22 @@ class UserCrudController extends CrudController
     }
 
     /**
+     *  Show
+     */
+    protected function setupShowOperation() {
+        CRUD::set('show.setFromDb', false);
+        CRUD::column('name');
+        CRUD::column('email');
+        CRUD::addColumn([
+          'label' => "User Role", 
+          'name' => 'role_id',
+          'entity' => 'userRole',
+          'attribute' => "name", 
+          'model' => "App\Models\UserRole",
+        ]);
+    }
+
+    /**
      * Define what happens when the List operation is loaded.
      *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
@@ -41,17 +57,15 @@ class UserCrudController extends CrudController
     {
         CRUD::column('name');
         CRUD::column('email');
-        // CRUD::column('email_verified_at');
-//        CRUD::column('password');
-        // CRUD::column('remember_token');
+        CRUD::addColumn([
+          'label' => "User Role", 
+          'name' => 'role_id',
+          'entity' => 'userRole',
+          'attribute' => "name_en", 
+          'model' => "App\Models\UserRole",
+        ]);
+        CRUD::orderBy('role_id', 'desc');
         CRUD::column('created_at');
-        // CRUD::column('updated_at');
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
-         */
     }
 
     /**
@@ -63,12 +77,15 @@ class UserCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(UserRequest::class);
-
+        CRUD::addField([
+         'label' => "User Role", 
+          'name' => 'role_id',
+          'entity' => 'userRole',
+          'attribute' => "name", 
+        ]);
         CRUD::field('name');
         CRUD::field('email');
-        // CRUD::field('email_verified_at');
         CRUD::field('password');
-        // CRUD::field('remember_token');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

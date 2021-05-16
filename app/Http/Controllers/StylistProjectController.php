@@ -41,8 +41,6 @@ class StylistProjectController extends Controller
       } 
       
       foreach ($request->all() as $key => $project) {
-              return 'here';
-
             $newProject = StylistProject::create([
                 'stylist_id' => $project['stylist_id'],
                 'name' => $project['name'],
@@ -53,9 +51,9 @@ class StylistProjectController extends Controller
              */
             if ($project['images'] && count($project['images']) > 0) {
                 foreach ($project['images'] as $key => $image) {
-                    $imagePath = $this->verifyAndStoreBase64Image($image, 
-                                                                 $project['stylist_id'] .'-'. $project['name'] . '-' . $key , 
-                                                                 'projects');
+                    $imagePath = $this->verifyAndStoreImage($image, 
+                                                            $project['stylist_id'] .'-'. $project['name'] . '-' . $key , 
+                                                            'projects');
                     StylistProjectImage::create([
                       'project_id' => $newProject->id,
                       'image'   => $imagePath

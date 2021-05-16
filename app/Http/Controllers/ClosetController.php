@@ -48,9 +48,9 @@ class ClosetController extends Controller
          * Store item image
          */
         if ($request->image) {
-            $imagePath = $this->verifyAndStoreBase64Image($request->image, $request->user_id . '-item' , 'closets');
+            $imagePath = $this->verifyAndStoreImage($request->image, $request->user_id . '-item' , 'closets');
             $request->merge([
-                'image' => $imagePath
+              'image' => $imagePath
             ]);
         }
 

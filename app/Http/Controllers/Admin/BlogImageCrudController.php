@@ -27,7 +27,7 @@ class BlogImageCrudController extends CrudController
     public function setup()
     {
         CRUD::setModel(\App\Models\BlogImage::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/blogimage');
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/blog/images');
         CRUD::setEntityNameStrings('blog image', 'blog images');
     }
 
@@ -41,7 +41,7 @@ class BlogImageCrudController extends CrudController
     {
         CRUD::column('blog_id');
         CRUD::addColumn([
-          'label' => "Images", 
+          'label' => "Image", 
           'type' => "image",
           'name' => 'image',
         ]);
@@ -81,9 +81,7 @@ class BlogImageCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(BlogImageRequest::class);
-
         CRUD::field('blog_id');
-        // CRUD::field('image')->type('upload_multiple');
         CRUD::addField([
           'label' => "Images", 
           'type' => "upload_multiple",
@@ -92,11 +90,6 @@ class BlogImageCrudController extends CrudController
           'allows_multiple' => true,
           'upload'    => true,
         ]);
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
     /**

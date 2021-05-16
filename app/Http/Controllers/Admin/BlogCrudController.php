@@ -30,22 +30,27 @@ class BlogCrudController extends CrudController
         CRUD::setModel(\App\Models\Blog::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/blog');
         CRUD::setEntityNameStrings('blog', 'blogs');
+        CRUD::filters();
+        CRUD::enableExportButtons();
+        CRUD::enableResponsiveTable();
     }
 
     /**
-     * 
+     *  Show
      */
     protected function setupShowOperation() {
+        CRUD::set('show.setFromDb', false);
         CRUD::addColumn([
           'label' => "User", 
-          'type' => "select",
           'name' => 'user_id',
           'entity' => 'user', 
           'attribute' => "name", 
           'model' => "App\Models\User",
         ]);
         CRUD::column('title');
+        CRUD::column('title_ar');
         CRUD::column('body');
+        CRUD::column('body_ar');
         CRUD::addColumn([
           'label' => 'Hashtags',
           'type' => 'json',
@@ -53,14 +58,14 @@ class BlogCrudController extends CrudController
         ]); 
         CRUD::addColumn([
           'label' => "Images", 
-          'type' => "relationship_count",
-          'name' => 'images',
+          'type' => "image",
+          'name' => 'image.image',
           'entity' => 'images', 
           'suffix' => ' images'
         ]);
         CRUD::column('Reviewed')->type('boolean');
         CRUD::column('Featured')->type('boolean');
-        CRUD::column('Active')->type('boolean');
+        CRUD::column('Active')->type('boolean');  
         CRUD::column('updated_at');
         CRUD::column('created_at');
     }
@@ -81,9 +86,7 @@ class BlogCrudController extends CrudController
           'model' => "App\Models\User",
         ]);
         CRUD::column('title');
-        CRUD::column('title_ar');
         CRUD::column('body');
-        CRUD::column('body_ar');
         CRUD::addColumn([
           'label' => 'Hashtags',
           'type' => 'json',
@@ -100,15 +103,7 @@ class BlogCrudController extends CrudController
           'inline_create' => true,
           'suffix' =>  ' images'
         ]);
-        CRUD::addColumn([
-            'name'        => 'is_reviewed',
-            'label'       => 'is_reviewed',
-            'type'        => 'radio',
-            'options'     => [
-                0 => 'No',
-                1 => 'Yes'
-            ]
-        ]);
+
         CRUD::addColumn([
             'name'        => 'is_featured',
             'label'       => 'Featured',
@@ -130,11 +125,8 @@ class BlogCrudController extends CrudController
         CRUD::column('created_at');
         CRUD::column('updated_at');
 
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
+        CRUD::addClause('where', 'is_reviewed', 1);
+        CRUD::orderBy('created_at', 'desc');
     }
 
     /**
@@ -145,6 +137,8 @@ class BlogCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
+        CRUD::setValidation(BlogRequest::class);
+
         CRUD::addField([
           'label' => "User", 
           'type' => "select2",
@@ -158,30 +152,35 @@ class BlogCrudController extends CrudController
         CRUD::addField([
           'label' => 'Body in En',
           'name' => 'body',
-          'type' => 'easymde'
+          'type' => 'wysiwyg'
         ]);
         CRUD::addField([
           'label' => 'Body in ar',
           'name' => 'body_ar',
-          'type' => 'easymde'
+          'type' => 'wysiwyg'
         ]);
         CRUD::addField([
-          'label' => 'Tags',
+          'label' => 'Hashtags',
           'name' => 'hashtags',
-          'type' => 'repeatable',
-          'ajax' => true,
+          'columns' => [
+            'en' => 'En',
+            'ar' => 'Ar'
+          ],
         ]); 
         // CRUD::addField([
         //   'label' => "Images", 
-        //   'type' => "base64_image",
-        //   'name' => 'image',
+        //   'type' => "image",
+        //   'name' => 'images',
         //   'entity' => 'images', 
-        //   'filename'     => "image_filename",
         //   'attribute' => "image", 
-        //   'model' => "App\Models\BlogImage",
-        //   'upload'    => true,
+        //   'model' => "\App\Models\BlogImage",
+        //   'upload' => true,
+        //   'crop'   => true,
+        //   'multiple'   => true,
+        //   'mime_types' => ['image'],
+        //   'aspect_ratio' => 1,
         //   'disk'      => 'local',
-        //   'src'          => NULL,
+        //   'prefix'    => 'public/images/blogs/'
         // ]);
         CRUD::addField([
           'label' => 'Reviewed',
@@ -201,8 +200,6 @@ class BlogCrudController extends CrudController
           'type' => 'checkbox',
           'default' => 1
         ]);
-
-        CRUD::setValidation(BlogRequest::class);
     }
 
     /**

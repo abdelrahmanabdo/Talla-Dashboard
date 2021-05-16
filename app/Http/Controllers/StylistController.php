@@ -29,12 +29,11 @@ class StylistController extends Controller
      */
     public function store(StylistRequest $request)
     {
-
         /**
          * Store stylist avatar
          */
         if ($request->avatar) {
-            $imagePath = $this->verifyAndStoreBase64Image($request->avatar, $request->user_id , 'users');
+            $imagePath = $this->verifyAndStoreImage($request->avatar, $request->user_id , 'users');
             $request->merge([
                 'avatar' => $imagePath
             ]);
@@ -53,7 +52,7 @@ class StylistController extends Controller
          * Create new stylist profile
          */
         else {
-            $stylist = Stylist::create($request->all());
+          $stylist = Stylist::create($request->all());
         }
 
         return new StylistResource($stylist);

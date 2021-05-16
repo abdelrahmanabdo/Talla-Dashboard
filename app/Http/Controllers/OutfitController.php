@@ -33,7 +33,9 @@ class OutfitController extends Controller
     public function store(OutfitRequest $request)
     {
         // Get the last added outfit for the user to increment it 
-        $lastUserOutfitGroup = Outfit::whereUserId($request->user_id)->latest('id')->value('group');
+        $lastUserOutfitGroup = Outfit::whereUserId($request->user_id)
+                                    ->latest('id')
+                                    ->value('group');
         
         // Increment last group by 1
         $lastUserOutfitGroup = ++$lastUserOutfitGroup ?? 1;

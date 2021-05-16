@@ -31,7 +31,7 @@ class UserProfileController extends Controller
          * Store user avatar
          */
         if ($request->avatar) {
-            $imagePath = $this->verifyAndStoreBase64Image($request->avatar, $request->user_id , 'users');
+            $imagePath = $this->verifyAndStoreImage($request->avatar, $request->user_id , 'users');
             $request->merge([
                 'avatar' => $imagePath
             ]);
@@ -65,6 +65,18 @@ class UserProfileController extends Controller
      */
     public function update(Request $request, UserProfile $userProfile)
     {  
+
+        /**
+         * Store user avatar
+         */
+        if ($request->avatar) {
+            $imagePath = $this->verifyAndStoreImage($request->avatar, $request->user_id , 'users');
+            $request->merge([
+                'avatar' => $imagePath
+            ]);
+        }
+
+
         $userProfile->update($request->all());
 
         return new UserProfileResource($userProfile);

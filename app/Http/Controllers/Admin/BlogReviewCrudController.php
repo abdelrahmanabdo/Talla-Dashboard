@@ -27,8 +27,8 @@ class BlogReviewCrudController extends CrudController
     public function setup()
     {
         CRUD::setModel(\App\Models\BlogReview::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/blogreview');
-        CRUD::setEntityNameStrings('blogreview', 'Blog Reviews');
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/blog/reviews');
+        CRUD::setEntityNameStrings('blog Reviews', 'Blog Reviews');
     }
 
     /**

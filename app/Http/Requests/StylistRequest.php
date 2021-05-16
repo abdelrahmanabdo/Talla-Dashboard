@@ -29,6 +29,8 @@ class StylistRequest extends FormRequest
             'user_id' => 'required',
             'email' => 'required',
             'country_id' => 'required',
+            'avatar' => '',
+            'mobile_numbers' => '',
         ];
     }
 

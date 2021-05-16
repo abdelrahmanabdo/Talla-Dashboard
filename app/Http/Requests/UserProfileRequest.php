@@ -30,7 +30,7 @@ class UserProfileRequest extends FormRequest
             'country_id' => 'required',
             'city_id' => 'required',
             'birth_date' => 'required',
-            'avatar' => 'string'
+            'avatar' => ''
         ];
     }
 

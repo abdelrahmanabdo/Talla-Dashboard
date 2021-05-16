@@ -31,6 +31,7 @@ class BlogRequest extends FormRequest
             'title_ar' => '',
             'body' => 'required',
             'body_ar' => '',
+            'hashtags' => '',
             'images' => '',
         ];
     }
