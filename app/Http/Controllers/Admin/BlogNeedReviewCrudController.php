@@ -50,7 +50,7 @@ class BlogNeedReviewCrudController extends CrudController
         CRUD::column('body');
         CRUD::addColumn([
           'label' => 'Hashtags',
-          'type' => 'array',
+          'type' => 'json',
           'name' => 'hashtags'
         ]); 
         CRUD::addColumn([
