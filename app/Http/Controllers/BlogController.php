@@ -11,6 +11,7 @@ use App\Http\Resources\BlogResource;
 use App\Http\Resources\BlogCollection;
 use Illuminate\Http\Request;
 use App\Traits\StoreImageTrait;
+
 class BlogController extends Controller
 {
     use StoreImageTrait;
@@ -35,6 +36,7 @@ class BlogController extends Controller
                       ->when($latest, function($query) {
                         return $query->limit(3)->orderBy('created_at','Desc');
                       })
+                      ->where(['is_reviewed' => 1, 'active' => 1])
                       ->orderBy('likes','Desc')
                       ->get();
 
