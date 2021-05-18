@@ -44,7 +44,6 @@ class SupportCrudController extends CrudController
         CRUD::column('mobile');
         CRUD::column('subject');
         CRUD::column('message');
-        CRUD::column('updated_at');
         CRUD::column('created_at');
 
         /**
