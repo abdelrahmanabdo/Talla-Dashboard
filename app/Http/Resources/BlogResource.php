@@ -19,7 +19,9 @@ class BlogResource extends JsonResource
             'data' => [
                 'id' => $this->id,
                 'title' => $this->title,
+                'title_ar' => $this->title_ar,
                 'body' => $this->body,
+                'body_ar' => $this->body_ar,
                 'hashtags' => $this->hashtags,
                 'likes' => $this->likes,
                 'user' => $this->user,

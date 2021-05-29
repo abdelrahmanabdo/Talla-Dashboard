@@ -20,7 +20,9 @@ class BlogCollection extends ResourceCollection
                 return [
                     'id' => $item->id,
                     'title' => $item->title,
+                    'title_ar' => $item->title_ar,
                     'body' => $item->body,
+                    'body_ar' => $item->body_ar,
                     'likes' => $item->likes,
                     'hashtags' => $item->hashtags,
                     'comments_count' => $item->comments->count(),
