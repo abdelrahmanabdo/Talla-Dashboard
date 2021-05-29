@@ -26,7 +26,7 @@ class BlogController extends Controller
       $featured = $request->featured;
       $latest = $request->latest;
 
-      $blogs = Blog::with(['user:id,name', 'user.profile:user_id,avatar', 'comments'])
+      $blogs = Blog::with(['user:id,role_id,name', 'user.profile:id,user_id,avatar', 'comments'])
                       ->when($category, function($query) use($category) {
                         return $query->where('hashtags', 'like', '%'.$category.'%');
                       })
