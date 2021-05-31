@@ -163,7 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Ichtrojan\Otp\OtpServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
-        
+        Barryvdh\Elfinder\ElfinderServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

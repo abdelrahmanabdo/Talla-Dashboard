@@ -49,9 +49,7 @@ Route::group([
     Route::crud('settings', 'SettingsCrudController');
     Route::crud('chat', 'ChatCrudController');
     Route::crud('subscription', 'SubscriptionCrudController');
-
-
     Route::get('blog/under-review/{id}/accept', 'BlogNeedReviewCrudController@accept_blog');
     Route::get('blog/under-review/{id}/reject', 'BlogNeedReviewCrudController@reject_blog');
 
-}); // this should be the absolute last line of this file
+});
