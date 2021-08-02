@@ -148,16 +148,22 @@ class BlogCrudController extends CrudController
           'model' => "App\Models\User",
         ]);
         CRUD::field('title');
-        CRUD::field('title_ar');
+        CRUD::addField('title_ar');
         CRUD::addField([
           'label' => 'Body in En',
           'name' => 'body',
-          'type' => 'wysiwyg'
+          'type' => 'textarea',
+          'attributes' => [
+            'rows' => 15,
+          ]
         ]);
         CRUD::addField([
           'label' => 'Body in ar',
           'name' => 'body_ar',
-          'type' => 'wysiwyg'
+          'type' => 'textarea',
+          'attributes' => [
+            'rows' => 15,
+          ]
         ]);
         CRUD::addField([
           'label' => 'Hashtags',
