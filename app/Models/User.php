@@ -14,6 +14,8 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable, HasApiTokens;
 
+    protected $with = 'profile';
+
     /**
      * The attributes that are mass assignable.
      *
