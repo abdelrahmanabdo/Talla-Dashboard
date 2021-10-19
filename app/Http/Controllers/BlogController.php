@@ -48,20 +48,24 @@ class BlogController extends Controller
      * @return \App\Http\Resources\BlogResource
      */
     public function store(BlogRequest $request)
-    {
+    {   
         $blog = Blog::create($request->validated());
 
         /**
          * Store blog images
          */
         if ($request->images) {
-            foreach ($request->images as $key => $image) {
-                $imagePath = $this->verifyAndStoreImage($image, $request->user_id .'-'. $request->title . '-' . $key , 'blogs');
-                BlogImage::create([
-                  'blog_id' => $blog->id,
-                  'image'   => $imagePath
-                ]);
-            }
+          foreach ($request->images as $key => $image) {
+              $imagePath = $this->verifyAndStoreImage(
+                  $image,
+                  $request->user_id.'/'.$request->title.'-'.$key, 
+                  'blogs'
+              );
+              BlogImage::create([
+                'blog_id' => $blog->id,
+                'image' => $imagePath
+              ]);
+          }
         }
 
         return new BlogResource($blog);

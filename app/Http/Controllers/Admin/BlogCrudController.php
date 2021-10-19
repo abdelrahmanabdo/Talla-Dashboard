@@ -140,7 +140,7 @@ class BlogCrudController extends CrudController
         CRUD::setValidation(BlogRequest::class);
 
         CRUD::addField([
-          'label' => "User", 
+          'label' => "Added by", 
           'type' => "select2",
           'name' => 'user_id',
           'entity' => 'user', 
@@ -189,19 +189,19 @@ class BlogCrudController extends CrudController
         //   'prefix'    => 'public/images/blogs/'
         // ]);
         CRUD::addField([
-          'label' => 'Reviewed',
+          'label' => 'Approved',
           'name' => 'is_reviewed',
           'type' => 'checkbox',
           'default' => 1
         ]); 
         CRUD::addField([
-          'label' => 'Featured',
+          'label' => 'Featured on the slider',
           'name' => 'is_featured',
           'type' => 'checkbox',
           'default' => 0
         ]); 
         CRUD::addField([
-          'label' => 'Active',
+          'label' => 'Active on the blog',
           'name' => 'active',
           'type' => 'checkbox',
           'default' => 1

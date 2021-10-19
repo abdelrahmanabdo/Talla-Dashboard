@@ -5,8 +5,8 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog/under-review') }}'><i class='nav-icon la la-blog'></i>Blogs Under Review</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog') }}'><i class='nav-icon la la-blog'></i>Blogs</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog/images') }}'><i class='nav-icon la la-picture-o'></i>Blog Images</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog/comments') }}'><i class='nav-icon la la-commenting-o'></i>Blog Comments</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog/reviews') }}'><i class='nav-icon la la-commenting-o'></i>Blog Reviews (Landing Page)</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog/comments') }}'><i class='nav-icon la la-commenting-o'></i>App Blog Comments</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('blog/reviews') }}'><i class='nav-icon la la-commenting-o'></i>Web Blog Reviews</a></li>
 
 <li class="nav-title font-weight-bold mt-2">User</li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon la la-user'></i>Users</a></li>

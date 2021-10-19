@@ -26,13 +26,13 @@ class BlogRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'title' => 'required|max:100',
-            'title_ar' => '',
-            'body' => 'required',
-            'body_ar' => '',
-            'hashtags' => '',
-            'images' => '',
+          'user_id' => 'required',
+          'title' => 'required|max:100',
+          'title_ar' => '',
+          'body' => 'required',
+          'body_ar' => '',
+          'hashtags' => '',
+          'images' => '',
         ];
     }
 
@@ -56,9 +56,9 @@ class BlogRequest extends FormRequest
     public function messages()
     {
         return [
-            'user_id' => 'The user id is required',
-            'title' => 'The title is required',
-            'body' => 'The body is required',
+          'user_id' => 'The user id is required',
+          'title' => 'The title is required',
+          'body' => 'The body is required',
         ];
     }
 }

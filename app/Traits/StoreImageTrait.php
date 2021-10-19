@@ -16,13 +16,10 @@ trait StoreImageTrait {
      * @param Request $request
      * @return $this|false|string
      */
-    public function verifyAndStoreBase64Image( $base64Str,
-                                               $fileName = '',
-                                               $directory = 'unknown'
-                                             ) 
+    public function verifyAndStoreBase64Image( $base64Str, $fileName = '', $directory = 'unknown') 
     {
         // Check if there is base64 string is sent
-        if ( !$base64Str ) return null;
+        if (!$base64Str) return null;
 
         // Public project disk
         $disk = config('filesystems.disks.public.driver'); 
@@ -76,7 +73,7 @@ trait StoreImageTrait {
         // 1. Generate a filename.
         //if filename contains spaces
         if (Str::contains($fileName, ' ')) $fileName = Str::camel($fileName);
-        $filename = $fileName .'_'. date('Y-M') . substr($image->mime(), 6);
+        $filename = $fileName .'_'. date('Y-M') . '.' .substr($image->mime(), 6);
         // 2. Store the image on disk.
         Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
         // 3. Delete the previous image, if there was one.

@@ -26,7 +26,7 @@ class BlogImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required'
+            'image' => 'required,dimensions:max_width=300,max_height=200'
         ];
     }
 

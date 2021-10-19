@@ -42,38 +42,26 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
 
         Route::apiResource('stylist-bank-accounts', 'StylistBankAccountController');
 
-        /**
-         * Blogs routes
-         */
+        //Blogs routes
         Route::apiResource('blogs', 'BlogController');
 
         Route::apiResource('blogs.comments','BlogCommentController');
 
-        /**
-         * User profile routes
-         */
+        //User profile routes
         Route::apiResource('user-profile', 'UserProfileController');
 
-        /**
-         * Closet routes
-         */
+        //Closet routes
         Route::apiResource('closets', 'ClosetController');
 
-        /**
-         * Outfits
-         */
+        // Outfits
         Route::apiResource('outfits', 'OutfitController');
 
-        /**
-         * Chats
-         */
+        //Chats
         Route::get('/chats', 'ChatController@getUserChats');
         Route::get('chats/messages', 'ChatController@getChatMessages');
         Route::post('chats/send', 'ChatController@sendNewMessage');
 
-        /**
-         * Notifications
-         */
+        //Notifications
         Route::apiResource('notifications', 'NotificationController');
 
     });

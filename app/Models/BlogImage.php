@@ -17,9 +17,9 @@ class BlogImage extends Model
      * @var array
      */
     protected $fillable = [
-        'blog_id',
-        'type',
-        'image',
+      'blog_id',
+      'type',
+      'image',
     ];
 
     /**
@@ -28,15 +28,16 @@ class BlogImage extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'blog_id' => 'integer',
-        'type' => 'string',
+      'id' => 'integer',
+      'blog_id' => 'integer',
+      'type' => 'string',
+      'image' => 'string',
     ];
 
 
     public function blog()
     {
-        return $this->belongsTo(\App\Models\Blog::class);
+      return $this->belongsTo(\App\Models\Blog::class);
     }
 
     /**
@@ -63,8 +64,10 @@ class BlogImage extends Model
     }
 
     public function setImageAttribute($value) {
-      if (gettype($value) == 'array'){
-        $this->save_image($value);
+      if (gettype($value) == 'array') {
+        return $this->save_image($value);
+      } else {
+        return $this->attributes['image'] = $value;
       }
     }
 }
