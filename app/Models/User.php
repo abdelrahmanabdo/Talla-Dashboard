@@ -22,10 +22,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'role_id',
-        'email',
-        'password',
+      'name',
+      'role_id',
+      'email',
+      'password',
     ];
 
     /**
@@ -34,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+      'password', 'remember_token',
     ];
 
     /**
@@ -43,18 +43,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+      'email_verified_at' => 'datetime',
     ];
 
     public function profile()
     {
-        return $this->hasOne(\App\Models\UserProfile::class);
+      return $this->hasOne(\App\Models\UserProfile::class);
     }
 
     public function userRole()
     {
-        return $this->belongsTo(\App\Models\UserRole::class, 'role_id');
+      return $this->belongsTo(\App\Models\UserRole::class, 'role_id');
     }
-
-
 }

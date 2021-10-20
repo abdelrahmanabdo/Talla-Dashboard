@@ -39,7 +39,6 @@ class Blog extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
-        'hashtags' => 'array',
         'is_reviewed' => 'boolean',
         'active' => 'boolean',
     ];
