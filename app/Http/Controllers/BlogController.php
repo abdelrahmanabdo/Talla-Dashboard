@@ -123,7 +123,7 @@ class BlogController extends Controller
 
 
     public function getBlogBySlug(Request $request, $slug) {
-      $blogs = Blog::with(['user:id,role_id,name', 'user.profile:id,user_id,avatar', 'comments'])
+      $blogs = Blog::with(['user:id,role_id,name', 'user.profile:id,user_id,avatar', 'comments', 'images'])
                     ->when($slug, function($query) use($slug) {
                       return $query->where('slug', $slug)
                         ->orWhere('title', $slug);
