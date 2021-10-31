@@ -18,6 +18,9 @@ class BlogResource extends JsonResource
       'success' => true,
       'data' => [
         'id' => $this->id,
+        'meta_title' => $this->meta_title,
+        'meta_description' => $this->meta_description,
+        'slug' => $this->slug,
         'title' => $this->title,
         'title_ar' => $this->title_ar,
         'body' => $this->body,

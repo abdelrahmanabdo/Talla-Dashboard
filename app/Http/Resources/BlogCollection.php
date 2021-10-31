@@ -19,6 +19,9 @@ class BlogCollection extends ResourceCollection
             'data' => $this->collection->transform(function($item) {
                 return [
                     'id' => $item->id,
+                    'meta_title' => $item->meta_title,
+                    'meta_description' => $item->meta_description,
+                    'slug' => $item->slug,
                     'title' => $item->title,
                     'title_ar' => $item->title_ar,
                     'body' => $item->body,
