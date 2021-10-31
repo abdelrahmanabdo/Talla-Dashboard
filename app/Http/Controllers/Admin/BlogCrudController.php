@@ -63,6 +63,9 @@ class BlogCrudController extends CrudController
           'entity' => 'images', 
           'suffix' => ' images'
         ]);
+        CRUD::column('meta_title');
+        CRUD::column('meta_description');
+        CRUD::column('slug');
         CRUD::column('Reviewed')->type('boolean');
         CRUD::column('Featured')->type('boolean');
         CRUD::column('Active')->type('boolean');  
@@ -103,7 +106,9 @@ class BlogCrudController extends CrudController
           'inline_create' => true,
           'suffix' =>  ' images'
         ]);
-
+        CRUD::column('meta_title');
+        CRUD::column('meta_description');
+        CRUD::column('slug');
         CRUD::addColumn([
             'name'        => 'is_featured',
             'label'       => 'Featured',
@@ -147,8 +152,33 @@ class BlogCrudController extends CrudController
           'attribute' => "name", 
           'model' => "App\Models\User",
         ]);
-        CRUD::field('title');
-        CRUD::addField('title_ar');
+        CRUD::addField([
+          'tab'   => 'SEO',
+          'label' => 'Page Title',
+          'name' => 'meta_title'
+        ]);
+        CRUD::addField([
+          'tab'   => 'SEO',
+          'label' => 'Page Description',
+          'name' => 'meta_description',
+          'type' => 'textarea',
+          'attributes' => [
+            'rows' => 10,
+          ]
+        ]);
+        CRUD::addField([
+          'tab'   => 'SEO',
+          'label' => 'Slug',
+          'name' => 'slug'
+        ]);
+        CRUD::addField([
+          'label' => 'Title in En',
+          'name' => 'title'
+        ]);
+        CRUD::addField([
+          'label' => 'Title in Ar',
+          'name' => 'title_ar',
+        ]);
         CRUD::addField([
           'label' => 'Body in En',
           'name' => 'body',
@@ -158,7 +188,7 @@ class BlogCrudController extends CrudController
           ]
         ]);
         CRUD::addField([
-          'label' => 'Body in ar',
+          'label' => 'Body in Ar',
           'name' => 'body_ar',
           'type' => 'textarea',
           'attributes' => [
