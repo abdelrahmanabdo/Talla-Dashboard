@@ -122,4 +122,18 @@ class BlogController extends Controller
     }
 
 
+    public function getBlogBySlug(Request $request, $slug) {
+      $blogs = Blog::with(['user:id,role_id,name', 'user.profile:id,user_id,avatar', 'comments'])
+                    ->when($slug, function($query) use($slug) {
+                      return $query->where('slug', 'like', '%'.$slug.'%')
+                        ->orWhere('title', 'like', '%'.$slug.'%');
+                    })
+                    ->where(['is_reviewed' => 1, 'active' => 1])
+                    ->get();
+
+      return response()->json([
+          'success' => true,
+          'message' => $blogs
+      ]);
+    }
 }

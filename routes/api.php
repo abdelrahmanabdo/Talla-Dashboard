@@ -93,6 +93,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
     Route::get('blogs', 'BlogController@index');
 
     Route::get('blogs/{blog}', 'BlogController@show');
+    
+    Route::get('blogs/details/{slug}', 'BlogController@getBlogBySlug');
 
     Route::apiResource('blogs.reviews','BlogReviewController');
 
