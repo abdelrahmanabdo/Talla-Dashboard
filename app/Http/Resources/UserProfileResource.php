@@ -22,6 +22,7 @@ class UserProfileResource extends JsonResource
                 'phone' => $this->phone,
                 'avatar' => $this->avatar,
                 'country' => $this->country,
+                'birth_date' => $this->birth_date,
                 'city' => $this->city,
                 'body_shape' => $this->bodyShape,
                 'skin_glow' => $this->skinGlow,
