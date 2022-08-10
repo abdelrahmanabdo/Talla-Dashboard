@@ -15,9 +15,10 @@ class SMSHandler {
     *
     * @return void
     */
-  public function __construct($message , $recipients) {
-    $this->message = $message ;
-    $this->recipients = $recipients ;
+  public function __construct($message, $recipients) {
+    $this->message = $message;
+    $this->recipients = $recipients;
+    $this->sendMessage($this->message, $this->recipients);
   }
 
 
@@ -31,8 +32,8 @@ class SMSHandler {
       $auth_token = getenv("TWILIO_AUTH_TOKEN");
       $twilio_number = getenv("TWILIO_NUMBER");
       $client = new Client($account_sid, $auth_token);
-      $client->messages->create($recipients, 
-              ['from' => $twilio_number, 'body' => $message] );
+      $client->messages->create($recipients,
+         ['from' => $twilio_number, 'body' => $message]);
   }
 
 

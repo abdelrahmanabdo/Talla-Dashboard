@@ -153,8 +153,8 @@ class DeviceTokenController extends Controller
         }else{
             return response()->json([
                 'success' => false ,
-                'message' => 'error',
-            ], 500);
+                'message' => 'No token assigned to this user',
+            ]);
         }
     }
 

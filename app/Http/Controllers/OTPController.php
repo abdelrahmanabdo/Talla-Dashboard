@@ -4,31 +4,34 @@ namespace App\Http\Controllers;
 
 // use App\Models\OTP as re;
 use Illuminate\Http\Request;
-use Otp;
+use App\Models\Stylist;
+use App\Models\OTP;
 
 class OTPController extends Controller
 {
 
-    /**
-     *  Create new otp token.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        $request->validate([
-            'phone' => ['required'],
-        ]);
-        
-        $newOtp = Otp::generate($request->phone, 6, 10);
+  /**
+   *  Verify otp code.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function verify($data) {
+    $status = 'invalid';
+    $message = 'Invalid OTP code';
+    $isValid = OTP::where([
+      'user_id' => $data->user_id,
+      'phone' => $data->phone,
+      'code' => $data-> code,
+    ])->exists();
 
-        return response([
-            'success' => false,
-            'mesage'  => 'New OTP valid for 10 mins only',
-            'data'    => $newOtp
-        ],200);
+    if ($isValid) {
+      $status = 'valid';
+      $message = 'New OTP valid for 10 mins only';
     }
 
-
-
+    return [
+      'success' => $isValid,
+      'message' => $message,
+    ];
+  }
 }

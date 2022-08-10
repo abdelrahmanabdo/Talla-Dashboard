@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OTP extends Model
+class UserSettings extends Model
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
-
-    protected $table = 'otps';
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +15,11 @@ class OTP extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'phone',
-        'code',
-        'valid',
+      'user_id',
+      'show_working_hours',
+      'show_in_stylists',
+      'send_reservations',
+      'send_before_reservations',
+      'send_before_reservations_by',
     ];
 }

@@ -17,19 +17,21 @@ class UserProfileResource extends JsonResource
         return [
             'success' => true,
             'data' => [
-                'id' => $this->id,
-                'user' => $this->user,
-                'phone' => $this->phone,
-                'avatar' => $this->avatar,
-                'country' => $this->country,
-                'birth_date' => $this->birth_date,
-                'city' => $this->city,
-                'body_shape' => $this->bodyShape,
-                'skin_glow' => $this->skinGlow,
-                'goals' => $this->goal_id,
-                'jobs' => $this->job_id,
-                'favourite_styles' => $this->favourite_style_id,
-                'created_at' => $this->created_at
+              'id' => $this->id,
+              'user' => $this->user,
+              'phone' => $this->phone,
+              'avatar' => $this->avatar,
+              'country' => $this->country,
+              'country_id' => $this->country_id,
+              'birth_date' => $this->birth_date,
+              'city' => $this->city,
+              'city_id' => $this->city_id,
+              'body_shape' => $this->bodyShape,
+              'skin_glow' => $this->skinGlow,
+              'goals' => $this->goal_id,
+              'jobs' => $this->job_id,
+              'favourite_styles' => $this->favourite_style_id,
+              'created_at' => $this->created_at
             ]
         ];
     }

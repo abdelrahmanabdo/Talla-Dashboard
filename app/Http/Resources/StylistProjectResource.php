@@ -17,12 +17,12 @@ class StylistProjectResource extends JsonResource
         return [
             'success' => true,
             'data' => [
-                'id' => $this->id,
-                'stylist_id' => $this->stylist_id,
-                'name' => $this->name,
-                'description' => $this->description,
-                'images' => $this->images,
-                'created_at' => $this->created_at
+              'id' => $this->id,
+              'stylist_id' => $this->stylist_id,
+              'name' => $this->name,
+              'description' => $this->description,
+              'images' => $this->images,
+              'created_at' => $this->created_at
             ],
         ];
     }

@@ -16,8 +16,8 @@ class Outfit extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'group',
+      'user_id',
+      'group',
     ];
 
     /**
@@ -26,9 +26,9 @@ class Outfit extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'user_id' => 'integer',
-        'group' => 'integer',
+      'id' => 'integer',
+      'user_id' => 'integer',
+      'group' => 'integer',
     ];
 
 

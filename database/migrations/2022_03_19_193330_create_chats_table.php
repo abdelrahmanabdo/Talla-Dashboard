@@ -15,9 +15,8 @@ class CreateChatsTable extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->string('chat_ref');
-            $table->foreignId('user_1')->constrained('users')->cascadeOnDelete();;
-            $table->foreignId('user_2')->constrained('users')->cascadeOnDelete();;
+            $table->foreignId('stylist_id')->constrained('stylists')->cascadeOnDelete();;
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();;
             $table->boolean('active')->default(0);
             $table->timestamps();
         });

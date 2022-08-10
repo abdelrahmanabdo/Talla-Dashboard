@@ -26,8 +26,8 @@ class ChatRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_1' => 'required',
-            'user_2' => 'required',
+          'stylist_id' => 'required',
+          'user_id' => 'required',
         ];
     }
 
@@ -51,7 +51,8 @@ class ChatRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'stylist_id.required' => 'A stylist id is required',
+            'user_id.required' => 'A user id in english is required',
         ];
     }
 }

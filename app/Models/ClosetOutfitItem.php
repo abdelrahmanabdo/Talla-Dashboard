@@ -37,7 +37,7 @@ class ClosetOutfitItem extends Model
         return $this->belongsTo(\App\Models\Outfit::class);
     }
 
-    public function closet_item()
+    public function closetItem()
     {
         return $this->belongsTo(\App\Models\Closet::class);
     }

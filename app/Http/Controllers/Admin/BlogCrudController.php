@@ -154,12 +154,17 @@ class BlogCrudController extends CrudController
         ]);
         CRUD::addField([
           'tab'   => 'SEO',
-          'label' => 'Page Title',
+          'label' => 'Page Title En',
           'name' => 'meta_title'
         ]);
         CRUD::addField([
           'tab'   => 'SEO',
-          'label' => 'Page Description',
+          'label' => 'Page Title Ar',
+          'name' => 'meta_title_ar'
+        ]);
+        CRUD::addField([
+          'tab'   => 'SEO',
+          'label' => 'Page Description En',
           'name' => 'meta_description',
           'type' => 'textarea',
           'attributes' => [
@@ -168,8 +173,22 @@ class BlogCrudController extends CrudController
         ]);
         CRUD::addField([
           'tab'   => 'SEO',
-          'label' => 'Slug',
+          'label' => 'Page Description Ar',
+          'name' => 'meta_description_ar',
+          'type' => 'textarea',
+          'attributes' => [
+            'rows' => 10,
+          ]
+        ]);
+        CRUD::addField([
+          'tab'   => 'SEO',
+          'label' => 'Slug En',
           'name' => 'slug'
+        ]);
+        CRUD::addField([
+          'tab'   => 'SEO',
+          'label' => 'Slug Ar',
+          'name' => 'slug_ar'
         ]);
         CRUD::addField([
           'label' => 'Title in En',
@@ -182,7 +201,7 @@ class BlogCrudController extends CrudController
         CRUD::addField([
           'label' => 'Body in En',
           'name' => 'body',
-          'type' => 'textarea',
+          'type' => 'ckeditor',
           'attributes' => [
             'rows' => 15,
           ]
@@ -190,7 +209,7 @@ class BlogCrudController extends CrudController
         CRUD::addField([
           'label' => 'Body in Ar',
           'name' => 'body_ar',
-          'type' => 'textarea',
+          'type' => 'ckeditor',
           'attributes' => [
             'rows' => 15,
           ]

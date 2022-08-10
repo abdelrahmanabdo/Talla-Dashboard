@@ -25,13 +25,13 @@ class StylistRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'user_id' => 'required',
-            'email' => 'required',
-            'country_id' => 'required',
-            'avatar' => '',
-            'mobile_numbers' => '',
-        ];
+      return [
+        'user_id' => 'required',
+        'email' => '',
+        'country_id' => '',
+        'avatar' => '',
+        'mobile_numbers' => '',
+      ];
     }
 
     /**

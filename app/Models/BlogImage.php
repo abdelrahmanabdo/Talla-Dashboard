@@ -51,7 +51,7 @@ class BlogImage extends Model
           // 0. Make the image
           $image = \Image::make($image);
           // 1. Generate a filename.
-          $filename = $this->attributes['blog_id'] .'/'. $index .'_'. date('M-Y') .'.'. substr($image->mime(), 6);
+          $filename = $this->attributes['blog_id'] .'/'. $index .'_'. time() . '_' . date('d-M-Y') .'.'. substr($image->mime(), 6);
           // 2. Store the image on disk.
           \Storage::disk($disk)->put($destination_path . $filename, $image->stream());
           // 3. Delete the previous image, if there was one.

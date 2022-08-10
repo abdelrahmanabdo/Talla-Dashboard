@@ -16,8 +16,7 @@ trait StoreImageTrait {
      * @param Request $request
      * @return $this|false|string
      */
-    public function verifyAndStoreBase64Image( $base64Str, $fileName = '', $directory = 'unknown') 
-    {
+    public function verifyAndStoreBase64Image($base64Str, $fileName = '', $directory = 'unknown') {
         // Check if there is base64 string is sent
         if (!$base64Str) return null;
 
@@ -28,14 +27,13 @@ trait StoreImageTrait {
         $destination_path = "public/images/". $directory; 
 
         // if a base64 was sent, store it in the db
-        if (Str::startsWith($base64Str, 'data:image'))
-        {
+        if (Str::startsWith($base64Str, 'data:image')) {
             // 0. Make the image
             $image = Image::make($base64Str)->encode('png', 90);
             // 1. Generate a filename.
             //if filename contains spaces
             if (Str::contains($fileName, ' ')) $fileName = Str::camel($fileName);
-            $filename = $fileName .'_'. date('M-Y') .'.png';
+            $filename = $fileName . '_' . time() . '_' .  date('d-M-Y') .'.png';
             // 2. Store the image on disk.
             Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
             // 3. Delete the previous image, if there was one.
@@ -57,10 +55,9 @@ trait StoreImageTrait {
      * @param Request $request
      * @return $this|false|string
      */
-    public function verifyAndStoreImage( $image, $fileName = '', $directory = 'unknown') 
-    {
+    public function verifyAndStoreImage( $image, $fileName = '', $directory = 'unknown') {
         // Check if there is base64 string is sent
-        if ( !$image ) return null;
+        if (!$image) return null;
 
         // Public project disk
         $disk = config('filesystems.disks.public.driver'); 
@@ -73,7 +70,7 @@ trait StoreImageTrait {
         // 1. Generate a filename.
         //if filename contains spaces
         if (Str::contains($fileName, ' ')) $fileName = Str::camel($fileName);
-        $filename = $fileName .'_'. date('Y-M') . '.' .substr($image->mime(), 6);
+        $filename = $fileName . '_' . time() . '_' . date('d-M-Y') . '.' .substr($image->mime(), 6);
         // 2. Store the image on disk.
         Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
         // 3. Delete the previous image, if there was one.

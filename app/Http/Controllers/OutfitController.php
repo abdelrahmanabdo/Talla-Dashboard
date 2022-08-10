@@ -66,9 +66,10 @@ class OutfitController extends Controller
      * @param \App\Outfit $Outfit
      * @return \App\Http\Resources\OutfitResource
      */
-    public function show(Request $request, Outfit $Outfit)
-    {
-        return new OutfitResource($Outfit);
+    public function show(Request $request, Outfit $Outfit) {
+      // $outfit = $Outfit::with(['items', 'items.closetItem']);
+      // var_dump($outfit);
+      return new OutfitResource($Outfit);
     }
 
     /**
@@ -80,7 +81,7 @@ class OutfitController extends Controller
     {
         $Outfit->update($request->validated());
 
-        return new OutfitResource($Outfit);
+        return new OutfitResource($Outfit->with('closetItem'));
     }
 
     /**

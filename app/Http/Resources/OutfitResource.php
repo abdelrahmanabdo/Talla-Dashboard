@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use \App\Models\Closet;
+use \App\Models\Outfit;
 
 class OutfitResource extends JsonResource
 {
@@ -22,6 +22,10 @@ class OutfitResource extends JsonResource
                 'user' => $this->user,
                 'group' => $this->group,
                 'items' => $this->items,
+                'related_items' => Outfit::whereUserId($this->user->id)
+                    ->where('id','<>',$this->id)
+                    ->limit(5)
+                    ->get(),
                 'created_at' => $this->created_at
             ]
         ];

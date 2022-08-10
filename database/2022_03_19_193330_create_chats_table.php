@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOTPSTable extends Migration
+class CreateChatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateOTPSTable extends Migration
      */
     public function up()
     {
-        Schema::create('o_t_p_s', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('stylist_id')->constrained('stylists')->cascadeOnDelete();;
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();;
+            $table->boolean('active')->default(0);
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -26,6 +31,6 @@ class CreateOTPSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('o_t_p_s');
+        Schema::dropIfExists('chats');
     }
 }

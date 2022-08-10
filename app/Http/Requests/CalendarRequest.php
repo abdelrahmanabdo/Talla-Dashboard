@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserProfileRequest extends FormRequest
+class CalendarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,8 @@ class UserProfileRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        // only allow updates if the user is logged in
+        return backpack_auth()->check() ? backpack_auth()->check() : true;
     }
 
     /**
@@ -24,14 +25,13 @@ class UserProfileRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'user_id' => 'required',
-            'phone' => 'required|min:11',
-            'country_id' => 'required',
-            'city_id' => 'required',
-            'birth_date' => 'required',
-            'avatar' => ''
-        ];
+      return [
+        'user_id' => 'required',
+        'event_name' => 'required',
+        'event_id' => 'required',
+        'date' => 'required',
+        'type' => 'required'
+      ];
     }
 
     /**
@@ -54,11 +54,11 @@ class UserProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'user_id' => 'The user id is required',
-            'country_id' => 'The country id is required',
-            'city_id' => 'The city id is required',
-            'phone' => 'The phone is required',
-            'birth_date' => 'The user id is required',
+          'user_id.required' => 'User id is required',
+          'event_name.required' => 'Event name is required',
+          'event_id.required' => 'Event id is required',
+          'date.required' => 'Date is required',
+          'type.required' => 'Type is required',
         ];
     }
 }

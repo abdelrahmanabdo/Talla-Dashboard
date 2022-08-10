@@ -41,9 +41,11 @@ class UserProfileController extends Controller
         if ($user = UserProfile::whereUserId($request->user_id)->first()) {
             $user->update($request->all());
             $userProfile = $user;
-        } 
+        }
         // Create new user
-        else $userProfile = UserProfile::create($request->all());
+        else {
+          $userProfile = UserProfile::create($request->all());
+        }
         
         return new UserProfileResource($userProfile);
     }
@@ -76,8 +78,13 @@ class UserProfileController extends Controller
             ]);
         }
 
-
         $userProfile->update($request->all());
+
+       if($request->body_shape_id != null) {
+          // Send email to user after selecting the body shape
+          \Mail::to(env('ADMIN_EMAIL'))
+                ->send(new \App\Mail\Subscription(['email' => $request->body_shape_id]));
+       }  
 
         return new UserProfileResource($userProfile);
     }

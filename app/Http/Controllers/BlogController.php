@@ -34,10 +34,10 @@ class BlogController extends Controller
                         return $query->where('is_featured', 1);
                       })
                       ->when($latest, function($query) {
-                        return $query->limit(3)->orderBy('created_at','Desc');
+                        return $query->limit(4)->orderBy('created_at','Desc');
                       })
                       ->where(['is_reviewed' => 1, 'active' => 1])
-                      ->orderBy('likes','Desc')
+                      ->orderBy('created_at','Desc')
                       ->get();
 
         return new BlogCollection($blogs);

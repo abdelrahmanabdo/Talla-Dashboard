@@ -51,6 +51,11 @@ class User extends Authenticatable
       return $this->hasOne(\App\Models\UserProfile::class);
     }
 
+    public function stylist()
+    {
+      return $this->hasOne(\App\Models\Stylist::class);
+    }
+    
     public function userRole()
     {
       return $this->belongsTo(\App\Models\UserRole::class, 'role_id');

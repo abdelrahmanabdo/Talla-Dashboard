@@ -33,38 +33,36 @@ class StylistProjectController extends Controller
      * @param \App\Http\Requests\StylistProjectStoreRequest $request
      * @return \App\Http\Resources\StylistProjectResource
      */
-    public function store(StylistProjectRequest $request)
+    public function store(Request $request)
     {
-
       if (count($request->all()) == 0) {
         return response()->json(['message' => 'You sent empty projects'], 400);
       } 
-      
       foreach ($request->all() as $key => $project) {
-            $newProject = StylistProject::create([
-                'stylist_id' => $project['stylist_id'],
-                'name' => $project['name'],
-                'description' => $project['description'],
-            ]);
-            /**
-             * Store project images
-             */
-            if ($project['images'] && count($project['images']) > 0) {
-                foreach ($project['images'] as $key => $image) {
-                    $imagePath = $this->verifyAndStoreImage($image, 
-                                                            $project['stylist_id'] .'-'. $project['name'] . '-' . $key , 
-                                                            'projects');
-                    StylistProjectImage::create([
-                      'project_id' => $newProject->id,
-                      'image'   => $imagePath
-                    ]);
-                }
-            }
-        }
+          $newProject = StylistProject::create([
+              'stylist_id' => $project['stylist_id'],
+              'name' => $project['name'],
+              'description' => $project['description'],
+          ]);
+          /**
+           * Store project images
+           */
+          if ($project['images'] && count($project['images']) > 0) {
+              foreach ($project['images'] as $key => $image) {
+                  $imagePath = $this->verifyAndStoreImage($image, 
+                                                          $project['stylist_id'] .'-'. $project['name'] . '-' . $key , 
+                                                          'projects');
+                  StylistProjectImage::create([
+                    'project_id' => $newProject->id,
+                    'image'   => $imagePath
+                  ]);
+              }
+          }
+      }
 
-        $projects = $request->all();
+      $projects = $request->all();
 
-        return new StylistProjectResource($projects);
+      return new StylistProjectCollection($projects);
     }
 
     /**

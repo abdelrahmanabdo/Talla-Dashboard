@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chat extends Model
+class Message extends Model
 {
     use HasFactory;
 
@@ -15,24 +15,15 @@ class Chat extends Model
      * @var array
      */
     protected $fillable = [
-        'stylist_id',
+        'chat_id',
         'user_id',
-        'active',
+        'type',
+        'message',
+        'seen',
     ];
-
-
-    public function stylist()
-    {
-        return $this->belongsTo(\App\Models\Stylist::class);
-    }
 
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class);
-    }
-
-    public function messages()
-    {
-        return $this->hasMany(\App\Models\Message::class);
     }
 }
