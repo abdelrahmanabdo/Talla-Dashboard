@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('test-email', function() {
-  return view('emails.subscription.admin_subscription');
+  return view('emails.profile.rectangle-shape-tips');
 });

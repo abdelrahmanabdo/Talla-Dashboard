@@ -20,10 +20,16 @@ class Message extends Model
         'type',
         'message',
         'seen',
+        'quotation_id'
     ];
 
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class);
+    }
+    
+    public function quotation()
+    {
+        return $this->belongsTo(\App\Models\Quotation::class);
     }
 }

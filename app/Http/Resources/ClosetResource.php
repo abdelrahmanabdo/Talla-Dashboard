@@ -21,14 +21,18 @@ class ClosetResource extends JsonResource
                 'id' => $this->id,
                 'season' => $this->season,
                 'color' => $this->color,
+                'color_id' => $this->color_id,
                 'category' => $this->category,
+                'category_id' => $this->category_id,
                 'brand' => $this->brand,
+                'brand_id' => $this->brand_id,
                 'image' => $this->image,
                 'price' => $this->price,
                 'comment' => $this->comment,
                 'related_items' => Closet::whereSeason($this->season)
                                         ->whereCategoryId($this->category_id)
                                         ->where('id','<>',$this->id)
+                                        ->where('user_id', $this->user->id)
                                         ->limit(5)
                                         ->get(),
                 'created_at' => $this->created_at

@@ -75,6 +75,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
         Route::get('user-settings','UserSettingsController@show');
         Route::post('user-settings/upsert-settings','UserSettingsController@store');
 
+        Route::apiResource('quotations', 'QuotationController');
     });
 
     /**

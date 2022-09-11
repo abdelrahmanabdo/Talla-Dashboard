@@ -67,4 +67,8 @@ class Stylist extends Model
         return $this->hasMany(\App\Models\StylistSpecialization::class);
     }
 
+    public function bank_account()
+    {
+        return $this->hasOne(\App\Models\StylistBankAccount::class);
+    }
 }

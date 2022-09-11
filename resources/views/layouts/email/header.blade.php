@@ -1,12 +1,17 @@
 <div class="header">
-  <img src={{asset('images/logo-white.png')}} />
+  <img class="logo" src={{asset('images/logo-white.png')}} />
 </div>
 <style>
 .header {
-  width: 100%;
-  background: #012647;
+  height: 350px;
+  background: #faf8f0;
   padding: 10px;
   text-align: center;
-  color: #FFF
+  color: #FFF;
+}
+.logo {
+  width: 150px;
+  height: 150px;
+  margin-top: 50px;
 }
 </style>

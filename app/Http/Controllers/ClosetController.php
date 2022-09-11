@@ -24,7 +24,7 @@ class ClosetController extends Controller
                                     $q->where('category_id', $request->category_id);
                                 })
                             ->when(!empty($request->season) && $request->season !== 'null' , function($q) use($request){
-                                    $q->where('season', $request->season);
+                                    $q->whereIn('season', [$request->season, 3]);
                                 })
                             ->when(!empty($request->color) && $request->color !== 'null' , function($q) use($request){
                                     $q->where('color_id', $request->color);

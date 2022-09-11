@@ -9,7 +9,8 @@ class ClosetOutfitItem extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
-
+    
+    protected $with = ['closetItem'];
     /**
      * The attributes that are mass assignable.
      *

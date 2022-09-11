@@ -29,7 +29,13 @@ trait StoreImageTrait {
         // if a base64 was sent, store it in the db
         if (Str::startsWith($base64Str, 'data:image')) {
             // 0. Make the image
-            $image = Image::make($base64Str)->encode('png', 90);
+            $image = Image::make($base64Str);
+            $image->resize(1024, null, function($constraint){ 
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            });
+            $image->orientate();
+
             // 1. Generate a filename.
             //if filename contains spaces
             if (Str::contains($fileName, ' ')) $fileName = Str::camel($fileName);
@@ -38,8 +44,7 @@ trait StoreImageTrait {
             Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
             // 3. Delete the previous image, if there was one.
             Storage::disk($disk)->delete($fileName);
-            // 4. Save the public path to the database
-            // but first, remove "public/" from the path, since we're pointing to it 
+
             $public_destination_path = Str::replaceFirst('public', 'storage', $destination_path);
 
             return url('') . '/' . $public_destination_path . '/' . $filename;
@@ -65,18 +70,21 @@ trait StoreImageTrait {
         // destination path relative to the disk above
         $destination_path = "public/images/". $directory; 
 
-        // 0. Make the image
-        $image = Image::make($image);
-        // 1. Generate a filename.
+        $customizedImage = Image::make($image)
+                                ->orientate()
+                                ->resize(800, 400, function($constraint){ 
+                                    $constraint->upsize();
+                                    $constraint->aspectRatio();
+                                });
+
         //if filename contains spaces
         if (Str::contains($fileName, ' ')) $fileName = Str::camel($fileName);
-        $filename = $fileName . '_' . time() . '_' . date('d-M-Y') . '.' .substr($image->mime(), 6);
+        $filename = $fileName . '_' . time() . '_' . date('d-M-Y') . '.' .substr($customizedImage->mime(), 6);
         // 2. Store the image on disk.
-        Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
+        Storage::disk($disk)->put($destination_path . '/' . $filename, $customizedImage->stream());
         // 3. Delete the previous image, if there was one.
         Storage::disk($disk)->delete($fileName);
-        // 4. Save the public path to the database
-        // but first, remove "public/" from the path, since we're pointing to it 
+
         $public_destination_path = Str::replaceFirst('public', 'storage', $destination_path);
 
         return url('') . '/' . $public_destination_path . '/' . $filename;

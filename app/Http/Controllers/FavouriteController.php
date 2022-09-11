@@ -16,7 +16,7 @@ class FavouriteController extends Controller
      */
     public function index(Request $request)
     {
-        $favorite = Favourite::with(['item', 'outfit.items.closet_item'])
+        $favorite = Favourite::with(['item', 'outfit.items'])
                             ->whereUserId($request->user_id)
                             ->get();
 

@@ -22,9 +22,12 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
+
       $category = $request->category;
       $featured = $request->featured;
       $latest = $request->latest;
+      $limit = (int)$request->limit;
+      $offset = (int)$request->offset;
 
       $blogs = Blog::with(['user:id,role_id,name', 'user.profile:id,user_id,avatar', 'comments'])
                       ->when($category, function($query) use($category) {
@@ -38,6 +41,12 @@ class BlogController extends Controller
                       })
                       ->where(['is_reviewed' => 1, 'active' => 1])
                       ->orderBy('created_at','Desc')
+                      ->when($offset, function($query, $offset) {
+                        return $query->skip($offset);
+                      })
+                      ->when($limit, function($query, $limit) {
+                        return $query->take($limit);
+                      })
                       ->get();
 
         return new BlogCollection($blogs);

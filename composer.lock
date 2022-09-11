@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df4803c64dfd866e55150184f96c2f91",
+    "content-hash": "3b40fb94e3074c9484703078746aefbc",
     "packages": [
         {
             "name": "apility/laravel-fcm",
@@ -709,6 +709,67 @@
                 "source": "https://github.com/creativeorange/gravatar/tree/v1.0.20"
             },
             "time": "2020-09-09T14:53:57+00:00"
+        },
+        {
+            "name": "ctf0/laravel-paymob",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ctf0/laravel-paymob.git",
+                "reference": "1eeea77fc99c66a06e53a48c152b811fc34d057a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ctf0/laravel-paymob/zipball/1eeea77fc99c66a06e53a48c152b811fc34d057a",
+                "reference": "1eeea77fc99c66a06e53a48c152b811fc34d057a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=7 <9"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ctf0\\PayMob\\PayMobServiceProvider"
+                    ],
+                    "aliases": {
+                        "PayMob": "ctf0\\PayMob\\Facades\\PayMob"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ctf0\\PayMob\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "muah",
+                    "email": "muah003@gmail.com"
+                }
+            ],
+            "description": "paymob integration for laravel",
+            "homepage": "https://github.com/ctf0/laravel-paymob",
+            "keywords": [
+                "laravel",
+                "paymob"
+            ],
+            "support": {
+                "issues": "https://github.com/ctf0/laravel-paymob/issues",
+                "source": "https://github.com/ctf0/laravel-paymob/tree/v1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/ctf0",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-03-02T22:41:22+00:00"
         },
         {
             "name": "defuse/php-encryption",

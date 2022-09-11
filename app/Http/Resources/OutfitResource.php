@@ -24,6 +24,7 @@ class OutfitResource extends JsonResource
                 'items' => $this->items,
                 'related_items' => Outfit::whereUserId($this->user->id)
                     ->where('id','<>',$this->id)
+                    ->with('items')
                     ->limit(5)
                     ->get(),
                 'created_at' => $this->created_at

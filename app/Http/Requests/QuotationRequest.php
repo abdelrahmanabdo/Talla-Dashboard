@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StylistProjectRequest extends FormRequest
+class QuotationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,17 @@ class StylistProjectRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            'projects' => 'required',
-            'images' => 'required',
+            'stylist_id' => 'required',
+            'user_id' => 'required',
+            'session_type_id' => 'required',
+            'date' => 'required',
+            'time' => 'required',
+            'fess' => '',
+            'total_paid' => 'required',
+            'status' => '',
         ];
     }
 
@@ -38,8 +45,7 @@ class StylistProjectRequest extends FormRequest
     public function attributes()
     {
         return [
-           'projects' => 'array',
-           'images' => 'array',
+            //
         ];
     }
 

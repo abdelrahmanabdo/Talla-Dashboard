@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class BodeShape extends Mailable
+class BodyShape extends Mailable
 {
     use Queueable, SerializesModels;
     
@@ -30,7 +30,18 @@ class BodeShape extends Mailable
      */
     public function build()
     {
-        return $this->subject('Your body shape is')
-                    ->view('emails.profile.body_shape');
+      $type = $this->data['type'];
+
+      if ($type === 'Attractive') {
+        return $this->markdown('emails.profile.apple-shape-tips');
+      } else if ($type === 'Glamourous') {
+        return $this->markdown('emails.profile.hourglass-shape-tips');
+      } else if ($type === 'Charming') {
+        return $this->markdown('emails.profile.inverted-triangle-shape-tips');
+      } else if ($type === 'Captivating') {
+        return $this->markdown('emails.profile.rectangle-shape-tips');
+      } else if ($type === 'Hottie') {
+        return $this->markdown('emails.profile.triangle-shape-tips');
+      }
     }
 }

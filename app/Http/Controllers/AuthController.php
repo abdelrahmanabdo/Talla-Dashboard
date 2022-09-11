@@ -46,6 +46,10 @@ class AuthController extends Controller
                               "user" => $user 
                             ];
                 $status_code = 200;
+                
+                $user->update([
+                    'is_online' => 1,
+                ]);
 
             } else {
                 $response = ["success" => false,
@@ -131,6 +135,11 @@ class AuthController extends Controller
         'user' => $user,
         'message' => 'User is authenticated successfully',
       ];
+    
+      $user->update([
+        'is_online' => 1,
+      ]);
+
       return response($response, 200);
     }
 

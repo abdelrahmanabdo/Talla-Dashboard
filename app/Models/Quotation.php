@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Outfit extends Model
+class Quotation extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
-    
 
     /**
      * The attributes that are mass assignable.
@@ -17,8 +16,14 @@ class Outfit extends Model
      * @var array
      */
     protected $fillable = [
-      'user_id',
-      'group',
+        'stylist_id',
+        'user_id',
+        'session_type_id',
+        'date',
+        'time',
+        'fees',
+        'total_paid',
+        'status',
     ];
 
     /**
@@ -27,21 +32,20 @@ class Outfit extends Model
      * @var array
      */
     protected $casts = [
-      'id' => 'integer',
-      'user_id' => 'integer',
-      'group' => 'integer',
     ];
-
 
     public function user()
     {
-      return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 
-
-    public function items()
+    public function stylist()
     {
-      return $this->hasMany(\App\Models\ClosetOutfitItem::class, 'outfit_id');
+        return $this->belongsTo(\App\Models\Stylist::class);
     }
 
+    public function session()
+    {
+        return $this->belongsTo(\App\Models\StylistSpecialization::class, 'session_type_id');
+    }    
 }

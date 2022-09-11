@@ -18,7 +18,8 @@ class StylistSpecializationController extends Controller
      */
     public function index(Request $request)
     {
-        $stylistSpecializations = StylistSpecialization::all();
+        $stylistSpecializations = StylistSpecialization::whereStylist_id($request->stylist_id)
+            ->with('specialization')->get();
 
         return new StylistSpecializationCollection($stylistSpecializations);
     }
