@@ -16,7 +16,7 @@
   <p class="copy">
     To feel the best in your clothes, you should pay  attention to your  body shape and how  different 
     clothes affect it. professional stylists at  Tallah have  curated tips  that will help  you balance  out
-    your body  shape and feel confident. Triangle  body shape e generally has narrow shoulders, wide 
+    your body  shape and feel confident. Triangle  body shap e generally has narrow shoulders, wide 
     hips ,  and  a  small  waist .  You  can  balance  out  these  features  by  wearing  the  right  outfit 
     combinations. Follow these tips to achieve outfits  that will  always  make  you feel great in your
     own skin.

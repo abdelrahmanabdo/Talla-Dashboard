@@ -1,7 +1,7 @@
 @extends('layouts.email.index')
 
 @section('header-image')
-  <img src={{asset('images/emails/header-1png')}} />
+  <img src={{asset('images/emails/header-1.png')}} />
 @endsection
 
 @section('title')

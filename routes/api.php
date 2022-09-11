@@ -19,12 +19,9 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
      * Auth routes
      */
     Route::group(['prefix' => 'auth'], function() {
-        //Login
         Route::post('login','AuthController@login');
-        // Social login
-        Route::post('social-login','AuthController@socialLogin');
-        //Registration
         Route::post('register','AuthController@register');
+        Route::post('social-login','AuthController@socialLogin');
     });
 
 
@@ -34,7 +31,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::apiResource('stylists', 'StylistController');
 
-        // Route::apiResource('stylist-projects', 'StylistProjectController');
+        Route::apiResource('stylist-projects', 'StylistProjectController');
 
         // Route::apiResource('stylists.projects', 'StylistProjectController');
 
@@ -46,36 +43,30 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
         
         Route::post('stylists/otp/verify', 'StylistController@verifyStylistPhone');
 
-        //Blogs routes
         Route::apiResource('blogs', 'BlogController');
 
         Route::apiResource('blogs.comments','BlogCommentController');
 
-        //User profile routes
         Route::apiResource('user-profile', 'UserProfileController');
 
-        //Closet routes
         Route::apiResource('closets', 'ClosetController');
 
-        // Outfits
         Route::apiResource('outfits', 'OutfitController');
 
-        // Calendar
         Route::apiResource('calendar', 'CalendarController');
 
-        //Chats
         Route::get('/chats', 'ChatController@getUserChats');
         Route::get('chats/messages', 'ChatController@getChatMessages');
         Route::post('chats/send', 'ChatController@sendNewMessage');
 
-        //Notifications
         Route::apiResource('notifications', 'NotificationController');
 
-        // User settings
-        Route::get('user-settings','UserSettingsController@show');
-        Route::post('user-settings/upsert-settings','UserSettingsController@store');
-
         Route::apiResource('quotations', 'QuotationController');
+        Route::post('quotations/confirm', 'QuotationController@confirmQuotation');
+
+        Route::get('user-settings','UserSettingsController@show');
+        Route::post('user-settings/delete/account', 'SettingsController@deleteAccount');
+        Route::post('user-settings/upsert-settings','UserSettingsController@store');
     });
 
     /**
@@ -127,8 +118,6 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
 
     Route::apiResource('settings', 'SettingsController');
 
-    Route::post('user-settings/delete/account', 'SettingsController@deleteAccount');
-
     Route::apiResource('subscription', 'SubscriptionController');
 
 
@@ -154,13 +143,4 @@ Route::group(['middleware' => ['cors', 'json.response']], function() {
      */
     Route::post('forget-password','AuthController@sendForgetPasswordVerificationCode');
     Route::post('forget-password/update-password','AuthController@updateUserPasswordByPhone');
-});
-
-
-Route::group([
-    'prefix'     => 'orders',
-    'as'         => 'order.',
-    'middleware' => 'auth',
-], function () {
-    ctf0\PayMob\PayMobRoutes::routes();
 });

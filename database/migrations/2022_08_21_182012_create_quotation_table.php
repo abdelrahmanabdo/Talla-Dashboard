@@ -15,8 +15,8 @@ class CreateQuotationTable extends Migration
     {
         Schema::create('quotation', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('stylist_id')->constrained('stylists')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('stylist_id')->constrained('stylists')->cascadeOnDelete();
             $table->foreignId('session_type_id')->constrained('stylist_specializations')->cascadeOnDelete();
             $table->date('date');
             $table->string('time');

@@ -10,8 +10,10 @@
   color: #FFF;
 }
 .logo {
-  width: 150px;
-  height: 150px;
-  margin-top: 50px;
+  width: 150px !important;
+  max-width: 150px !important;
+  height: 150px !important;
+  max-height: 150px !important;
+  margin-top: 30px;
 }
 </style>

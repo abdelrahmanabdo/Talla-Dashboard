@@ -30,17 +30,11 @@
     text-align: center;
     font-family: Times New Roman;
   }
-  .email-body {
-    display:flex; 
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
   .header-image {
     width: 85%;
-    height: 40rem;
-    background: #fbeee4;
-    margin-top: -6rem;
+    height: 30rem;
+    margin-top: -150px !important;
+    margin: auto;
   }
   .header-image img {
     width: 100%;
@@ -48,7 +42,7 @@
   }
   .content {
     min-height: 700px;
-    padding: 30px;
+    padding: 30px !important;
   }
   .title {
     text-align: center;

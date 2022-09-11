@@ -15,7 +15,6 @@ class CreateUserSettingsTable extends Migration
     {
         Schema::create('user_settings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->boolean('show_working_hours')->default(true);
             $table->boolean('show_in_stylists')->default(true);
             $table->boolean('send_reservations')->default(true);
